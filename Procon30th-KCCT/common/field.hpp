@@ -37,11 +37,11 @@ public:
 	{
 		return size;
 	}
-	auto begin()const
+	auto begin()const noexcept
 	{
 		return panels.begin();
 	}
-	auto end()const
+	auto end()const noexcept
 	{
 		return panels.end();
 	}

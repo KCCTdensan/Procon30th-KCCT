@@ -11,6 +11,7 @@ class Stage
 	const Field field;
 	AgentManager agentManager;
 	ScoreManager scoreManager;
+	int turnNo;
 
 public:
 	Stage(const FieldInfo &fieldInfo, uchar numAgents)
