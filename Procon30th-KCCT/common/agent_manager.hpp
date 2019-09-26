@@ -3,6 +3,12 @@
 #include "agent.hpp"
 
 
+struct AgantManagerInfo
+{
+	std::vector<Position> redAgentInitialPositions;
+	std::vector<Position> blueAgentInitialPositions;
+};
+
 class AgentManager
 {
 	const Size fieldSize;
@@ -10,11 +16,17 @@ class AgentManager
 	std::vector<Agent> blueAgents;
 
 public:
-	AgentManager(const Field &field, uchar numAgents)
+	AgentManager(const AgantManagerInfo &agentManagerInfo, const Field &field)
 		: fieldSize(field.getSize())
 	{
-		redAgents.resize(numAgents);
-		blueAgents.resize(numAgents);
+		for(const Position &position : agentManagerInfo.redAgentInitialPositions)
+		{
+			redAgents.emplace_back(field, position);
+		}
+		for(const Position &position : agentManagerInfo.blueAgentInitialPositions)
+		{
+			blueAgents.emplace_back(field, position);
+		}
 	}
 	const Agent &getRedAgent(uchar agentNo)const
 	{

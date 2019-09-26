@@ -9,8 +9,8 @@ class Agent
 	Position position;
 
 public:
-	Agent(const Field &field, Position position)noexcept
-		: field(field), position(position)
+	Agent(const Field &field, Position initialPosition)noexcept
+		: field(field), position(initialPosition)
 	{
 
 	}

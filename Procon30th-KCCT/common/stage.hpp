@@ -14,8 +14,8 @@ class Stage
 	int turnNo;
 
 public:
-	Stage(const FieldInfo &fieldInfo, uchar numAgents)
-		: field(fieldInfo), agentManager(field, numAgents), scoreManager(field)
+	Stage(const FieldInfo &fieldInfo, const AgantManagerInfo &agentManagerInfo)
+		: field(fieldInfo), agentManager(agentManagerInfo, field), scoreManager(field)
 	{
 
 	}
