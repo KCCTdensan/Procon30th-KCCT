@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="Simulator">
+      <UniqueIdentifier>{e1357c8a-3c39-4a3d-8055-4bb7c6ef1f7e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{f31f4c12-9a9f-4241-8566-610eaae72767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Controller">
+      <UniqueIdentifier>{3cf2446e-f225-42e9-89d1-cecb8891581d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\KA-31 NEO">
+      <UniqueIdentifier>{207fcb4d-21f6-42d1-b389-9b492387683c}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Engine\interface.hpp">
+      <Filter>Engine</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Simulator\panel.hpp">
+      <Filter>Simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulator\score.hpp">
+      <Filter>Simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulator\score_manager.hpp">
+      <Filter>Simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulator\agent.hpp">
+      <Filter>Simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulator\agent_manager.hpp">
+      <Filter>Simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulator\field.hpp">
+      <Filter>Simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulator\stage.hpp">
+      <Filter>Simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="action_id.hpp" />
+    <ClInclude Include="direction.hpp" />
+    <ClInclude Include="position.hpp" />
+    <ClInclude Include="team.hpp" />
+    <ClInclude Include="tile_state.hpp" />
+    <ClInclude Include="size.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Engine\main.cpp" />
+  </ItemGroup>
+</Project>
