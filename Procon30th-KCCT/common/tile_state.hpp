@@ -3,7 +3,7 @@
 #include "team.hpp"
 
 
-enum TileState
+enum class TileState
 {
 	NoTile,
 	RedTile,
@@ -14,13 +14,13 @@ TeamID toTeam(TileState tile)
 {
 	switch(tile)
 	{
-	case RedTile:
-		return TeamRed;
+	case TileState::RedTile:
+		return TeamID::TeamRed;
 
-	case BlueTile:
-		return TeamBlue;
+	case TileState::BlueTile:
+		return TeamID::TeamBlue;
 
 	default:
-		return TeamNull;
+		return TeamID::TeamNull;
 	}
 }

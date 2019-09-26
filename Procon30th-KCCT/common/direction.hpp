@@ -6,23 +6,23 @@
 
 class Direction
 {
-	char x;
-	char y;
+	int8_t x;
+	int8_t y;
 
 public:
-	Direction(ActionID id)
+	Direction(ActionID id)noexcept
 	{
 		switch(id)
 		{
-		case ID_TopLeft:
-		case ID_Top:
-		case ID_TopRight:
+		case ActionID::ID_TopLeft:
+		case ActionID::ID_Top:
+		case ActionID::ID_TopRight:
 			y = -1;
 			break;
 
-		case ID_BottomLeft:
-		case ID_Bottom:
-		case ID_BottomRight:
+		case ActionID::ID_BottomLeft:
+		case ActionID::ID_Bottom:
+		case ActionID::ID_BottomRight:
 			y = 1;
 			break;
 
@@ -32,15 +32,15 @@ public:
 		}
 		switch(id)
 		{
-		case ID_TopLeft:
-		case ID_Left:
-		case ID_BottomLeft:
+		case ActionID::ID_TopLeft:
+		case ActionID::ID_Left:
+		case ActionID::ID_BottomLeft:
 			x = -1;
 			break;
 
-		case ID_TopRight:
-		case ID_Right:
-		case ID_BottomRight:
+		case ActionID::ID_TopRight:
+		case ActionID::ID_Right:
+		case ActionID::ID_BottomRight:
 			x = 1;
 			break;
 

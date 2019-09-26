@@ -17,7 +17,7 @@ public:
 	Stage(const FieldInfo &fieldInfo, const AgantManagerInfo &agentManagerInfo)
 		: field(fieldInfo), agentManager(agentManagerInfo, field), scoreManager(field)
 	{
-
+		turnNo = 1;
 	}
 	void print()const
 	{

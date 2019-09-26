@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "direction.hpp"
+#include "size.hpp"
 
 
 struct Position
@@ -18,6 +19,26 @@ struct Position
 Position operator+(Position position, Direction direction)
 {
 	return Position(position) += direction;
+}
+
+bool operator<=(Position position, Size size)
+{
+	return position.x >= 0 && position.x < size.width && position.y >= 0 && position.y < size.height;
+}
+
+bool operator>(Position position, Size size)
+{
+	return !(position <= size);
+}
+
+bool operator>=(Size size, Position position)
+{
+	return position.x >= 0 && position.x < size.width && position.y >= 0 && position.y < size.height;
+}
+
+bool operator<(Size size, Position position)
+{
+	return !(size >= position);
 }
 
 bool operator==(Position position1, Position position2)

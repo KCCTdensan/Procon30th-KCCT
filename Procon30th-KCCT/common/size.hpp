@@ -5,6 +5,6 @@
 
 struct Size
 {
-	uchar width;
-	uchar height;
+	uint8_t width;
+	uint8_t height;
 };

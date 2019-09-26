@@ -1,9 +1,10 @@
 #pragma once
 
 
-enum ActionID
+constexpr int numKindsOfAction = 9;
+
+enum class ActionID
 {
-	ID_None = -1,
 	ID_Stay,
 	ID_TopLeft,
 	ID_Top,
@@ -13,5 +14,5 @@ enum ActionID
 	ID_BottomLeft,
 	ID_Bottom,
 	ID_BottomRight,
-	ID_NumID
+	ID_None = -1
 };

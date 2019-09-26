@@ -3,7 +3,7 @@
 
 constexpr int numTeams = 2;
 
-enum TeamID
+enum class TeamID
 {
 	TeamRed,
 	TeamBlue,

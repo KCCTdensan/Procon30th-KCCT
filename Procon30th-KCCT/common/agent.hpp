@@ -20,8 +20,7 @@ public:
 	}
 	bool canMove(Direction direction)const noexcept
 	{
-		Position nextPosition = position + direction;
-		return nextPosition.x >= 0 && nextPosition.x < field.getSize().width && nextPosition.y >= 0 && nextPosition.y < field.getSize().height;
+		return position + direction <= field.getSize();
 	}
 	void move(Direction direction)noexcept
 	{
