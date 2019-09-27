@@ -86,8 +86,8 @@
     <ClInclude Include="Simulator\score_manager.hpp" />
     <ClInclude Include="Simulator\stage.hpp" />
     <ClInclude Include="size.hpp" />
-    <ClInclude Include="team.hpp" />
-    <ClInclude Include="tile_state.hpp" />
+    <ClInclude Include="team_id.hpp" />
+    <ClInclude Include="tile_id.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\main.cpp" />

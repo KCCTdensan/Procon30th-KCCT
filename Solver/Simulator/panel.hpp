@@ -1,7 +1,7 @@
 ﻿#pragma once
 
-#include "../team.hpp"
-#include "../tile_state.hpp"
+#include "../team_id.hpp"
+#include "../tile_id.hpp"
 
 
 namespace solver

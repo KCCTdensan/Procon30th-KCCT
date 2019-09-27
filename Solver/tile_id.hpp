@@ -1,6 +1,6 @@
 #pragma once
 
-#include "team.hpp"
+#include "team_id.hpp"
 
 
 namespace solver

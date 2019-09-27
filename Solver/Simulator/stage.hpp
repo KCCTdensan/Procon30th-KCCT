@@ -18,7 +18,7 @@ namespace solver
 
 		public:
 			Stage(const FieldInfo &fieldInfo, const AgantManagerInfo &agentManagerInfo)
-				: field(fieldInfo), agentManager(agentManagerInfo, field), scoreManager(field)
+				: field(fieldInfo), agentManager(agentManagerInfo, field.getSize()), scoreManager(field)
 			{
 				turnNo = 1;
 			}

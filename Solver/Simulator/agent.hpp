@@ -10,12 +10,12 @@ namespace solver
 	{
 		class Agent
 		{
-			const Field &field;
+			const Size &fieldSize;
 			Position position;
 
 		public:
-			Agent(const Field &field, Position initialPosition)noexcept
-				: field(field), position(initialPosition)
+			Agent(const Size &fieldSize, Position initialPosition)noexcept
+				: fieldSize(fieldSize), position(initialPosition)
 			{
 
 			}
@@ -25,7 +25,7 @@ namespace solver
 			}
 			bool canMove(Direction direction)const noexcept
 			{
-				return position + direction <= field.getSize();
+				return isPositionInField(movedPosition(position, direction), fieldSize);
 			}
 			void move(Direction direction)noexcept
 			{
@@ -33,7 +33,7 @@ namespace solver
 				{
 					return;
 				}
-				position += direction;
+				position.move(direction);
 			}
 		};
 	}

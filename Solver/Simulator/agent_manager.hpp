@@ -21,16 +21,16 @@ namespace solver
 			std::vector<Agent> blueAgents;
 
 		public:
-			AgentManager(const AgantManagerInfo &agentManagerInfo, const Field &field)
-				: fieldSize(field.getSize())
+			AgentManager(const AgantManagerInfo &agentManagerInfo, const Size &fieldSize)
+				: fieldSize(fieldSize)
 			{
 				for(const Position &position : agentManagerInfo.redAgentInitialPositions)
 				{
-					redAgents.emplace_back(field, position);
+					redAgents.emplace_back(fieldSize, position);
 				}
 				for(const Position &position : agentManagerInfo.blueAgentInitialPositions)
 				{
-					blueAgents.emplace_back(field, position);
+					blueAgents.emplace_back(fieldSize, position);
 				}
 			}
 			const Agent &getRedAgent(unsigned agentNo)const

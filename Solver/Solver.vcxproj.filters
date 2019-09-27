@@ -44,9 +44,9 @@
     <ClInclude Include="action_id.hpp" />
     <ClInclude Include="direction.hpp" />
     <ClInclude Include="position.hpp" />
-    <ClInclude Include="team.hpp" />
-    <ClInclude Include="tile_state.hpp" />
     <ClInclude Include="size.hpp" />
+    <ClInclude Include="tile_id.hpp" />
+    <ClInclude Include="team_id.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Engine\main.cpp" />

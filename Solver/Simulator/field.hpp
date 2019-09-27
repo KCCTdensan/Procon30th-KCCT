@@ -33,17 +33,26 @@ namespace solver
 					}
 				}
 			}
-			const Panel &operator[](Position position)const
+			const Panel &operator[](const Position &position)const
 			{
-				return panels[size.width * position.y + position.x];
+				size_t index = static_cast<size_t>(size.width) *position.y + position.x;
+				return panels[index];
 			}
 			const Size getSize()const noexcept
 			{
 				return size;
 			}
+			auto begin()noexcept
+			{
+				return panels.begin();
+			}
 			auto begin()const noexcept
 			{
 				return panels.begin();
+			}
+			auto end()noexcept
+			{
+				return panels.end();
 			}
 			auto end()const noexcept
 			{
