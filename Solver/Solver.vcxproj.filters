@@ -57,5 +57,8 @@
       <Filter>Engine\KA-31 NEO</Filter>
     </ClInclude>
     <ClInclude Include="command.hpp" />
+    <ClInclude Include="Engine\KA-31 NEO\simulator.hpp">
+      <Filter>Engine\KA-31 NEO</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

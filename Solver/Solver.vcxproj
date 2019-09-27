@@ -81,6 +81,7 @@
     <ClInclude Include="Engine\Controller\controller.hpp" />
     <ClInclude Include="Engine\KA-31 NEO\ka31neo.hpp" />
     <ClInclude Include="Engine\KA-31 NEO\node.hpp" />
+    <ClInclude Include="Engine\KA-31 NEO\simulator.hpp" />
     <ClInclude Include="position.hpp" />
     <ClInclude Include="Simulator\agent.hpp" />
     <ClInclude Include="Simulator\agent_manager.hpp" />
