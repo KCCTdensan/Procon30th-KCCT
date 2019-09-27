@@ -10,7 +10,7 @@ namespace solver
 	{
 		class Agent
 		{
-			const Size &fieldSize;
+			const Size fieldSize;
 			Position position;
 
 		public:

@@ -76,7 +76,11 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="action_id.hpp" />
+    <ClInclude Include="command.hpp" />
     <ClInclude Include="direction.hpp" />
+    <ClInclude Include="Engine\Controller\controller.hpp" />
+    <ClInclude Include="Engine\KA-31 NEO\ka31neo.hpp" />
+    <ClInclude Include="Engine\KA-31 NEO\node.hpp" />
     <ClInclude Include="position.hpp" />
     <ClInclude Include="Simulator\agent.hpp" />
     <ClInclude Include="Simulator\agent_manager.hpp" />
@@ -88,9 +92,6 @@
     <ClInclude Include="size.hpp" />
     <ClInclude Include="team_id.hpp" />
     <ClInclude Include="tile_id.hpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClCompile Include="Engine\main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

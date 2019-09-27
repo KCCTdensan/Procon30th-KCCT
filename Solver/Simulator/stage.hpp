@@ -3,6 +3,7 @@
 #include "field.hpp"
 #include "agent_manager.hpp"
 #include "score_manager.hpp"
+#include "../command.hpp"
 
 
 namespace solver
@@ -11,7 +12,7 @@ namespace solver
 	{
 		class Stage
 		{
-			const Field field;
+			Field field;
 			AgentManager agentManager;
 			ScoreManager scoreManager;
 			unsigned turnNo;
@@ -22,9 +23,10 @@ namespace solver
 			{
 				turnNo = 1;
 			}
-			void print()const
+			void act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)
 			{
-
+				//
+				scoreManager.updateScore();
 			}
 		};
 	}
