@@ -102,7 +102,10 @@ namespace solver
 				}
 				void search()
 				{
-					select()->play();
+					++numVisited;
+					int reward = select()->play();
+					record += reward;
+					averageReward = static_cast<float>(record) / numVisited;
 				}
 			};
 		}
