@@ -19,6 +19,7 @@ namespace solver
 				std::array<Node *, numActionID> children;
 				unsigned numChildren;
 				unsigned numVisited;
+				int record;
 				float averageReward;
 
 				float UCB1(float averageRewardOfChild, unsigned numVisitedOfChild)
@@ -31,7 +32,7 @@ namespace solver
 				}
 				int evaluate()
 				{
-
+					return simulator.rollout();
 				}
 				void expand()
 				{
@@ -47,11 +48,19 @@ namespace solver
 				}
 				int play()
 				{
+					int reward;
 					if(numVisited < threshold)
 					{
-						return evaluate();
+						reward = evaluate();
 					}
-					return select()->play();
+					else
+					{
+						reward = select()->play();
+					}
+					++numVisited;
+					record += reward;
+					averageReward = static_cast<float>(record) / numVisited;
+					return reward;
 				}
 				Node *select()
 				{
@@ -82,7 +91,7 @@ namespace solver
 				}
 
 			public:
-				Node(const Simulator&simulator)
+				Node(const Simulator &simulator)
 					: simulator(simulator), children{nullptr}, numChildren(0)
 				{
 

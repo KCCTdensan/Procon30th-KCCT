@@ -20,6 +20,10 @@ namespace solver
 				{
 
 				}
+				int rollout()
+				{
+
+				}
 				bool canAct(ActionID action_id)
 				{
 
