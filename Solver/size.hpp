@@ -5,7 +5,7 @@ namespace solver
 {
 	struct Size
 	{
-		unsigned width;
-		unsigned height;
+		uint8_t width;
+		uint8_t height;
 	};
 }

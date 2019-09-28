@@ -14,13 +14,15 @@ namespace solver
 				const unsigned numRemainingTurns;
 				const simulator::Stage currentStage;
 
+
+
 			public:
 				Simulator(unsigned numRemainingTurns, const simulator::Stage &currentStage)
 					: numRemainingTurns(numRemainingTurns), currentStage(currentStage)
 				{
 
 				}
-				int rollout()
+				float rollout()
 				{
 
 				}
@@ -28,7 +30,7 @@ namespace solver
 				{
 
 				}
-				Simulator act(ActionID action_id)
+				Simulator next(ActionID action_id)
 				{
 
 				}

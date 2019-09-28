@@ -8,8 +8,8 @@ namespace solver
 {
 	struct Position
 	{
-		int x;
-		int y;
+		int8_t x;
+		int8_t y;
 		Position &move(const Direction &direction)noexcept
 		{
 			x += direction.getX();

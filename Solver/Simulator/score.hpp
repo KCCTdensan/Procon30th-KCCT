@@ -11,8 +11,8 @@ namespace solver
 		{
 			const Field &field;
 			const TeamID team;
-			int tileScore;
-			int regionScore;
+			int16_t tileScore;
+			int16_t regionScore;
 
 			void updateScoreOfPanel(const Panel &panel)noexcept
 			{
@@ -41,15 +41,15 @@ namespace solver
 					updateScoreOfPanel(panel);
 				}
 			}
-			int getTileScore()const noexcept
+			int16_t getTileScore()const noexcept
 			{
 				return tileScore;
 			}
-			int getRegionScore()const noexcept
+			int16_t getRegionScore()const noexcept
 			{
 				return regionScore;
 			}
-			int getAllScore()const noexcept
+			int16_t getAllScore()const noexcept
 			{
 				return tileScore + regionScore;
 			}

@@ -10,17 +10,17 @@ namespace solver
 	{
 		class Panel
 		{
-			const int point;
+			const int8_t point;
 			TileID tileStatus;
 			bool regionStatus[numTeams];
 
 		public:
-			Panel(int point)noexcept
+			Panel(int8_t point)noexcept
 				: point(point), tileStatus(TileID::none), regionStatus {false}
 			{
 
 			}
-			int getPoint()const noexcept
+			int8_t getPoint()const noexcept
 			{
 				return point;
 			}

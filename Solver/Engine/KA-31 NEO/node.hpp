@@ -19,7 +19,7 @@ namespace solver
 				std::array<Node *, numActionID> children;
 				unsigned numChildren;
 				unsigned numVisited;
-				int record;
+				float record;
 				float averageReward;
 
 				float UCB1(float averageRewardOfChild, unsigned numVisitedOfChild)
@@ -30,7 +30,7 @@ namespace solver
 					}
 					return averageReward + controlParameter * std::sqrt(2.0f * std::log(numVisited)) / numVisitedOfChild;
 				}
-				int evaluate()
+				float evaluate()
 				{
 					return simulator.rollout();
 				}
@@ -42,24 +42,16 @@ namespace solver
 						{
 							continue;
 						}
-						children[static_cast<size_t>(i)] = new Node(simulator.act(i));
+						children[static_cast<size_t>(i)] = new Node(simulator.next(i));
 						++numChildren;
 					}
 				}
-				int play()
+				_NODISCARD float play()
 				{
-					int reward;
-					if(numVisited < threshold)
-					{
-						reward = evaluate();
-					}
-					else
-					{
-						reward = select()->play();
-					}
+					float reward = numVisited < threshold ? evaluate() : select()->play();
 					++numVisited;
 					record += reward;
-					averageReward = static_cast<float>(record) / numVisited;
+					averageReward = record / numVisited;
 					return reward;
 				}
 				Node *select()
@@ -68,7 +60,7 @@ namespace solver
 					{
 						expand();
 					}
-					float maxAverageRewardOfChildren = -10.0f;
+					float maxAverageRewardOfChildren = 0.0f;
 					Node *selectedNode = nullptr;
 					for(Node *childNode : children)
 					{
@@ -81,7 +73,7 @@ namespace solver
 						{
 							return childNode;
 						}
-						if(maxAverageRewardOfChildren < averageRewardOfChild)
+						if(selectedNode == nullptr || maxAverageRewardOfChildren < averageRewardOfChild)
 						{
 							maxAverageRewardOfChildren = averageRewardOfChild;
 							selectedNode = childNode;

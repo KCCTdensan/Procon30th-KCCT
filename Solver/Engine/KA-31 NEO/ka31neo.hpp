@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../interface.hpp"
+#include "node.hpp"
 
 
 namespace solver
@@ -11,10 +12,16 @@ namespace solver
 		{
 			class KA31Neo : public Interface
 			{
-			public:
-				void setStage(const simulator::Stage &stage)override
-				{
+				Node *currentNode;
 
+			public:
+				KA31Neo()noexcept
+				{
+					currentNode = nullptr;
+				}
+				void setStage(unsigned numRemainingTurns, const simulator::Stage &stage)override
+				{
+					currentNode = new Node(Simulator(numRemainingTurns, stage));
 				}
 				void think()override
 				{

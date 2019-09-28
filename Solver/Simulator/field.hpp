@@ -13,7 +13,7 @@ namespace solver
 		struct FieldInfo
 		{
 			Size size;
-			std::vector<std::vector<int>> panelPoints;
+			std::vector<std::vector<int8_t>> panelPoints;
 		};
 
 		class Field

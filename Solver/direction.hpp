@@ -7,8 +7,8 @@ namespace solver
 {
 	class Direction
 	{
-		int x;
-		int y;
+		int8_t x;
+		int8_t y;
 
 	public:
 		Direction(ActionID id)noexcept
