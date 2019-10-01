@@ -1,7 +1,6 @@
 #pragma once
 
-#include "simulator.hpp"
-#include <array>
+#include "child_nodes_manager.hpp"
 
 
 namespace solver
@@ -15,9 +14,8 @@ namespace solver
 
 			class Node
 			{
+				ChildNodesManager childNodesManager;
 				Simulator simulator;
-				std::array<Node *, numActionID> children;
-				unsigned numChildren;
 				unsigned numVisited;
 				float record;
 				float averageReward;
@@ -42,8 +40,7 @@ namespace solver
 						{
 							continue;
 						}
-						children[static_cast<size_t>(i)] = new Node(simulator.next(i));
-						++numChildren;
+						childNodesManager.createChild(i, simulator);
 					}
 				}
 				_NODISCARD float play()

@@ -60,5 +60,8 @@
     <ClInclude Include="Engine\KA-31 NEO\simulator.hpp">
       <Filter>Engine\KA-31 NEO</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\KA-31 NEO\child_nodes_manager.hpp">
+      <Filter>Engine\KA-31 NEO</Filter>
+    </ClInclude>
   </ItemGroup>
 </Project>

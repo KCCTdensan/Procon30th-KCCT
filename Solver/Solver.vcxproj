@@ -79,6 +79,7 @@
     <ClInclude Include="command.hpp" />
     <ClInclude Include="direction.hpp" />
     <ClInclude Include="Engine\Controller\controller.hpp" />
+    <ClInclude Include="Engine\KA-31 NEO\child_nodes_manager.hpp" />
     <ClInclude Include="Engine\KA-31 NEO\ka31neo.hpp" />
     <ClInclude Include="Engine\KA-31 NEO\node.hpp" />
     <ClInclude Include="Engine\KA-31 NEO\simulator.hpp" />

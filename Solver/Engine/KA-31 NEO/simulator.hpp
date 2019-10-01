@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../Simulator/stage.hpp"
+#include <queue>
 
 
 namespace solver
@@ -13,7 +14,7 @@ namespace solver
 			{
 				const unsigned numRemainingTurns;
 				const simulator::Stage currentStage;
-
+				std::queue<ActionID> actionList;
 
 
 			public:
@@ -22,17 +23,19 @@ namespace solver
 				{
 
 				}
-				float rollout()
+				float rollout()const
 				{
 
 				}
-				bool canAct(ActionID action_id)
+				bool canAct(ActionID action_id)const
 				{
 
 				}
-				Simulator next(ActionID action_id)
+				Simulator next(ActionID action_id)const
 				{
-
+					Simulator ret(numRemainingTurns - 1, currentStage);
+					ret.actionList.push(action_id);
+					return ret;
 				}
 			};
 		}
