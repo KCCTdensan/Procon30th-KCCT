@@ -33,17 +33,17 @@ namespace solver
 						delete node;
 					}
 				}
-				Node *begin()noexcept
+				auto begin()noexcept
 				{
 					auto ret = children.begin();
 					while(ret != children.end() && *ret == nullptr)ret++;
-					return *ret;
+					return ret;
 				}
-				Node *end()noexcept
+				auto end()noexcept
 				{
 					auto ret = children.end();
 					while(ret != children.begin() && *ret == nullptr)ret--;
-					return *ret;
+					return ret;
 				}
 				void createChild(ActionID actionID, const Simulator &simulator)
 				{
