@@ -59,7 +59,7 @@ namespace solver
 					}
 					float maxAverageRewardOfChildren = 0.0f;
 					Node *selectedNode = nullptr;
-					for(Node *childNode : children)
+					for(Node *childNode : childNodesManager)
 					{
 						if(childNode == nullptr)
 						{
@@ -81,13 +81,13 @@ namespace solver
 
 			public:
 				Node(const Simulator &simulator)
-					: simulator(simulator), children{nullptr}, numChildren(0)
+					: simulator(simulator)
 				{
 
 				}
 				bool isLeafNode()
 				{
-					return numChildren == 0;
+					return childNodesManager.getNumChildren() == 0;
 				}
 				void search()
 				{
