@@ -61,6 +61,10 @@ namespace solver
 					Node *selectedNode = nullptr;
 					for(Node *childNode : childNodesManager)
 					{
+						if(childNode == nullptr)
+						{
+							continue;
+						}
 						float averageRewardOfChild = UCB1(childNode->averageReward, childNode->numVisited);
 						if(averageRewardOfChild == INFINITY)
 						{

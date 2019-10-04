@@ -35,15 +35,11 @@ namespace solver
 				}
 				auto begin()noexcept
 				{
-					auto ret = children.begin();
-					while(ret != children.end() && *ret == nullptr)ret++;
-					return ret;
+					return children.begin();
 				}
 				auto end()noexcept
 				{
-					auto ret = children.end();
-					while(ret != children.begin() && *ret == nullptr)ret--;
-					return ret;
+					return children.end();
 				}
 				void createChild(ActionID actionID, const Simulator &simulator)
 				{
