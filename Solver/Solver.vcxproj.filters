@@ -56,11 +56,13 @@
       <Filter>engine</Filter>
     </ClInclude>
     <ClInclude Include="host.hpp" />
+    <ClInclude Include="engine_loader.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
     <ClCompile Include="settings\rw.cpp">
       <Filter>settings</Filter>
     </ClCompile>
+    <ClCompile Include="engine_loader.cpp" />
   </ItemGroup>
 </Project>
