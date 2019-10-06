@@ -1,7 +1,7 @@
 #pragma once
 
 #include "../interface.hpp"
-#include "node.hpp"
+#include "agent.hpp"
 #include <vector>
 
 
@@ -14,13 +14,13 @@ namespace solver
 			class KA31Neo : public Interface
 			{
 				TeamID team;
-				std::vector<Node *> currentNodes;
+				std::vector<Agent> agents;
 
 			public:
 				void initialize(TeamID team, unsigned numAgents)override
 				{
 					this->team = team;
-					currentNodes.resize(numAgents);
+					agents.resize(numAgents);
 				}
 				void setStage(unsigned numRemainingTurns, const simulator::Stage &stage)override
 				{
@@ -28,7 +28,17 @@ namespace solver
 				}
 				void think()override
 				{
-
+					for(Agent &agent : agents)
+					{
+						agent.think();
+					}
+				}
+				void unthink()override
+				{
+					for(Agent &agent : agents)
+					{
+						agent.unthink();
+					}
 				}
 				Command getBestActions()const override
 				{
