@@ -1,37 +1,37 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="Simulator">
-      <UniqueIdentifier>{e1357c8a-3c39-4a3d-8055-4bb7c6ef1f7e}</UniqueIdentifier>
-    </Filter>
     <Filter Include="settings">
       <UniqueIdentifier>{c8b52b9b-abc2-413a-9e19-2ce2b967cbc0}</UniqueIdentifier>
     </Filter>
     <Filter Include="engine">
       <UniqueIdentifier>{f31f4c12-9a9f-4241-8566-610eaae72767}</UniqueIdentifier>
     </Filter>
+    <Filter Include="simulator">
+      <UniqueIdentifier>{e1357c8a-3c39-4a3d-8055-4bb7c6ef1f7e}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Simulator\panel.hpp">
-      <Filter>Simulator</Filter>
+      <Filter>simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\score.hpp">
-      <Filter>Simulator</Filter>
+      <Filter>simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\score_manager.hpp">
-      <Filter>Simulator</Filter>
+      <Filter>simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\agent.hpp">
-      <Filter>Simulator</Filter>
+      <Filter>simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\agent_manager.hpp">
-      <Filter>Simulator</Filter>
+      <Filter>simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\field.hpp">
-      <Filter>Simulator</Filter>
+      <Filter>simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\stage.hpp">
-      <Filter>Simulator</Filter>
+      <Filter>simulator</Filter>
     </ClInclude>
     <ClInclude Include="action_id.hpp" />
     <ClInclude Include="direction.hpp" />
@@ -55,6 +55,7 @@
     <ClInclude Include="engine\interface.hpp">
       <Filter>engine</Filter>
     </ClInclude>
+    <ClInclude Include="host.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
