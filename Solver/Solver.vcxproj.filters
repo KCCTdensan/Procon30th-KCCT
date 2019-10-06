@@ -13,6 +13,9 @@
     <Filter Include="Engine\KA-31 NEO">
       <UniqueIdentifier>{207fcb4d-21f6-42d1-b389-9b492387683c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Config">
+      <UniqueIdentifier>{ae64ee8f-a84a-4f43-afbb-e6ebc8366314}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\interface.hpp">
@@ -63,5 +66,26 @@
     <ClInclude Include="Engine\KA-31 NEO\child_nodes_manager.hpp">
       <Filter>Engine\KA-31 NEO</Filter>
     </ClInclude>
+    <ClInclude Include="Config\data.hpp">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\reader.hpp">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\writer.hpp">
+      <Filter>Config</Filter>
+    </ClInclude>
+    <ClInclude Include="Config\data_info.hpp">
+      <Filter>Config</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="main.cpp" />
+    <ClCompile Include="Config\reader.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
+    <ClCompile Include="Config\writer.cpp">
+      <Filter>Config</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

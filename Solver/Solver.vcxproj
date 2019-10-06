@@ -77,6 +77,10 @@
   <ItemGroup>
     <ClInclude Include="action_id.hpp" />
     <ClInclude Include="command.hpp" />
+    <ClInclude Include="Config\data.hpp" />
+    <ClInclude Include="Config\data_info.hpp" />
+    <ClInclude Include="Config\reader.hpp" />
+    <ClInclude Include="Config\writer.hpp" />
     <ClInclude Include="direction.hpp" />
     <ClInclude Include="Engine\Controller\controller.hpp" />
     <ClInclude Include="Engine\KA-31 NEO\child_nodes_manager.hpp" />
@@ -94,6 +98,11 @@
     <ClInclude Include="size.hpp" />
     <ClInclude Include="team_id.hpp" />
     <ClInclude Include="tile_id.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Config\reader.cpp" />
+    <ClCompile Include="Config\writer.cpp" />
+    <ClCompile Include="main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
