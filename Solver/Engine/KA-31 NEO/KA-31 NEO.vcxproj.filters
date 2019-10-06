@@ -6,6 +6,7 @@
     <ClInclude Include="agent.hpp" />
     <ClInclude Include="child_nodes_manager.hpp" />
     <ClInclude Include="engine.hpp" />
+    <ClInclude Include="..\instance.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="instance.cpp" />

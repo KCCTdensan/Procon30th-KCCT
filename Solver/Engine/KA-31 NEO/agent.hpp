@@ -45,5 +45,9 @@ namespace solver::engine::ka31neo
 			WaitForSingleObject(threadHandle, INFINITE);
 			CloseHandle(threadHandle);
 		}
+		ActionID getBestAction()const
+		{
+
+		}
 	};
 }

@@ -12,7 +12,7 @@ namespace solver
 		blue
 	};
 
-	TeamID toTeam(TileID tile)
+	inline TeamID toTeam(TileID tile)
 	{
 		switch(tile)
 		{

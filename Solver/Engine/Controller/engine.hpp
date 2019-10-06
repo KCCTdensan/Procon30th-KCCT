@@ -12,6 +12,11 @@ namespace solver::engine::controller
 		Command agentIntentions;
 
 	public:
+		Engine()
+		{
+			team = TeamID::null;
+			numAgents = 0;
+		}
 		void initialize(TeamID team, unsigned numAgents)override
 		{
 			this->team = team;

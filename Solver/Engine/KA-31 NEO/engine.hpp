@@ -12,6 +12,7 @@ namespace solver::engine::ka31neo
 		TeamID team;
 		unsigned numRemainingTurns;
 		std::vector<Agent> agents;
+		Command agentIntentions;
 
 	public:
 		void initialize(TeamID team, unsigned numAgents)override

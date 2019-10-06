@@ -16,6 +16,10 @@ namespace solver::engine::controller
 
 	void Engine::unthink()
 	{
-
+		agentIntentions.actionIDs.clear();
+		for(unsigned i = 0; i < numAgents; ++i)
+		{
+			agentIntentions.actionIDs.push_back(ActionID::stay);//‰¼ƒvƒƒOƒ‰ƒ€
+		}
 	}
 }

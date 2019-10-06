@@ -18,22 +18,22 @@ namespace solver
 		}
 	};
 
-	bool operator==(const Position &position1, const Position &position2)noexcept
+	inline bool operator==(const Position &position1, const Position &position2)noexcept
 	{
 		return position1.x == position2.x && position1.y == position2.y;
 	}
 
-	bool operator!=(const Position &position1, const Position &position2)noexcept
+	inline bool operator!=(const Position &position1, const Position &position2)noexcept
 	{
 		return !(position1 == position2);
 	}
 
-	Position movedPosition(const Position &position, const Direction &direction)noexcept
+	inline Position movedPosition(const Position &position, const Direction &direction)noexcept
 	{
 		return Position(position).move(direction);
 	}
 
-	bool isPositionInField(const Position &position, const Size &size)noexcept
+	inline bool isPositionInField(const Position &position, const Size &size)noexcept
 	{
 		return position.x >= 0 && position.x < size.width && position.y >= 0 && position.y < size.height;
 	}

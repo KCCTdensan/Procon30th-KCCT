@@ -20,22 +20,22 @@ namespace solver
 		null = -1
 	};
 
-	ActionID begin(ActionID)
+	inline ActionID begin(ActionID)
 	{
 		return ActionID::stay;
 	}
 
-	ActionID end(ActionID)
+	inline ActionID end(ActionID)
 	{
 		return ActionID::numActionID;
 	}
 
-	ActionID operator*(ActionID action_id)
+	inline ActionID operator*(ActionID action_id)
 	{
 		return action_id;
 	}
 
-	ActionID operator++(ActionID &action_id)
+	inline ActionID operator++(ActionID &action_id)
 	{
 		return action_id = static_cast<ActionID>(static_cast<int>(action_id) + 1);
 	}

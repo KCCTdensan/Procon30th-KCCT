@@ -2,8 +2,10 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="instance.cpp" />
+    <ClCompile Include="engine.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.hpp" />
+    <ClInclude Include="..\instance.hpp" />
   </ItemGroup>
 </Project>
