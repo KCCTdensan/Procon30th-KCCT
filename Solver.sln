@@ -5,6 +5,8 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Solver", "Solver\Solver.vcxproj", "{D228F4C6-678C-4725-8DBA-68E57AD63EC5}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KA-31 NEO", "Solver\Engine\KA-31 NEO\KA-31 NEO.vcxproj", "{30A3619F-E52E-477B-A75A-D0A3901D8559}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -15,6 +17,10 @@ Global
 		{D228F4C6-678C-4725-8DBA-68E57AD63EC5}.Debug|x64.Build.0 = Debug|x64
 		{D228F4C6-678C-4725-8DBA-68E57AD63EC5}.Release|x64.ActiveCfg = Release|x64
 		{D228F4C6-678C-4725-8DBA-68E57AD63EC5}.Release|x64.Build.0 = Release|x64
+		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Debug|x64.ActiveCfg = Debug|x64
+		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Debug|x64.Build.0 = Debug|x64
+		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Release|x64.ActiveCfg = Release|x64
+		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

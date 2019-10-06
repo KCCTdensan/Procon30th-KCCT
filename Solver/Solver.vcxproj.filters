@@ -7,12 +7,6 @@
     <Filter Include="Engine">
       <UniqueIdentifier>{f31f4c12-9a9f-4241-8566-610eaae72767}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine\Controller">
-      <UniqueIdentifier>{3cf2446e-f225-42e9-89d1-cecb8891581d}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="Engine\KA-31 NEO">
-      <UniqueIdentifier>{207fcb4d-21f6-42d1-b389-9b492387683c}</UniqueIdentifier>
-    </Filter>
     <Filter Include="Setting">
       <UniqueIdentifier>{ae64ee8f-a84a-4f43-afbb-e6ebc8366314}</UniqueIdentifier>
     </Filter>
@@ -50,25 +44,7 @@
     <ClInclude Include="size.hpp" />
     <ClInclude Include="tile_id.hpp" />
     <ClInclude Include="team_id.hpp" />
-    <ClInclude Include="Engine\Controller\controller.hpp">
-      <Filter>Engine\Controller</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\KA-31 NEO\node.hpp">
-      <Filter>Engine\KA-31 NEO</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\KA-31 NEO\ka31neo.hpp">
-      <Filter>Engine\KA-31 NEO</Filter>
-    </ClInclude>
     <ClInclude Include="command.hpp" />
-    <ClInclude Include="Engine\KA-31 NEO\simulator.hpp">
-      <Filter>Engine\KA-31 NEO</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\KA-31 NEO\child_nodes_manager.hpp">
-      <Filter>Engine\KA-31 NEO</Filter>
-    </ClInclude>
-    <ClInclude Include="Engine\KA-31 NEO\agent.hpp">
-      <Filter>Engine\KA-31 NEO</Filter>
-    </ClInclude>
     <ClInclude Include="Setting\writer.hpp">
       <Filter>Setting</Filter>
     </ClInclude>

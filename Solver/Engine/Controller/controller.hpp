@@ -3,30 +3,24 @@
 #include "../interface.hpp"
 
 
-namespace solver
+namespace solver::engine::controller
 {
-	namespace engine
+	class Controller : public Interface
 	{
-		namespace controller
+		Command agentIntentions;
+
+	public:
+		void setStage(unsigned nunRemainingTurns, const simulator::Stage &stage)override
 		{
-			class Controller : public Interface
-			{
-				Command agentIntentions;
 
-			public:
-				void setStage(unsigned nunRemainingTurns, const simulator::Stage &stage)override
-				{
-
-				}
-				void think()override
-				{
-					//標準入力によりエージェントの意思表示をagentIntentions変数に保存する
-				}
-				Command getBestActions()const override
-				{
-					return agentIntentions;
-				}
-			};
 		}
-	}
+		void think()override
+		{
+			//標準入力によりエージェントの意思表示をagentIntentions変数に保存する
+		}
+		Command getBestActions()const override
+		{
+			return agentIntentions;
+		}
+	};
 }
