@@ -72,18 +72,15 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <None Include="Engine\interface.hpp" />
-  </ItemGroup>
-  <ItemGroup>
     <ClInclude Include="action_id.hpp" />
     <ClInclude Include="command.hpp" />
     <ClInclude Include="direction.hpp" />
-    <ClInclude Include="Engine\instance.hpp" />
+    <ClInclude Include="engine\instance.hpp" />
+    <ClInclude Include="engine\interface.hpp" />
     <ClInclude Include="position.hpp" />
-    <ClInclude Include="Setting\data.hpp" />
-    <ClInclude Include="Setting\data_info.hpp" />
-    <ClInclude Include="Setting\reader.hpp" />
-    <ClInclude Include="Setting\writer.hpp" />
+    <ClInclude Include="settings\data.hpp" />
+    <ClInclude Include="settings\data_info.hpp" />
+    <ClInclude Include="settings\rw.hpp" />
     <ClInclude Include="Simulator\agent.hpp" />
     <ClInclude Include="Simulator\agent_manager.hpp" />
     <ClInclude Include="Simulator\field.hpp" />
@@ -97,8 +94,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Setting\reader.cpp" />
-    <ClCompile Include="Setting\writer.cpp" />
+    <ClCompile Include="settings\rw.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -4,17 +4,12 @@
     <Filter Include="Simulator">
       <UniqueIdentifier>{e1357c8a-3c39-4a3d-8055-4bb7c6ef1f7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Engine">
+    <Filter Include="settings">
+      <UniqueIdentifier>{c8b52b9b-abc2-413a-9e19-2ce2b967cbc0}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="engine">
       <UniqueIdentifier>{f31f4c12-9a9f-4241-8566-610eaae72767}</UniqueIdentifier>
     </Filter>
-    <Filter Include="Setting">
-      <UniqueIdentifier>{ae64ee8f-a84a-4f43-afbb-e6ebc8366314}</UniqueIdentifier>
-    </Filter>
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Engine\interface.hpp">
-      <Filter>Engine</Filter>
-    </None>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Simulator\panel.hpp">
@@ -45,29 +40,26 @@
     <ClInclude Include="tile_id.hpp" />
     <ClInclude Include="team_id.hpp" />
     <ClInclude Include="command.hpp" />
-    <ClInclude Include="Setting\writer.hpp">
-      <Filter>Setting</Filter>
+    <ClInclude Include="settings\data.hpp">
+      <Filter>settings</Filter>
     </ClInclude>
-    <ClInclude Include="Setting\data.hpp">
-      <Filter>Setting</Filter>
+    <ClInclude Include="settings\data_info.hpp">
+      <Filter>settings</Filter>
     </ClInclude>
-    <ClInclude Include="Setting\data_info.hpp">
-      <Filter>Setting</Filter>
+    <ClInclude Include="settings\rw.hpp">
+      <Filter>settings</Filter>
     </ClInclude>
-    <ClInclude Include="Setting\reader.hpp">
-      <Filter>Setting</Filter>
+    <ClInclude Include="engine\instance.hpp">
+      <Filter>engine</Filter>
     </ClInclude>
-    <ClInclude Include="Engine\instance.hpp">
-      <Filter>Engine</Filter>
+    <ClInclude Include="engine\interface.hpp">
+      <Filter>engine</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="Setting\writer.cpp">
-      <Filter>Setting</Filter>
-    </ClCompile>
-    <ClCompile Include="Setting\reader.cpp">
-      <Filter>Setting</Filter>
+    <ClCompile Include="settings\rw.cpp">
+      <Filter>settings</Filter>
     </ClCompile>
   </ItemGroup>
 </Project>

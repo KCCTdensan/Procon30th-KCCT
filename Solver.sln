@@ -5,9 +5,11 @@ VisualStudioVersion = 16.0.29306.81
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Solver", "Solver\Solver.vcxproj", "{D228F4C6-678C-4725-8DBA-68E57AD63EC5}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KA-31 NEO", "Solver\Engine\KA-31 NEO\KA-31 NEO.vcxproj", "{30A3619F-E52E-477B-A75A-D0A3901D8559}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Controller", "Solver\engine\Controller\Controller.vcxproj", "{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}"
 EndProject
-Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Controller", "Solver\Engine\Controller\Controller.vcxproj", "{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}"
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KA-31 NEO", "Solver\engine\KA-31 NEO\KA-31 NEO.vcxproj", "{30A3619F-E52E-477B-A75A-D0A3901D8559}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "engine", "engine", "{4BEFAF5B-1631-4C54-B071-5058D37222B7}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -19,17 +21,21 @@ Global
 		{D228F4C6-678C-4725-8DBA-68E57AD63EC5}.Debug|x64.Build.0 = Debug|x64
 		{D228F4C6-678C-4725-8DBA-68E57AD63EC5}.Release|x64.ActiveCfg = Release|x64
 		{D228F4C6-678C-4725-8DBA-68E57AD63EC5}.Release|x64.Build.0 = Release|x64
-		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Debug|x64.ActiveCfg = Debug|x64
-		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Debug|x64.Build.0 = Debug|x64
-		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Release|x64.ActiveCfg = Release|x64
-		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Release|x64.Build.0 = Release|x64
 		{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}.Debug|x64.ActiveCfg = Debug|x64
 		{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}.Debug|x64.Build.0 = Debug|x64
 		{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}.Release|x64.ActiveCfg = Release|x64
 		{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}.Release|x64.Build.0 = Release|x64
+		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Debug|x64.ActiveCfg = Debug|x64
+		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Debug|x64.Build.0 = Debug|x64
+		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Release|x64.ActiveCfg = Release|x64
+		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{62DE302B-4E44-42DC-BA15-2F1FCAF17E73} = {4BEFAF5B-1631-4C54-B071-5058D37222B7}
+		{30A3619F-E52E-477B-A75A-D0A3901D8559} = {4BEFAF5B-1631-4C54-B071-5058D37222B7}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {96C9CD75-FC3F-4815-A256-8F32F9F118C3}
