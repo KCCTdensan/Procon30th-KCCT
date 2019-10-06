@@ -2,6 +2,7 @@
 
 #include "../interface.hpp"
 #include "node.hpp"
+#include <vector>
 
 
 namespace solver
@@ -12,16 +13,18 @@ namespace solver
 		{
 			class KA31Neo : public Interface
 			{
-				Node *currentNode;
+				TeamID team;
+				std::vector<Node *> currentNodes;
 
 			public:
-				KA31Neo()noexcept
+				void initialize(TeamID team, unsigned numAgents)override
 				{
-					currentNode = nullptr;
+					this->team = team;
+					currentNodes.resize(numAgents);
 				}
 				void setStage(unsigned numRemainingTurns, const simulator::Stage &stage)override
 				{
-					currentNode = new Node(Simulator(numRemainingTurns, stage));
+
 				}
 				void think()override
 				{

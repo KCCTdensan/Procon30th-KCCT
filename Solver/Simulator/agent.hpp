@@ -1,6 +1,5 @@
 ﻿#pragma once
 
-#include "field.hpp"
 #include "../position.hpp"
 
 

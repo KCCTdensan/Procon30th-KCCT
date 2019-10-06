@@ -14,7 +14,7 @@ namespace solver
 				Command agentIntentions;
 
 			public:
-				void setStage(const simulator::Stage &stage)override
+				void setStage(unsigned nunRemainingTurns, const simulator::Stage &stage)override
 				{
 
 				}
