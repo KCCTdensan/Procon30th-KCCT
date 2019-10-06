@@ -14,9 +14,9 @@ namespace solver
 			int16_t tileScore;
 			int16_t regionScore;
 
-			void updateScoreOfPanel(const Panel &panel)noexcept
+			void updatePanel(const Panel &panel)noexcept
 			{
-				if(toTeam(panel.getTile()) == team)
+				if(toTeam(panel.getTileStatus()) == team)
 				{
 					tileScore += panel.getPoint();
 				}
@@ -32,13 +32,13 @@ namespace solver
 			{
 
 			}
-			void updateScore()
+			void update()
 			{
 				tileScore = 0;
 				regionScore = 0;
 				for(const Panel &panel : field)
 				{
-					updateScoreOfPanel(panel);
+					updatePanel(panel);
 				}
 			}
 			int16_t getTileScore()const noexcept
@@ -49,7 +49,7 @@ namespace solver
 			{
 				return regionScore;
 			}
-			int16_t getAllScore()const noexcept
+			int16_t getTotalScore()const noexcept
 			{
 				return tileScore + regionScore;
 			}

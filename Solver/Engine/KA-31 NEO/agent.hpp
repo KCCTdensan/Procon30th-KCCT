@@ -33,13 +33,13 @@ namespace solver::engine::ka31neo
 		{
 
 		}
-		bool think()
+		bool startThinking()
 		{
 			isThinking = true;
 			threadHandle = reinterpret_cast<HANDLE>(_beginthreadex(NULL, 0, startThinking, this, 0, &threadID));
 			return threadHandle != NULL;
 		}
-		void unthink()
+		void stopThinking()
 		{
 			isThinking = false;
 			WaitForSingleObject(threadHandle, INFINITE);

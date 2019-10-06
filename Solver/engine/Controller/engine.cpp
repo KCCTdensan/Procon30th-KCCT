@@ -9,12 +9,12 @@ namespace solver::engine::controller
 
 	}
 
-	void Engine::think()
+	void Engine::startThinking()
 	{
 
 	}
 
-	void Engine::unthink()
+	void Engine::stopThinking()
 	{
 		agentIntentions.actionIDs.clear();
 		for(unsigned i = 0; i < numAgents; ++i)

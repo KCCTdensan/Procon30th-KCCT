@@ -18,10 +18,10 @@ namespace solver
 			{
 
 			}
-			void updateScore()
+			void update()
 			{
-				redScore.updateScore();
-				blueScore.updateScore();
+				redScore.update();
+				blueScore.update();
 			}
 			const Score &getRedScore()const noexcept
 			{

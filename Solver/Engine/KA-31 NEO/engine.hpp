@@ -24,18 +24,18 @@ namespace solver::engine::ka31neo
 		{
 
 		}
-		void think()override
+		void startThinking()override
 		{
 			for(Agent &agent : agents)
 			{
-				agent.think();
+				agent.startThinking();
 			}
 		}
-		void unthink()override
+		void stopThinking()override
 		{
 			for(Agent &agent : agents)
 			{
-				agent.unthink();
+				agent.stopThinking();
 			}
 		}
 		Command getBestActions()const override

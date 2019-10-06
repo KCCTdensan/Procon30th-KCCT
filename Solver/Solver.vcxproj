@@ -96,6 +96,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="engine_loader.cpp" />
+    <ClCompile Include="host.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="settings\rw.cpp" />
   </ItemGroup>

@@ -36,7 +36,7 @@ namespace solver
 			{
 				tileStatus = TileID::none;
 			}
-			TileID getTile()const noexcept
+			TileID getTileStatus()const noexcept
 			{
 				return tileStatus;
 			}

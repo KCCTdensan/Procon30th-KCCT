@@ -19,5 +19,7 @@ namespace solver
 	public:
 		EngineLoader(const std::wstring &engineName);
 		~EngineLoader();
+		engine::Interface *createEngine();
+		void destroyEngine(engine::Interface *engine);
 	};
 }

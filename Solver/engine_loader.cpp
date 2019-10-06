@@ -27,4 +27,14 @@ namespace solver
 	{
 		FreeLibrary(moduleHandle);
 	}
+
+	engine::Interface *EngineLoader::createEngine()
+	{
+		return creator();
+	}
+
+	void EngineLoader::destroyEngine(engine::Interface *engine)
+	{
+		destroyer(engine);
+	}
 }

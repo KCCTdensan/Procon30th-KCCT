@@ -25,7 +25,7 @@ namespace solver
 			void act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)
 			{
 				//
-				scoreManager.updateScore();
+				scoreManager.update();
 			}
 		};
 	}

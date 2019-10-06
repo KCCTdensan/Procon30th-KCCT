@@ -64,5 +64,6 @@
       <Filter>settings</Filter>
     </ClCompile>
     <ClCompile Include="engine_loader.cpp" />
+    <ClCompile Include="host.cpp" />
   </ItemGroup>
 </Project>

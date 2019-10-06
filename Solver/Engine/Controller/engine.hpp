@@ -23,8 +23,8 @@ namespace solver::engine::controller
 			this->numAgents = numAgents;
 		}
 		void setStage(unsigned nunRemainingTurns, const simulator::Stage &stage)override;
-		void think()override;
-		void unthink()override;
+		void startThinking()override;
+		void stopThinking()override;
 		Command getBestActions()const override
 		{
 			return agentIntentions;
