@@ -78,6 +78,7 @@
     <ClInclude Include="action_id.hpp" />
     <ClInclude Include="command.hpp" />
     <ClInclude Include="direction.hpp" />
+    <ClInclude Include="Engine\instance.hpp" />
     <ClInclude Include="position.hpp" />
     <ClInclude Include="Setting\data.hpp" />
     <ClInclude Include="Setting\data_info.hpp" />

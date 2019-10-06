@@ -57,6 +57,9 @@
     <ClInclude Include="Setting\reader.hpp">
       <Filter>Setting</Filter>
     </ClInclude>
+    <ClInclude Include="Engine\instance.hpp">
+      <Filter>Engine</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />

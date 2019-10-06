@@ -5,51 +5,45 @@
 #include <Windows.h>
 
 
-namespace solver
+namespace solver::engine::ka31neo
 {
-	namespace engine
+	class Agent
 	{
-		namespace ka31neo
+		Node *currentNode;
+		bool isThinking;
+		HANDLE threadHandle;
+		DWORD32 threadID;
+
+		static unsigned __stdcall startThinking(void *arg)
 		{
-			class Agent
+			Agent &agent = *reinterpret_cast<Agent *>(arg);
+			while(agent.isThinking)
 			{
-				Node *currentNode;
-				bool isThinking;
-				HANDLE threadHandle;
-				DWORD32 threadID;
-
-				static unsigned __stdcall startThinking(void *arg)
-				{
-					Agent &agent = *reinterpret_cast<Agent *>(arg);
-					while(agent.isThinking)
-					{
-						agent.currentNode->search();
-					}
-					return 0;
-				}
-
-			public:
-				Agent(TeamID team)
-				{
-					
-				}
-				void setStage(unsigned numRemainingTurns, const simulator::Stage &stage)
-				{
-
-				}
-				bool think()
-				{
-					isThinking = true;
-					threadHandle = reinterpret_cast<HANDLE>(_beginthreadex(NULL, 0, startThinking, this, 0, &threadID));
-					return threadHandle != NULL;
-				}
-				void unthink()
-				{
-					isThinking = false;
-					WaitForSingleObject(threadHandle, INFINITE);
-					CloseHandle(threadHandle);
-				}
-			};
+				agent.currentNode->search();
+			}
+			return 0;
 		}
-	}
+
+	public:
+		Agent(TeamID team)
+		{
+
+		}
+		void setStage(unsigned numRemainingTurns, const simulator::Stage &stage)
+		{
+
+		}
+		bool think()
+		{
+			isThinking = true;
+			threadHandle = reinterpret_cast<HANDLE>(_beginthreadex(NULL, 0, startThinking, this, 0, &threadID));
+			return threadHandle != NULL;
+		}
+		void unthink()
+		{
+			isThinking = false;
+			WaitForSingleObject(threadHandle, INFINITE);
+			CloseHandle(threadHandle);
+		}
+	};
 }

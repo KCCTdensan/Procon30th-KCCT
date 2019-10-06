@@ -1,10 +1,13 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClInclude Include="ka31neo.hpp" />
     <ClInclude Include="node.hpp" />
     <ClInclude Include="simulator.hpp" />
     <ClInclude Include="agent.hpp" />
     <ClInclude Include="child_nodes_manager.hpp" />
+    <ClInclude Include="engine.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="instance.cpp" />
   </ItemGroup>
 </Project>

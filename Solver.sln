@@ -7,6 +7,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Solver", "Solver\Solver.vcx
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "KA-31 NEO", "Solver\Engine\KA-31 NEO\KA-31 NEO.vcxproj", "{30A3619F-E52E-477B-A75A-D0A3901D8559}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Controller", "Solver\Engine\Controller\Controller.vcxproj", "{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,10 @@ Global
 		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Debug|x64.Build.0 = Debug|x64
 		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Release|x64.ActiveCfg = Release|x64
 		{30A3619F-E52E-477B-A75A-D0A3901D8559}.Release|x64.Build.0 = Release|x64
+		{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}.Debug|x64.ActiveCfg = Debug|x64
+		{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}.Debug|x64.Build.0 = Debug|x64
+		{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}.Release|x64.ActiveCfg = Release|x64
+		{62DE302B-4E44-42DC-BA15-2F1FCAF17E73}.Release|x64.Build.0 = Release|x64
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
