@@ -6,5 +6,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine.hpp" />
+    <ClInclude Include="..\instance.hpp" />
   </ItemGroup>
 </Project>
