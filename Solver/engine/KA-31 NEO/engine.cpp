@@ -3,12 +3,12 @@
 
 namespace solver::engine::ka31neo
 {
-	void Engine::initialize(TeamID team, const simulator::Stage &stage)
+	void Engine::initialize(TeamID team_id, const StageInterface &stage)
 	{
-		this->team = team;
+		this->team_id = team_id;
 		for(uint8_t i = 0; i < stage.getNumAgents(); ++i)
 		{
-			agents.emplace_back(team, i, stage);
+			agents.emplace_back(team_id, i, stage);
 		}
 	}
 

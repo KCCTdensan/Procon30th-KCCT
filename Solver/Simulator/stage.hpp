@@ -1,5 +1,6 @@
 #pragma once
 
+#include "../stage_interface.hpp"
 #include "field.hpp"
 #include "agent_manager.hpp"
 #include "score_manager.hpp"
@@ -8,7 +9,7 @@
 
 namespace solver::simulator
 {
-	class Stage
+	class Stage : public StageInterface
 	{
 		const uint8_t numTurns;
 		uint8_t currentTurnNo;
@@ -22,14 +23,14 @@ namespace solver::simulator
 		{
 
 		}
-		void act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)
+		void act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)override
 		{
 			//
 			scoreManager.update();
 		}
-		uint8_t getNumAgents()const noexcept;
-		uint8_t getNumTurns()const noexcept;
-		uint8_t getCurrentTurnNo()const noexcept;
-		uint8_t getNumRemainingTurns()const noexcept;
+		uint8_t getNumAgents()const noexcept override;
+		uint8_t getNumTurns()const noexcept override;
+		uint8_t getCurrentTurnNo()const noexcept override;
+		uint8_t getNumRemainingTurns()const noexcept override;
 	};
 }

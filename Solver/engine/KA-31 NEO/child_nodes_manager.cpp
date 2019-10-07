@@ -22,6 +22,15 @@ namespace solver::engine::ka31neo
 		}
 	}
 
+	const Node *ChildNodesManager::operator[](ActionID action_id)const noexcept
+	{
+		if(action_id == ActionID::null)
+		{
+			return nullptr;
+		}
+		return children[static_cast<size_t>(action_id)];
+	}
+
 	std::array<Node *, numActionID>::iterator ChildNodesManager::begin()noexcept
 	{
 		return children.begin();

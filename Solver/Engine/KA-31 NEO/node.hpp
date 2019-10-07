@@ -26,5 +26,6 @@ namespace solver::engine::ka31neo
 		Node(const Simulator &simulator);
 		bool isLeafNode()const noexcept;
 		void search();
+		ActionID getBestAction()const noexcept;
 	};
 }

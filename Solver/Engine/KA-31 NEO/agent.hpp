@@ -24,9 +24,9 @@ namespace solver::engine::ka31neo
 		}
 
 	public:
-		Agent(TeamID team, uint8_t agentNo, const simulator::Stage &stage);
+		Agent(TeamID team_id, uint8_t agentNo, const StageInterface &stage);
 		void startThinking();
 		void stopThinking();
-		ActionID getBestAction()const;
+		ActionID getBestAction()const noexcept;
 	};
 }

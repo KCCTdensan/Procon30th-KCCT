@@ -9,7 +9,7 @@ namespace solver::engine::ka31neo
 		{
 			return INFINITY;
 		}
-		return averageReward + controlParameter * std::sqrt(2.0f * std::logf(numVisited)) / numVisitedOfChild;
+		return averageReward + controlParameter * std::sqrt(2.0f * std::logf(static_cast<float>(numVisited))) / numVisitedOfChild;
 	}
 
 	float Node::evaluate()
@@ -67,7 +67,7 @@ namespace solver::engine::ka31neo
 	}
 
 	Node::Node(const Simulator &simulator)
-		: simulator(simulator)
+		: numVisited(0), record(0.0f), averageReward(0.0f), simulator(simulator)
 	{
 
 	}
@@ -80,8 +80,28 @@ namespace solver::engine::ka31neo
 	void Node::search()
 	{
 		++numVisited;
-		int reward = select()->play();
+		float reward = select()->play();
 		record += reward;
 		averageReward = static_cast<float>(record) / numVisited;
+	}
+
+	ActionID Node::getBestAction()const noexcept
+	{
+		unsigned maxNumVisited = 0;
+		ActionID selectedActionID = ActionID::null;
+		for(ActionID i : ActionID())
+		{
+			const Node *childNode = childNodesManager[i];
+			if(childNode == nullptr)
+			{
+				continue;
+			}
+			if(childNode->numVisited > maxNumVisited)
+			{
+				maxNumVisited = childNode->numVisited;
+				selectedActionID = i;
+			}
+		}
+		return selectedActionID;
 	}
 }

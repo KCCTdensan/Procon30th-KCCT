@@ -16,6 +16,7 @@ namespace solver::engine::ka31neo
 	public:
 		ChildNodesManager();
 		~ChildNodesManager();
+		const Node *operator[](ActionID action_id)const noexcept;
 		std::array<Node *, numActionID>::iterator begin()noexcept;
 		std::array<Node *, numActionID>::iterator end()noexcept;
 		void createChild(ActionID actionID, const Simulator &simulator);

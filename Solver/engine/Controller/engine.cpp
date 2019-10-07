@@ -4,7 +4,7 @@
 
 namespace solver::engine::controller
 {
-	void Engine::initialize(TeamID team, const simulator::Stage &stage)
+	void Engine::initialize(TeamID team, const StageInterface &stage)
 	{
 		this->team = team;
 		this->stage = &stage;

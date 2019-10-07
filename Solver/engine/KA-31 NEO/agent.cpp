@@ -4,9 +4,10 @@
 
 namespace solver::engine::ka31neo
 {
-	Agent::Agent(TeamID team, uint8_t agentNo, const simulator::Stage &stage)
+	Agent::Agent(TeamID team_id, uint8_t agentNo, const StageInterface &stage)
+		: isThinking(false), threadHandle(NULL), threadID(0)
 	{
-		currentNode = new Node(Simulator(team, agentNo, stage));
+		currentNode = new Node(Simulator(team_id, agentNo, stage));
 	}
 
 	void Agent::startThinking()
@@ -28,6 +29,6 @@ namespace solver::engine::ka31neo
 
 	ActionID Agent::getBestAction()const noexcept
 	{
-
+		return currentNode->getBestAction();
 	}
 }

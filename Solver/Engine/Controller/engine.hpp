@@ -10,7 +10,7 @@ namespace solver::engine::controller
 		TeamID team;
 		unsigned numAgents;
 		unsigned numRemainingTurns;
-		const simulator::Stage *stage;
+		const StageInterface *stage;
 		Command agentIntentions;
 
 	public:
@@ -21,7 +21,7 @@ namespace solver::engine::controller
 			numRemainingTurns = 0;
 			stage = nullptr;
 		}
-		void initialize(TeamID team, const simulator::Stage &stage);
+		void initialize(TeamID team, const StageInterface &stage);
 		void startThinking()override;
 		void stopThinking()override;
 		Command getBestActions()const override;
