@@ -1,25 +1,34 @@
 #include "com_interface.hpp"
 
-class ComInterface
+
+
+namespace solver::com
 {
-	int getMatchInfo(MatchInfo *matchInfo)
+	int ComInterface::getMatchInfo(ReceivedMatchInfo* matchInfo)
 	{
-		jsonString = system(cmdString);
+		cmdString = "curl -H \"Authorrization: " + tokenString + "\" \"http://localhost:" + portNumString + "/matches\"";
+		jsonString = system(cmdString.c_str);
 		return 401;
 	}
 
-	int getMatchData(MatchData *matchData)
+	int ComInterface::getMatchData(ReceivedMatchData* matchData)
 	{
+		cmdString = "curl -H \"Authorrization: " + tokenString + "\" \"http://localhost:" + portNumString + "/matches/" + matchIDString + "\"";
+		jsonString = system(cmdString.c_str);
 		return 401;
 	}
 
-	int sendActionData(ActionData actionData)
+	int ComInterface::sendActionData(SendActionData actionData)
 	{
+		cmdString = "curl -H \"Authorization: "+tokenString+"\" -H \"Content-Type: application/json\" -X POST \"http://localhost:" + tokenString + "/matches/1/action\" -d \""+sendDataString;
+		jsonString = system(cmdString.c_str);
 		return 401;
 	}
 
-	int getPimg()
+	int ComInterface::getPimg()
 	{
+		cmdString = "curl - H \"Authorization: "+tokenString+"\" \"http://localhost:"+portNumString+"/matches";
+		jsonString = system(cmdString.c_str);
 		return 401;
 	}
 };

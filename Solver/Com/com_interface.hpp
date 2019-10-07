@@ -1,18 +1,24 @@
-#include "match_data.hpp"
-#include "match_info.hpp"
-#include "action_data.hpp"
+#include "received_match_data.hpp"
+#include "received_match_info.hpp"
+#include "send_action_data.hpp"
 #include<string>
 
+namespace solver::com{
+
 class ComInterface
-{
-private:
-	std::string cmdString;
-	std::string jsonString;
-	std::string 
+	{
+	private:
+		std::string cmdString;
+		std::string jsonString;
+		std::string tokenString;
+		std::string portNumString;
+		std::string matchIDString;
+		std::string sendDataString;
 
-	int getMatchInfo(MatchInfo* matchInfo);
-	int getMatchData(MatchData* matchData);
-	int sendActionData(ActionData actionData);
-	int getPimg();
+		int getMatchInfo(ReceivedMatchInfo* matchInfo);
+		int getMatchData(ReceivedMatchData* matchData);
+		int sendActionData(SendActionData actionData);
+		int getPimg();
 
-};
+	};
+}

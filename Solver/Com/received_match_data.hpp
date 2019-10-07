@@ -10,7 +10,7 @@ namespace solver::com
 		int x;
 		int y;
 
-	}
+	};
 
 	struct ReceivedTeam
 	{
@@ -20,7 +20,7 @@ namespace solver::com
 		int teamID;
 		int tilePoint;
 
-	}
+	};
 
 	struct ReceivedAction
 	{
@@ -32,7 +32,7 @@ namespace solver::com
 		int apply;
 		int turn;
 
-	}
+	};
 
 	struct ReceivedMatchData
 	{
