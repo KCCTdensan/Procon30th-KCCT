@@ -13,6 +13,9 @@
     <Filter Include="Engine\KA-31 NEO">
       <UniqueIdentifier>{207fcb4d-21f6-42d1-b389-9b492387683c}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Com">
+      <UniqueIdentifier>{6ac2beda-12cd-48ec-a8ec-0a81265a896b}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <None Include="Engine\interface.hpp">
@@ -63,5 +66,22 @@
     <ClInclude Include="Engine\KA-31 NEO\child_nodes_manager.hpp">
       <Filter>Engine\KA-31 NEO</Filter>
     </ClInclude>
+    <ClInclude Include="Com\com_interface.hpp">
+      <Filter>Com</Filter>
+    </ClInclude>
+    <ClInclude Include="Com\received_match_data.hpp">
+      <Filter>Com</Filter>
+    </ClInclude>
+    <ClInclude Include="Com\received_match_info.hpp">
+      <Filter>Com</Filter>
+    </ClInclude>
+    <ClInclude Include="Com\send_action_data.hpp">
+      <Filter>Com</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Com\com_interface.cpp">
+      <Filter>Com</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

@@ -18,7 +18,7 @@ namespace solver::com
 	struct ReceivedMatchInfo
 	{
 
-		std::vector<ReceivedMatchInfoOne> MatchsInfo;
+		std::vector<ReceivedMatchInfoOne> MatchesInfo;
 
 	};
 }

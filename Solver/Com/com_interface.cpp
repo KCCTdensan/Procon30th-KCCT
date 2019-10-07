@@ -4,6 +4,7 @@ class ComInterface
 {
 	int getMatchInfo(MatchInfo *matchInfo)
 	{
+		jsonString = system(cmdString);
 		return 401;
 	}
 
