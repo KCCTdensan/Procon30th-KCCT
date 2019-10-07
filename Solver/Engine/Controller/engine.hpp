@@ -18,6 +18,8 @@ namespace solver::engine::controller
 		{
 			team = TeamID::null;
 			numAgents = 0;
+			numRemainingTurns = 0;
+			stage = nullptr;
 		}
 		void initialize(TeamID team, unsigned numAgents)override
 		{

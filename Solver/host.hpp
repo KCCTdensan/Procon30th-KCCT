@@ -8,14 +8,15 @@ namespace solver
 {
 	class Host
 	{
-		simulator::Stage stage;
-		engine::Interface *const redEngine;
-		engine::Interface *const blueEngine;
+		simulator::Stage &stage;
+		engine::Interface &redEngine;
+		engine::Interface &blueEngine;
 
 	public:
-		Host(simulator::FieldInfo fieldInfo, simulator::AgantManagerInfo agentInfo, engine::Interface *redEngine, engine::Interface *blueEngine);
+		Host(simulator::Stage &stage, engine::Interface &redEngine, engine::Interface &blueEngine);
 		void startThinking();
 		void stopThinking();
 		void act();
+		uint8_t getNumAgents()const noexcept;
 	};
 }

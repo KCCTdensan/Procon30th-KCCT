@@ -3,14 +3,18 @@
 
 namespace solver
 {
-	Host::Host(simulator::FieldInfo fieldInfo, simulator::AgantManagerInfo agentInfo, engine::Interface *redEngine, engine::Interface *blueEngine)
-		: stage(fieldInfo, agentInfo), redEngine(redEngine), blueEngine(blueEngine)
+	Host::Host(simulator::Stage &stage, engine::Interface &redEngine, engine::Interface &blueEngine)
+		: stage(stage), redEngine(redEngine), blueEngine(blueEngine)
 	{
-
+		redEngine.initialize(TeamID::red, agentInfo.numAgents);
+		blueEngine.initialize(TeamID::blue, agentInfo.numAgents);
 	}
 
 	void Host::startThinking()
 	{
+		redEngine->setStage(numTurns - currentTurnNo, stage);
+		blueEngine->setStage(numTurns - currentTurnNo, stage);
+
 		redEngine->startThinking();
 		blueEngine->startThinking();
 	}
@@ -24,5 +28,6 @@ namespace solver
 	void Host::act()
 	{
 		stage.act(redEngine->getBestActions(), blueEngine->getBestActions());
+		currentTurnNo++;
 	}
 }

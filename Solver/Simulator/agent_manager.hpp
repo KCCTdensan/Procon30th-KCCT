@@ -10,6 +10,7 @@ namespace solver
 	{
 		struct AgantManagerInfo
 		{
+			uint8_t numAgents;
 			std::vector<Position> redAgentInitialPositions;
 			std::vector<Position> blueAgentInitialPositions;
 		};
