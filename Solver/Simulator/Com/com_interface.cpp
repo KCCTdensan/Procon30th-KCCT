@@ -12,7 +12,7 @@ class ComInterface
 		return 401;
 	}
 
-	int sendActionData(ActionData *actionData)
+	int sendActionData(ActionData actionData)
 	{
 		return 401;
 	}
