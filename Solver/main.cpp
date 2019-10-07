@@ -1,19 +1,22 @@
 #include "engine_loader.hpp"
+#include "simulator/stage.hpp"
 #include "host.hpp"
 
 
 solver::FieldInfo createRandomField()
 {
-
+	return solver::FieldInfo();
 }
 
 solver::AgantInfo createRandomAgent()
 {
-
+	return solver::AgantInfo();
 }
 
 int main(int argc, char *argv[])
 {
+	return 0;
+
 	constexpr unsigned numTurns = 30;
 
 	switch(argc)

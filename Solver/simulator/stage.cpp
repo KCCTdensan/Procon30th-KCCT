@@ -22,4 +22,19 @@ namespace solver::simulator
 	{
 		return numTurns - currentTurnNo;
 	}
+
+	bool Stage::canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id) const noexcept
+	{
+		switch(team_id)
+		{
+		case TeamID::red:
+			return agentManager.getRedAgent(agentNo).canMove(action_id);
+
+		case TeamID::blue:
+			return agentManager.getBlueAgent(agentNo).canMove(action_id);
+
+		default:
+			return false;
+		}
+	}
 }

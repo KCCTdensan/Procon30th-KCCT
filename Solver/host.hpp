@@ -1,6 +1,6 @@
 #pragma once
 
-#include "Simulator/stage.hpp"
+#include "stage_interface.hpp"
 #include "engine/interface.hpp"
 
 
@@ -8,12 +8,12 @@ namespace solver
 {
 	class Host
 	{
-		simulator::Stage &stage;
+		StageInterface &stage;
 		engine::Interface &redEngine;
 		engine::Interface &blueEngine;
 
 	public:
-		Host(simulator::Stage &stage, engine::Interface &redEngine, engine::Interface &blueEngine);
+		Host(StageInterface &stage, engine::Interface &redEngine, engine::Interface &blueEngine);
 		void startThinking();
 		void stopThinking();
 		void act();

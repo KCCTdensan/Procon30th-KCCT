@@ -38,7 +38,7 @@ namespace solver::engine::ka31neo
 		}
 		bool canAct(ActionID action_id)const
 		{
-			return currentStage.canAgentAct(team_id, agentNo);
+			return currentStage.canAgentAct(team_id, agentNo, action_id);
 		}
 		Simulator next(ActionID action_id)const
 		{

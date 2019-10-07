@@ -69,6 +69,8 @@
     </ClCompile>
     <ClCompile Include="engine_loader.cpp" />
     <ClCompile Include="host.cpp" />
-    <ClCompile Include="simulator\stage.cpp" />
+    <ClCompile Include="simulator\stage.cpp">
+      <Filter>simulator</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>

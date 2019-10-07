@@ -4,11 +4,11 @@
 
 namespace solver
 {
-	Host::Host(simulator::Stage &stage, engine::Interface &redEngine, engine::Interface &blueEngine)
+	Host::Host(StageInterface &stage, engine::Interface &redEngine, engine::Interface &blueEngine)
 		: stage(stage), redEngine(redEngine), blueEngine(blueEngine)
 	{
-		redEngine.initialize(TeamID::red, stage.getNumAgents());
-		blueEngine.initialize(TeamID::blue, stage.getNumAgents());
+		redEngine.initialize(TeamID::red, stage);
+		blueEngine.initialize(TeamID::blue, stage);
 	}
 
 	void Host::startThinking()

@@ -14,6 +14,6 @@ namespace solver
 		virtual uint8_t getNumTurns()const = 0;
 		virtual uint8_t getCurrentTurnNo()const = 0;
 		virtual uint8_t getNumRemainingTurns()const = 0;
-		virtual bool canAgentAct(TeamID team_id, uint8_t agentNo)const = 0;
+		virtual bool canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const = 0;
 	};
 }

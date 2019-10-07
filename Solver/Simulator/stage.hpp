@@ -32,5 +32,6 @@ namespace solver::simulator
 		uint8_t getNumTurns()const noexcept override;
 		uint8_t getCurrentTurnNo()const noexcept override;
 		uint8_t getNumRemainingTurns()const noexcept override;
+		bool canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const noexcept override;
 	};
 }
