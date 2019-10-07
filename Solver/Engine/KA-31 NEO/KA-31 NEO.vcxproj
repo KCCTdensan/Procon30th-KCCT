@@ -84,6 +84,8 @@
     <ClInclude Include="simulator.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="agent.cpp" />
+    <ClCompile Include="engine.cpp" />
     <ClCompile Include="instance.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

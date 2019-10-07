@@ -1,7 +1,6 @@
 #pragma once
 
 #include "node.hpp"
-#include <process.h>
 #include <Windows.h>
 
 
@@ -25,32 +24,9 @@ namespace solver::engine::ka31neo
 		}
 
 	public:
-		Agent(TeamID team)
-		{
-
-		}
-		void setStage(unsigned numRemainingTurns, const simulator::Stage &stage)
-		{
-
-		}
-		void startThinking()
-		{
-			isThinking = true;
-			threadHandle = reinterpret_cast<HANDLE>(_beginthreadex(NULL, 0, startThinking, this, 0, &threadID));
-			if(threadHandle == NULL)
-			{
-				throw L"solver::engine::ka31neo::Agent : ÉXÉåÉbÉhÇÃçÏê¨Ç…é∏îsÇµÇ‹ÇµÇΩ";
-			}
-		}
-		void stopThinking()
-		{
-			isThinking = false;
-			WaitForSingleObject(threadHandle, INFINITE);
-			CloseHandle(threadHandle);
-		}
-		ActionID getBestAction()const
-		{
-
-		}
+		Agent(TeamID team, uint8_t agentNo, const simulator::Stage &stage);
+		void startThinking();
+		void stopThinking();
+		ActionID getBestAction()const;
 	};
 }

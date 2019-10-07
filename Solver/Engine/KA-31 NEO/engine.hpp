@@ -15,32 +15,9 @@ namespace solver::engine::ka31neo
 		Command agentIntentions;
 
 	public:
-		void initialize(TeamID team, unsigned numAgents)override
-		{
-			this->team = team;
-			agents.resize(numAgents);
-		}
-		void setStage(unsigned numRemainingTurns, const simulator::Stage &stage)override
-		{
-
-		}
-		void startThinking()override
-		{
-			for(Agent &agent : agents)
-			{
-				agent.startThinking();
-			}
-		}
-		void stopThinking()override
-		{
-			for(Agent &agent : agents)
-			{
-				agent.stopThinking();
-			}
-		}
-		Command getBestActions()const override
-		{
-
-		}
+		void initialize(TeamID team, const simulator::Stage &stage);
+		void startThinking()override;
+		void stopThinking()override;
+		Command getBestActions()const override;
 	};
 }

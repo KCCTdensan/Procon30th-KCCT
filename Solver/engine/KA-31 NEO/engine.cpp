@@ -1,26 +1,30 @@
 #include "engine.hpp"
-#include <iostream>
 
 
-namespace solver::engine::controller
+namespace solver::engine::ka31neo
 {
 	void Engine::initialize(TeamID team, const simulator::Stage &stage)
 	{
 		this->team = team;
-		this->stage = &stage;
+		for(uint8_t i = 0; i < stage.getNumAgents(); ++i)
+		{
+			agents.emplace_back(team, i, stage);
+		}
 	}
 
 	void Engine::startThinking()
 	{
-
+		for(Agent &agent : agents)
+		{
+			agent.startThinking();
+		}
 	}
 
 	void Engine::stopThinking()
 	{
-		agentIntentions.actionIDs.clear();
-		for(unsigned i = 0; i < numAgents; ++i)
+		for(Agent &agent : agents)
 		{
-			agentIntentions.actionIDs.push_back(ActionID::stay);//‰¼ƒvƒƒOƒ‰ƒ€
+			agent.stopThinking();
 		}
 	}
 

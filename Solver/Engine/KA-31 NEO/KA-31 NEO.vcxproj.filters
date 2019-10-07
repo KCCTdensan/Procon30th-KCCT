@@ -10,5 +10,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="instance.cpp" />
+    <ClCompile Include="agent.cpp" />
+    <ClCompile Include="engine.cpp" />
   </ItemGroup>
 </Project>

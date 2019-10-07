@@ -21,17 +21,9 @@ namespace solver::engine::controller
 			numRemainingTurns = 0;
 			stage = nullptr;
 		}
-		void initialize(TeamID team, unsigned numAgents)override
-		{
-			this->team = team;
-			this->numAgents = numAgents;
-		}
-		void setStage(unsigned nunRemainingTurns, const simulator::Stage &stage)override;
+		void initialize(TeamID team, const simulator::Stage &stage);
 		void startThinking()override;
 		void stopThinking()override;
-		Command getBestActions()const override
-		{
-			return agentIntentions;
-		}
+		Command getBestActions()const override;
 	};
 }
