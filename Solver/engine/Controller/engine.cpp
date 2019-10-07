@@ -6,7 +6,8 @@ namespace solver::engine::controller
 {
 	void Engine::setStage(unsigned numRemainingTurns, const simulator::Stage &stage)
 	{
-
+		this->numRemainingTurns = numRemainingTurns;
+		this->stage = &stage;
 	}
 
 	void Engine::startThinking()

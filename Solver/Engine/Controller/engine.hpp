@@ -9,6 +9,8 @@ namespace solver::engine::controller
 	{
 		TeamID team;
 		unsigned numAgents;
+		unsigned numRemainingTurns;
+		const simulator::Stage *stage;
 		Command agentIntentions;
 
 	public:

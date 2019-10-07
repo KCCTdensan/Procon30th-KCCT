@@ -7,11 +7,11 @@
 
 namespace solver
 {
-	using creator_t = engine::Interface * (*)();
-	using destroyer_t = void(*)(engine::Interface *);
-
 	class EngineLoader
 	{
+		using creator_t = engine::Interface * (*)();
+		using destroyer_t = void(*)(engine::Interface *);
+
 		HMODULE moduleHandle;
 		creator_t creator;
 		destroyer_t destroyer;

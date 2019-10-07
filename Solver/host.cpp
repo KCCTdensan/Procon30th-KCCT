@@ -3,10 +3,10 @@
 
 namespace solver
 {
-	Host::Host(engine::Interface *redEngine, engine::Interface *blueEngine)
+	Host::Host(simulator::FieldInfo fieldInfo, simulator::AgantManagerInfo agentInfo, engine::Interface *redEngine, engine::Interface *blueEngine)
+		: stage(fieldInfo, agentInfo), redEngine(redEngine), blueEngine(blueEngine)
 	{
-		this->redEngine = redEngine;
-		this->blueEngine = blueEngine;
+
 	}
 
 	void Host::startThinking()
@@ -19,5 +19,10 @@ namespace solver
 	{
 		redEngine->stopThinking();
 		blueEngine->stopThinking();
+	}
+
+	void Host::act()
+	{
+		stage.act(redEngine->getBestActions(), blueEngine->getBestActions());
 	}
 }
