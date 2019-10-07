@@ -3,6 +3,7 @@
 #include "panel.hpp"
 #include "../size.hpp"
 #include "../position.hpp"
+#include "../field_info.hpp"
 #include <vector>
 
 
@@ -10,12 +11,6 @@ namespace solver
 {
 	namespace simulator
 	{
-		struct FieldInfo
-		{
-			Size size;
-			std::vector<std::vector<int8_t>> panelPoints;
-		};
-
 		class Field
 		{
 			const Size size;
@@ -23,13 +18,13 @@ namespace solver
 
 		public:
 			Field(const FieldInfo &fieldInfo)
-				: size(fieldInfo.size)
+				: size(fieldInfo.getSize())
 			{
-				for(size_t h = 0; h < size.height; ++h)
+				for(uint8_t y = 0; y < size.height; ++y)
 				{
-					for(size_t w = 0; w < size.width; ++w)
+					for(uint8_t x = 0; x < size.width; ++x)
 					{
-						panels.emplace_back(fieldInfo.panelPoints[h][w]);
+						panels.emplace_back(fieldInfo[Position {x,y}]);
 					}
 				}
 			}

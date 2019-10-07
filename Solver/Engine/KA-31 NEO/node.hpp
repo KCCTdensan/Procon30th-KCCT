@@ -22,7 +22,7 @@ namespace solver::engine::ka31neo
 			{
 				return INFINITY;
 			}
-			return averageReward + controlParameter * std::sqrt(2.0f * std::log(numVisited)) / numVisitedOfChild;
+			return averageReward + controlParameter * std::sqrt(2.0f * std::logf(numVisited)) / numVisitedOfChild;
 		}
 		float evaluate()
 		{

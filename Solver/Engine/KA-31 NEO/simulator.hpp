@@ -10,13 +10,12 @@ namespace solver::engine::ka31neo
 	{
 		const TeamID team;
 		const int8_t agentNo;
-		const unsigned numRemainingTurns;
 		const simulator::Stage &currentStage;
 		std::queue<ActionID> commandList;
 
 	public:
-		Simulator(TeamID team, int8_t agentNo, unsigned numRemainingTurns, const simulator::Stage &currentStage)
-			: team(team), agentNo(agentNo), numRemainingTurns(numRemainingTurns), currentStage(currentStage)
+		Simulator(TeamID team, int8_t agentNo, const simulator::Stage &currentStage)
+			: team(team), agentNo(agentNo), currentStage(currentStage)
 		{
 
 		}
@@ -27,7 +26,7 @@ namespace solver::engine::ka31neo
 			{
 
 			}
-			for(int i = 0; i < numRemainingTurns; ++i)
+			for(int i = currentStage.getCurrentTurnNo() + commandList.size(); i < currentStage.getNumTurns(); ++i)
 			{
 				Command redCommand;
 				Command blueCommand;
@@ -43,7 +42,7 @@ namespace solver::engine::ka31neo
 		}
 		Simulator next(ActionID action_id)const
 		{
-			Simulator ret(team, agentNo, numRemainingTurns - 1, currentStage);
+			Simulator ret(team, agentNo, currentStage);
 			ret.commandList.push(action_id);
 			return ret;
 		}

@@ -57,6 +57,9 @@
     </ClInclude>
     <ClInclude Include="host.hpp" />
     <ClInclude Include="engine_loader.hpp" />
+    <ClInclude Include="stage_info.hpp" />
+    <ClInclude Include="field_info.hpp" />
+    <ClInclude Include="agent_info.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -65,5 +68,6 @@
     </ClCompile>
     <ClCompile Include="engine_loader.cpp" />
     <ClCompile Include="host.cpp" />
+    <ClCompile Include="simulator\stage.cpp" />
   </ItemGroup>
 </Project>

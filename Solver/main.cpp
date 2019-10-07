@@ -2,12 +2,12 @@
 #include "host.hpp"
 
 
-solver::simulator::FieldInfo createRandomField()
+solver::FieldInfo createRandomField()
 {
 
 }
 
-solver::simulator::AgantManagerInfo createRandomAgent()
+solver::AgantInfo createRandomAgent()
 {
 
 }
@@ -34,7 +34,8 @@ int main(int argc, char *argv[])
 	solver::engine::Interface *controller = controllerCreator.createEngine();
 	solver::engine::Interface *ka31neo = ka31neoCreator.createEngine();
 
-	solver::Host host(createRandomField(), createRandomAgent(), numTurns, controller, ka31neo);
+	solver::simulator::Stage stage(numTurns, createRandomField(), createRandomAgent());
+	solver::Host host(stage, *controller, *ka31neo);
 
 	for(int i = 0; i < numTurns; ++i)
 	{

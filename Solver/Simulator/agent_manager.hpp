@@ -1,6 +1,7 @@
 ﻿#pragma once
 
 #include "agent.hpp"
+#include "../agent_info.hpp"
 #include <vector>
 
 
@@ -8,37 +9,32 @@ namespace solver
 {
 	namespace simulator
 	{
-		struct AgantManagerInfo
-		{
-			uint8_t numAgents;
-			std::vector<Position> redAgentInitialPositions;
-			std::vector<Position> blueAgentInitialPositions;
-		};
-
 		class AgentManager
 		{
+			uint8_t numAgents;
 			const Size fieldSize;
 			std::vector<Agent> redAgents;
 			std::vector<Agent> blueAgents;
 
 		public:
-			AgentManager(const AgantManagerInfo &agentManagerInfo, const Size &fieldSize)
-				: fieldSize(fieldSize)
+			AgentManager(const AgantInfo &agentInfo, const Size &fieldSize)
+				:numAgents(agentInfo.getNumAgents()), fieldSize(fieldSize)
 			{
-				for(const Position &position : agentManagerInfo.redAgentInitialPositions)
+				for(uint8_t i = 0; i < numAgents; ++i)
 				{
-					redAgents.emplace_back(fieldSize, position);
-				}
-				for(const Position &position : agentManagerInfo.blueAgentInitialPositions)
-				{
-					blueAgents.emplace_back(fieldSize, position);
+					redAgents.emplace_back(fieldSize, agentInfo.getRedAgentInitialPosition(i));
+					blueAgents.emplace_back(fieldSize, agentInfo.getBlueAgentInitialPosition(i));
 				}
 			}
-			const Agent &getRedAgent(unsigned agentNo)const
+			uint8_t getNumAgents()const noexcept
+			{
+				return numAgents;
+			}
+			const Agent &getRedAgent(uint8_t agentNo)const
 			{
 				return redAgents[agentNo];
 			}
-			const Agent &getBlueAgent(unsigned agentNo)const
+			const Agent &getBlueAgent(uint8_t agentNo)const
 			{
 				return blueAgents[agentNo];
 			}
