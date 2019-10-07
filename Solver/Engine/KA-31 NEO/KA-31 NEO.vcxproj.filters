@@ -12,5 +12,7 @@
     <ClCompile Include="instance.cpp" />
     <ClCompile Include="agent.cpp" />
     <ClCompile Include="engine.cpp" />
+    <ClCompile Include="node.cpp" />
+    <ClCompile Include="child_nodes_manager.cpp" />
   </ItemGroup>
 </Project>

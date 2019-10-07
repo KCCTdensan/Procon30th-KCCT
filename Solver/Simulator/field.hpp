@@ -24,7 +24,10 @@ namespace solver
 				{
 					for(uint8_t x = 0; x < size.width; ++x)
 					{
-						panels.emplace_back(fieldInfo[Position {x,y}]);
+						Position position;
+						position.x = x;
+						position.y = y;
+						panels.emplace_back(fieldInfo[position]);
 					}
 				}
 			}
