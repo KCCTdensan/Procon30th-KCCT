@@ -3,6 +3,18 @@
 
 namespace solver::simulator
 {
+	Stage::Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgantInfo &agentManagerInfo)
+		:numTurns(numTurns), currentTurnNo(0), field(fieldInfo), agentManager(agentManagerInfo, field.getSize()), scoreManager(field)
+	{
+
+	}
+
+	void Stage::act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)
+	{
+		//
+		scoreManager.update();
+	}
+
 	uint8_t Stage::getNumAgents()const noexcept
 	{
 		return agentManager.getNumAgents();
@@ -23,7 +35,7 @@ namespace solver::simulator
 		return numTurns - currentTurnNo;
 	}
 
-	bool Stage::canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id) const noexcept
+	bool Stage::canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const noexcept
 	{
 		switch(team_id)
 		{

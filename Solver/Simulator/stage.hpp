@@ -18,16 +18,8 @@ namespace solver::simulator
 		ScoreManager scoreManager;
 
 	public:
-		Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgantInfo &agentManagerInfo)
-			:numTurns(numTurns), currentTurnNo(0), field(fieldInfo), agentManager(agentManagerInfo, field.getSize()), scoreManager(field)
-		{
-
-		}
-		void act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)override
-		{
-			//
-			scoreManager.update();
-		}
+		Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgantInfo &agentManagerInfo);
+		void act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)override;
 		uint8_t getNumAgents()const noexcept override;
 		uint8_t getNumTurns()const noexcept override;
 		uint8_t getCurrentTurnNo()const noexcept override;

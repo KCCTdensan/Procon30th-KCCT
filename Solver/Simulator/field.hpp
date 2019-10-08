@@ -33,7 +33,7 @@ namespace solver
 			}
 			const Panel &operator[](const Position &position)const
 			{
-				size_t index = static_cast<size_t>(size.width) *position.y + position.x;
+				size_t index = static_cast<size_t>(size.width) * position.y + position.x;
 				return panels[index];
 			}
 			const Size getSize()const noexcept
