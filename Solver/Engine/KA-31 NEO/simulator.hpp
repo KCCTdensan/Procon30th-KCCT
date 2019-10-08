@@ -26,7 +26,7 @@ namespace solver::engine::ka31neo
 			{
 
 			}
-			for(int i = currentStage.getCurrentTurnNo() + commandList.size(); i < currentStage.getNumTurns(); ++i)
+			for(uint8_t i = currentStage.getCurrentTurnNo() + static_cast<uint8_t>(commandList.size()); i < currentStage.getNumTurns(); ++i)
 			{
 				Command redCommand;
 				Command blueCommand;
