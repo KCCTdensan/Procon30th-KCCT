@@ -23,19 +23,19 @@ namespace solver
 		{
 			return numAgents;
 		}
-		Position &getRedAgentInitialPosition(uint8_t agentNo)
+		Position &redAgentInitialPosition(uint8_t agentNo)
 		{
 			return redAgentInitialPositions[agentNo];
 		}
-		const Position &getRedAgentInitialPosition(uint8_t agentNo)const
+		const Position &redAgentInitialPosition(uint8_t agentNo)const
 		{
 			return redAgentInitialPositions[agentNo];
 		}
-		Position &getBlueAgentInitialPosition(uint8_t agentNo)
+		Position &blueAgentInitialPosition(uint8_t agentNo)
 		{
 			return blueAgentInitialPositions[agentNo];
 		}
-		const Position &getBlueAgentInitialPosition(uint8_t agentNo)const
+		const Position &blueAgentInitialPosition(uint8_t agentNo)const
 		{
 			return blueAgentInitialPositions[agentNo];
 		}

@@ -20,8 +20,8 @@ namespace solver::simulator
 		{
 			for(uint8_t i = 0; i < numAgents; ++i)
 			{
-				redAgents.emplace_back(fieldSize, agentInfo.getRedAgentInitialPosition(i));
-				blueAgents.emplace_back(fieldSize, agentInfo.getBlueAgentInitialPosition(i));
+				redAgents.emplace_back(fieldSize, agentInfo.redAgentInitialPosition(i));
+				blueAgents.emplace_back(fieldSize, agentInfo.blueAgentInitialPosition(i));
 			}
 		}
 		uint8_t getNumAgents()const noexcept

@@ -70,6 +70,7 @@
     <ClInclude Include="cui\string_color.hpp">
       <Filter>cui</Filter>
     </ClInclude>
+    <ClInclude Include="random.hpp" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -85,5 +86,6 @@
       <Filter>cui</Filter>
     </ClCompile>
     <ClCompile Include="cui\string_color.cpp" />
+    <ClCompile Include="random.cpp" />
   </ItemGroup>
 </Project>
