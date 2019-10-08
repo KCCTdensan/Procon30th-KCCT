@@ -4,6 +4,12 @@
 
 namespace solver::com
 {
+	ComInterface::ComInterface(std::string portNumString, std::string matchIDString, std::string tokenString)
+		: portNumString(portNumString),matchIDString(matchIDString),tokenString(tokenString)
+	{
+
+	}
+
 	int ComInterface::getMatchInfo(ReceivedMatchInfo* matchInfo)
 	{
 		cmdString = "curl -H \"Authorrization: " + tokenString + "\" \"http://localhost:" + portNumString + "/matches\"";

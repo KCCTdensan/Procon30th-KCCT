@@ -26,11 +26,11 @@ namespace solver::com
 	{
 
 		int agentID;
-		int dx;
-		int dy;
+		int dx; //-1:¶
+		int dy; //-1:ã
 		std::string type;
-		int apply;
-		int turn;
+		int apply; //-1:–³Œø 0:‹£‡ 1:—LŒø
+		int turn; //1ƒ^[ƒ“–Ú‚©‚ç
 
 	};
 

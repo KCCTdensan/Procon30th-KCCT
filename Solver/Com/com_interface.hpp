@@ -10,11 +10,12 @@ class ComInterface
 	private:
 		std::string cmdString;
 		std::string jsonString;
-		std::string tokenString;
+		std::string sendDataString;
 		std::string portNumString;
 		std::string matchIDString;
-		std::string sendDataString;
+		std::string tokenString;
 
+		ComInterface(std::string portNumString,std::string matchIDString,std::string tokenString);
 		int getMatchInfo(ReceivedMatchInfo* matchInfo);
 		int getMatchData(ReceivedMatchData* matchData);
 		int sendActionData(SendActionData actionData);
