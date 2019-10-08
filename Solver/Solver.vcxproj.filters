@@ -10,6 +10,9 @@
     <Filter Include="simulator">
       <UniqueIdentifier>{e1357c8a-3c39-4a3d-8055-4bb7c6ef1f7e}</UniqueIdentifier>
     </Filter>
+    <Filter Include="cui">
+      <UniqueIdentifier>{3031ced7-4cdf-4dde-8260-873c82921817}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Simulator\panel.hpp">
@@ -61,6 +64,12 @@
     <ClInclude Include="field_info.hpp" />
     <ClInclude Include="agent_info.hpp" />
     <ClInclude Include="stage_interface.hpp" />
+    <ClInclude Include="cui\stage_printer.hpp">
+      <Filter>cui</Filter>
+    </ClInclude>
+    <ClInclude Include="cui\string_color.hpp">
+      <Filter>cui</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
@@ -72,5 +81,9 @@
     <ClCompile Include="simulator\stage.cpp">
       <Filter>simulator</Filter>
     </ClCompile>
+    <ClCompile Include="cui\stage_printer.cpp">
+      <Filter>cui</Filter>
+    </ClCompile>
+    <ClCompile Include="cui\string_color.cpp" />
   </ItemGroup>
 </Project>

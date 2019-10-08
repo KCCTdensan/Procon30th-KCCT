@@ -15,6 +15,11 @@ namespace solver::simulator
 		scoreManager.update();
 	}
 
+	Size Stage::getFieldSize()const noexcept
+	{
+		return field.getSize();
+	}
+
 	uint8_t Stage::getNumAgents()const noexcept
 	{
 		return agentManager.getNumAgents();
@@ -48,5 +53,36 @@ namespace solver::simulator
 		default:
 			return false;
 		}
+	}
+
+	int8_t Stage::getPanelPoint(Position position)const noexcept
+	{
+		return field[position].getPoint();
+	}
+
+	TileID Stage::getPanelTileStatus(Position position)const noexcept
+	{
+		return field[position].getTileStatus();
+	}
+
+	bool Stage::getPanelRegionStatus(Position position, TeamID team)const noexcept
+	{
+		return field[position].getRegionStatus(team);
+	}
+
+	bool Stage::isAgentOnPanel(Position position)const noexcept
+	{
+		for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
+		{
+			if(position == agentManager.getRedAgent(i).getPosition())
+			{
+				return true;
+			}
+			if(position == agentManager.getBlueAgent(i).getPosition())
+			{
+				return true;
+			}
+		}
+		return false;
 	}
 }

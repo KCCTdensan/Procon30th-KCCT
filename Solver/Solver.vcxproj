@@ -77,6 +77,8 @@
     <ClInclude Include="action_id.hpp" />
     <ClInclude Include="agent_info.hpp" />
     <ClInclude Include="command.hpp" />
+    <ClInclude Include="cui\stage_printer.hpp" />
+    <ClInclude Include="cui\string_color.hpp" />
     <ClInclude Include="direction.hpp" />
     <ClInclude Include="engine\instance.hpp" />
     <ClInclude Include="engine\interface.hpp" />
@@ -101,6 +103,8 @@
     <ClInclude Include="tile_id.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="cui\stage_printer.cpp" />
+    <ClCompile Include="cui\string_color.cpp" />
     <ClCompile Include="engine_loader.cpp" />
     <ClCompile Include="host.cpp" />
     <ClCompile Include="main.cpp" />

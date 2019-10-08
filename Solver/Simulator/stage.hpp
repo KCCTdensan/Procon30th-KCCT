@@ -20,10 +20,15 @@ namespace solver::simulator
 	public:
 		Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgantInfo &agentManagerInfo);
 		void act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)override;
+		Size getFieldSize()const noexcept override;
 		uint8_t getNumAgents()const noexcept override;
 		uint8_t getNumTurns()const noexcept override;
 		uint8_t getCurrentTurnNo()const noexcept override;
 		uint8_t getNumRemainingTurns()const noexcept override;
 		bool canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const noexcept override;
+		int8_t getPanelPoint(Position position)const noexcept override;
+		TileID getPanelTileStatus(Position position)const noexcept override;
+		bool getPanelRegionStatus(Position position, TeamID team)const noexcept override;
+		bool isAgentOnPanel(Position position)const noexcept override;
 	};
 }
