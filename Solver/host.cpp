@@ -25,7 +25,10 @@ namespace solver
 
 	void Host::act()
 	{
-		stage.act(redEngine.getBestActions(), blueEngine.getBestActions());
+		StageCommand command;
+		command.teamCommands[static_cast<size_t>(TeamID::red)] = redEngine.getBestActions();
+		command.teamCommands[static_cast<size_t>(TeamID::blue)] = blueEngine.getBestActions();
+		stage.act(command);
 	}
 
 	uint8_t Host::getNumAgents()const noexcept

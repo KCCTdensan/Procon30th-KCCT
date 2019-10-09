@@ -1,6 +1,7 @@
 #pragma once
 
 #include "position.hpp"
+#include <array>
 #include <vector>
 
 
@@ -9,35 +10,28 @@ namespace solver
 	class AgentInfo
 	{
 		uint8_t numAgents;
-		std::vector<Position> redAgentInitialPositions;
-		std::vector<Position> blueAgentInitialPositions;
+		std::array<std::vector<Position>, numTeams> agentInitialPositions;
 
 	public:
 		void setNumAgents(uint8_t numAgents)
 		{
 			this->numAgents = numAgents;
-			redAgentInitialPositions.resize(numAgents);
-			blueAgentInitialPositions.resize(numAgents);
+			for(int t = 0; t < numTeams; ++t)
+			{
+				agentInitialPositions[t].resize(numAgents);
+			}
 		}
 		uint8_t getNumAgents()const noexcept
 		{
 			return numAgents;
 		}
-		Position &redAgentInitialPosition(uint8_t agentNo)
+		Position &agentInitialPosition(TeamID team, uint8_t agentNo)
 		{
-			return redAgentInitialPositions[agentNo];
+			return agentInitialPositions[static_cast<size_t>(team)][agentNo];
 		}
-		const Position &redAgentInitialPosition(uint8_t agentNo)const
+		Position agentInitialPosition(TeamID team, uint8_t agentNo)const
 		{
-			return redAgentInitialPositions[agentNo];
-		}
-		Position &blueAgentInitialPosition(uint8_t agentNo)
-		{
-			return blueAgentInitialPositions[agentNo];
-		}
-		const Position &blueAgentInitialPosition(uint8_t agentNo)const
-		{
-			return blueAgentInitialPositions[agentNo];
+			return agentInitialPositions[static_cast<size_t>(team)][agentNo];
 		}
 	};
 }

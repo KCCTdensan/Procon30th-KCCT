@@ -11,7 +11,7 @@ namespace solver::engine::controller
 		unsigned numAgents;
 		unsigned numRemainingTurns;
 		const StageInterface *stage;
-		Command agentIntentions;
+		TeamCommand agentIntentions;
 
 	public:
 		Engine()
@@ -24,6 +24,6 @@ namespace solver::engine::controller
 		void initialize(TeamID team, const StageInterface &stage);
 		void startThinking()override;
 		void stopThinking()override;
-		const Command &getBestActions()const override;
+		const TeamCommand &getBestActions()const override;
 	};
 }

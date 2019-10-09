@@ -12,12 +12,12 @@ namespace solver::engine::ka31neo
 		TeamID team_id;
 		unsigned numRemainingTurns;
 		std::vector<Agent> agents;
-		Command agentIntentions;
+		TeamCommand agentIntentions;
 
 	public:
 		void initialize(TeamID team_id, const StageInterface &stage);
 		void startThinking()override;
 		void stopThinking()override;
-		const Command &getBestActions()const override;
+		const TeamCommand &getBestActions()const override;
 	};
 }

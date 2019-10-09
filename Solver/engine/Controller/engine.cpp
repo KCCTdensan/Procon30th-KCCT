@@ -11,7 +11,7 @@ namespace solver::engine::controller
 		numAgents = stage.getNumAgents();
 		numRemainingTurns = stage.getNumRemainingTurns();
 		this->stage = &stage;
-		agentIntentions.actionIDs.resize(numAgents);
+		agentIntentions.commands.resize(numAgents);
 	}
 
 	void Engine::startThinking()
@@ -23,11 +23,11 @@ namespace solver::engine::controller
 	{
 		for(unsigned i = 0; i < numAgents; ++i)
 		{
-			agentIntentions.actionIDs[i] = static_cast<ActionID>(getRandomValue(0, numActionID));//仮プログラム
+			agentIntentions.commands[i] = static_cast<ActionID>(getRandomValue(0, numActionID));//仮プログラム
 		}
 	}
 
-	const Command &Engine::getBestActions()const
+	const TeamCommand &Engine::getBestActions()const
 	{
 		return agentIntentions;
 	}

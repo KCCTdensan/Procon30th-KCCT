@@ -28,7 +28,7 @@ namespace solver::engine::ka31neo
 		}
 	}
 
-	const Command &Engine::getBestActions()const
+	const TeamCommand &Engine::getBestActions()const
 	{
 		return agentIntentions;
 	}

@@ -28,8 +28,8 @@ namespace solver::engine::ka31neo
 			}
 			for(uint8_t i = currentStage.getCurrentTurnNo() + static_cast<uint8_t>(commandList.size()); i < currentStage.getNumTurns(); ++i)
 			{
-				Command redCommand;
-				Command blueCommand;
+				TeamCommand redCommand;
+				TeamCommand blueCommand;
 				//stage.act(redCommand, blueCommand);
 			}
 			//ƒXƒRƒAŽæ“¾

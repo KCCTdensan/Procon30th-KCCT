@@ -3,13 +3,49 @@
 
 namespace solver::simulator
 {
+	bool Stage::willAgentStay(const Agent &agent, ActionID command) const
+	{
+		//エージェントが"留まる"を選択したか、意思表示が無効な場合
+		if(command == ActionID::stay || !agent.canMove(command))
+		{
+			return true;
+		}
+		Position nextPosition = movedPosition(agent.getPosition(), command);
+		TileID tile = field[nextPosition].getTileStatus();
+		return tile != TileID::none && agent.getTeam() != toTeam(tile);
+	}
+
+	FieldFlag Stage::decideAgentFirstStayingPanels(const StageCommand &command)const
+	{
+		FieldFlag ret(field.getSize());
+		for(TeamID team : TeamID())
+		{
+			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
+			{
+				if(willAgentStay(agentManager.agent(team, i), command.teamCommands[static_cast<size_t>(team)].commands[i]))
+				{
+					//パネルの上のエージェントを確定させる
+					Position agentPosition = agentManager.agent(team, i).getPosition();
+					ret[agentPosition] = true;
+				}
+			}
+		}
+		return ret;
+	}
+
 	Stage::Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgentInfo &agentManagerInfo)
 		:numTurns(numTurns), currentTurnNo(0), field(fieldInfo), agentManager(agentManagerInfo, field.getSize()), scoreManager(field)
 	{
+		for(TeamID team : TeamID())
+		{
+			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
+			{
 
+			}
+		}
 	}
 
-	void Stage::act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)
+	void Stage::act(const StageCommand &command)
 	{
 		//
 		scoreManager.update();
@@ -42,17 +78,7 @@ namespace solver::simulator
 
 	bool Stage::canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const noexcept
 	{
-		switch(team_id)
-		{
-		case TeamID::red:
-			return agentManager.getRedAgent(agentNo).canMove(action_id);
-
-		case TeamID::blue:
-			return agentManager.getBlueAgent(agentNo).canMove(action_id);
-
-		default:
-			return false;
-		}
+		return agentManager.agent(team_id, agentNo).canMove(action_id);
 	}
 
 	int8_t Stage::getPanelPoint(Position position)const noexcept
@@ -72,15 +98,14 @@ namespace solver::simulator
 
 	bool Stage::isAgentOnPanel(Position position)const noexcept
 	{
-		for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
+		for(TeamID team : TeamID())
 		{
-			if(position == agentManager.getRedAgent(i).getPosition())
+			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
 			{
-				return true;
-			}
-			if(position == agentManager.getBlueAgent(i).getPosition())
-			{
-				return true;
+				if(position == agentManager.agent(team, i).getPosition())
+				{
+					return true;
+				}
 			}
 		}
 		return false;

@@ -11,7 +11,7 @@ namespace solver
 	class StageInterface
 	{
 	public:
-		virtual void act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam) = 0;
+		virtual void act(const StageCommand &command) = 0;
 		virtual Size getFieldSize()const = 0;
 		virtual uint8_t getNumAgents()const = 0;
 		virtual uint8_t getNumTurns()const = 0;

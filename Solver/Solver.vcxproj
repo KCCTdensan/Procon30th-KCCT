@@ -93,10 +93,12 @@
     <ClInclude Include="Simulator\agent.hpp" />
     <ClInclude Include="Simulator\agent_manager.hpp" />
     <ClInclude Include="Simulator\field.hpp" />
+    <ClInclude Include="simulator\field_flag.hpp" />
     <ClInclude Include="Simulator\panel.hpp" />
     <ClInclude Include="Simulator\score.hpp" />
     <ClInclude Include="Simulator\score_manager.hpp" />
     <ClInclude Include="Simulator\stage.hpp" />
+    <ClInclude Include="simulator\stage_flag.hpp" />
     <ClInclude Include="size.hpp" />
     <ClInclude Include="stage_info.hpp" />
     <ClInclude Include="stage_interface.hpp" />
@@ -112,6 +114,9 @@
     <ClCompile Include="random.cpp" />
     <ClCompile Include="settings\rw.cpp" />
     <ClCompile Include="simulator\stage.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="simulator\agent_flag.hpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

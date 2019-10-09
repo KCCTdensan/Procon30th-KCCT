@@ -4,6 +4,7 @@
 #include "../size.hpp"
 #include "../position.hpp"
 #include "../field_info.hpp"
+#include "stage_flag.hpp"
 #include <vector>
 
 
@@ -29,7 +30,7 @@ namespace solver::simulator
 				}
 			}
 		}
-		const Panel &operator[](const Position &position)const
+		const Panel &operator[](Position position)const
 		{
 			size_t index = static_cast<size_t>(size.width) *position.y + position.x;
 			return panels[index];
@@ -53,6 +54,27 @@ namespace solver::simulator
 		auto end()const noexcept
 		{
 			return panels.end();
+		}
+		StageFlag decideStayingAgents(const StageCommand &command, uint8_t numAgents)
+		{
+			StageFlag ret(size, numAgents);
+			for(TeamID team : TeamID())
+			{
+				for(uint8_t i = 0; i < numAgents; ++i)
+				{
+					ActionID agentCommand = command.teamCommands[static_cast<size_t>(team)].commands[i];
+					Position nextPosition = movedPosition(this->agent(team, i).getPosition(), agentCommand);
+					//エージェントが敵チームのタイルを剥がそうとする場合
+					if(agentCommand != ActionID::stay)
+					{
+						//パネルの上のエージェントを確定させる
+						Position agentPosition = this->agent(team, i).getPosition();
+						ret.fieldFlag[agentPosition] = true;
+						ret.agentFlag(team, i) = true;
+					}
+				}
+			}
+			return ret;
 		}
 	};
 }
