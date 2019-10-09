@@ -18,6 +18,6 @@ namespace solver::engine::ka31neo
 		void initialize(TeamID team_id, const StageInterface &stage);
 		void startThinking()override;
 		void stopThinking()override;
-		Command getBestActions()const override;
+		const Command &getBestActions()const override;
 	};
 }

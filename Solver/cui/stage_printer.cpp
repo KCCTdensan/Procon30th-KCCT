@@ -61,5 +61,6 @@ namespace solver::cui
 			}
 			std::wcout << std::endl;
 		}
+		changeColor(ColorID::white, ColorID::black);
 	}
 }

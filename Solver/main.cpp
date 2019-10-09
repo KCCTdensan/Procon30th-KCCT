@@ -3,6 +3,7 @@
 #include "host.hpp"
 #include "cui/stage_printer.hpp"
 #include "random.hpp"
+#include <iostream>
 
 
 solver::FieldInfo createRandomField()
@@ -21,21 +22,36 @@ solver::FieldInfo createRandomField()
 	return ret;
 }
 
-solver::AgantInfo createRandomAgent(solver::Size fieldSize)
+solver::AgentInfo createRandomAgent(solver::Size fieldSize)
 {
-	solver::AgantInfo ret;
+	solver::AgentInfo ret;
 	const uint8_t numAgents = static_cast<uint8_t>(solver::getRandomValue(2, 8));
 	ret.setNumAgents(numAgents);
 	for(uint8_t i = 0; i < numAgents; ++i)
 	{
-
+		createPosition:
+		solver::Position redAgentPosition;
+		redAgentPosition.x = solver::getRandomValue(0, fieldSize.width / 2 - 1);
+		redAgentPosition.y = solver::getRandomValue(0, fieldSize.height - 1);
+		for(uint8_t j = 0; j < i; ++j)
+		{
+			if(ret.redAgentInitialPosition(j) == redAgentPosition)
+			{
+				goto createPosition;
+			}
+		}
+		ret.redAgentInitialPosition(i) = redAgentPosition;
+		solver::Position blueAgentPosition;
+		blueAgentPosition.x = fieldSize.width - redAgentPosition.x - 1;
+		blueAgentPosition.y = redAgentPosition.y;
+		ret.blueAgentInitialPosition(i) = blueAgentPosition;
 	}
 	return ret;
 }
 
 int main(int argc, char *argv[])
 {
-	return 0;
+	//return 0;
 
 	constexpr unsigned numTurns = 30;
 
@@ -52,13 +68,14 @@ int main(int argc, char *argv[])
 	}
 
 	solver::EngineLoader controllerCreator(L"Controller");
-	solver::EngineLoader ka31neoCreator(L"KA-31 NEO");
+	solver::engine::Interface *controller1 = controllerCreator.createEngine();
+	solver::engine::Interface *controller2 = controllerCreator.createEngine();
 
-	solver::engine::Interface *controller = controllerCreator.createEngine();
-	solver::engine::Interface *ka31neo = ka31neoCreator.createEngine();
+	solver::FieldInfo fieldInfo = createRandomField();
+	solver::AgentInfo agentInfo = createRandomAgent(fieldInfo.getSize());
 
-	solver::simulator::Stage stage(numTurns, createRandomField(), createRandomAgent());
-	solver::Host host(stage, *controller, *ka31neo);
+	solver::simulator::Stage stage(numTurns, fieldInfo, agentInfo);
+	solver::Host host(stage, *controller1, *controller2);
 	solver::cui::StagePrinter printer(stage);
 
 	printer.print();
@@ -68,10 +85,11 @@ int main(int argc, char *argv[])
 		host.stopThinking();
 		host.act();
 		printer.print();
+		Sleep(3000);
 	}
 
-	controllerCreator.destroyEngine(controller);
-	ka31neoCreator.destroyEngine(ka31neo);
+	controllerCreator.destroyEngine(controller1);
+	controllerCreator.destroyEngine(controller2);
 
 	return 0;
 }

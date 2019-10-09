@@ -24,6 +24,6 @@ namespace solver::engine::controller
 		void initialize(TeamID team, const StageInterface &stage);
 		void startThinking()override;
 		void stopThinking()override;
-		Command getBestActions()const override;
+		const Command &getBestActions()const override;
 	};
 }

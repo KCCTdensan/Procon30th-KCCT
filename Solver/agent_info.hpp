@@ -6,7 +6,7 @@
 
 namespace solver
 {
-	class AgantInfo
+	class AgentInfo
 	{
 		uint8_t numAgents;
 		std::vector<Position> redAgentInitialPositions;

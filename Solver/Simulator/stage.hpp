@@ -18,7 +18,7 @@ namespace solver::simulator
 		ScoreManager scoreManager;
 
 	public:
-		Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgantInfo &agentManagerInfo);
+		Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgentInfo &agentManagerInfo);
 		void act(const Command &commandOfRedTeam, const Command &commandOfBlueTeam)override;
 		Size getFieldSize()const noexcept override;
 		uint8_t getNumAgents()const noexcept override;

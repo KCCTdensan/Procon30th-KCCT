@@ -15,7 +15,7 @@ namespace solver::simulator
 		std::vector<Agent> blueAgents;
 
 	public:
-		AgentManager(const AgantInfo &agentInfo, const Size &fieldSize)
+		AgentManager(const AgentInfo &agentInfo, const Size &fieldSize)
 			:numAgents(agentInfo.getNumAgents()), fieldSize(fieldSize)
 		{
 			for(uint8_t i = 0; i < numAgents; ++i)

@@ -9,6 +9,6 @@ namespace solver
 	struct StageInfo
 	{
 		FieldInfo fieldInfo;
-		AgantInfo agentInfo;
+		AgentInfo agentInfo;
 	};
 }
