@@ -80,6 +80,7 @@
     <ClInclude Include="engine.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\random.cpp" />
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="instance.cpp" />
   </ItemGroup>
