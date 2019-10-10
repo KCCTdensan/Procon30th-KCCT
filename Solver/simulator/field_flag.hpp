@@ -24,13 +24,27 @@ namespace solver::simulator
 				}
 			}
 		}
-		bool &operator[](Position position)
+		std::vector<bool>::reference operator[](Position position)
 		{
 			return flags[position.y][position.x];
 		}
 		bool operator[](Position position)const
 		{
 			return flags[position.y][position.x];
+		}
+		FieldFlag &operator|=(const FieldFlag &flag)
+		{
+			bool b = false;
+			bool &a = b;
+			for(uint8_t y = 0; y < flags.size(); ++y)
+			{
+				for(uint8_t x = 0; x < flags[0].size(); ++x)
+				{
+					Position position = {x,y};
+					(*this)[position] = (*this)[position] || flag[position];
+				}
+			}
+			return *this;
 		}
 	};
 }

@@ -16,5 +16,10 @@ namespace solver::simulator
 		{
 
 		}
+		StageFlag &operator|=(const StageFlag &flag)
+		{
+
+			return *this;
+		}
 	};
 }

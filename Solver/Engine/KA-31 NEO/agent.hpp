@@ -13,15 +13,7 @@ namespace solver::engine::ka31neo
 		HANDLE threadHandle;
 		DWORD32 threadID;
 
-		static unsigned __stdcall startThinking(void *arg)
-		{
-			Agent &agent = *reinterpret_cast<Agent *>(arg);
-			while(agent.isThinking)
-			{
-				agent.currentNode->search();
-			}
-			return 0;
-		}
+		static unsigned __stdcall startThinking(void *arg);
 
 	public:
 		Agent(TeamID team_id, uint8_t agentNo, const StageInterface &stage);

@@ -1,6 +1,7 @@
 #pragma once
 
 #include "action_id.hpp"
+#include "team_id.hpp"
 #include <array>
 #include <vector>
 

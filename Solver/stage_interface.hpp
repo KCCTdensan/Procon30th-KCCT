@@ -4,6 +4,7 @@
 #include "team_id.hpp"
 #include "position.hpp"
 #include "tile_id.hpp"
+#include "score.hpp"
 
 
 namespace solver
@@ -22,5 +23,8 @@ namespace solver
 		virtual TileID getPanelTileStatus(Position position)const = 0;
 		virtual bool getPanelRegionStatus(Position position, TeamID team)const = 0;
 		virtual bool isAgentOnPanel(Position position)const = 0;
+		virtual Score getScore()const noexcept = 0;
+		virtual StageInterface *copy()const = 0;
+		virtual void destroy() = 0;
 	};
 }

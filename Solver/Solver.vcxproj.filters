@@ -18,9 +18,6 @@
     <ClInclude Include="Simulator\panel.hpp">
       <Filter>simulator</Filter>
     </ClInclude>
-    <ClInclude Include="Simulator\score.hpp">
-      <Filter>simulator</Filter>
-    </ClInclude>
     <ClInclude Include="Simulator\score_manager.hpp">
       <Filter>simulator</Filter>
     </ClInclude>
@@ -75,6 +72,10 @@
       <Filter>simulator</Filter>
     </ClInclude>
     <ClInclude Include="simulator\stage_flag.hpp">
+      <Filter>simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="score.hpp" />
+    <ClInclude Include="Simulator\score_updater.hpp">
       <Filter>simulator</Filter>
     </ClInclude>
   </ItemGroup>

@@ -13,38 +13,13 @@ namespace solver::engine::ka31neo
 		const StageInterface &currentStage;
 		std::queue<ActionID> commandList;
 
+		StageCommand getRandomCommand(uint8_t numAgents)const;
+		float calculateReward(const Score &score)const;
+
 	public:
-		Simulator(TeamID team_id, int8_t agentNo, const StageInterface &currentStage)
-			: team_id(team_id), agentNo(agentNo), currentStage(currentStage)
-		{
-
-		}
-		float rollout()const
-		{
-			//StageInterface stage = currentStage;
-			for(int i = 0; i < commandList.size(); ++i)
-			{
-
-			}
-			for(uint8_t i = currentStage.getCurrentTurnNo() + static_cast<uint8_t>(commandList.size()); i < currentStage.getNumTurns(); ++i)
-			{
-				TeamCommand redCommand;
-				TeamCommand blueCommand;
-				//stage.act(redCommand, blueCommand);
-			}
-			//ƒXƒRƒAŽæ“¾
-			//•ñV‚ðŒvŽZ
-			return 0.0;
-		}
-		bool canAct(ActionID action_id)const
-		{
-			return currentStage.canAgentAct(team_id, agentNo, action_id);
-		}
-		Simulator next(ActionID action_id)const
-		{
-			Simulator ret(team_id, agentNo, currentStage);
-			ret.commandList.push(action_id);
-			return ret;
-		}
+		Simulator(TeamID team_id, int8_t agentNo, const StageInterface &currentStage);
+		float rollout()const;
+		bool canAct(ActionID action_id)const noexcept;
+		Simulator next(ActionID action_id)const;
 	};
 }

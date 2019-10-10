@@ -26,6 +26,10 @@ namespace solver::engine::ka31neo
 		{
 			agent.stopThinking();
 		}
+		for(uint8_t i = 0; i < agents.size(); ++i)
+		{
+			agentIntentions.commands[i] = agents[i].getBestAction();
+		}
 	}
 
 	const TeamCommand &Engine::getBestActions()const

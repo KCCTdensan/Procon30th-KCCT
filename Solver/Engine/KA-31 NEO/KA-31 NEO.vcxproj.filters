@@ -14,5 +14,6 @@
     <ClCompile Include="engine.cpp" />
     <ClCompile Include="node.cpp" />
     <ClCompile Include="child_nodes_manager.cpp" />
+    <ClCompile Include="simulator.cpp" />
   </ItemGroup>
 </Project>

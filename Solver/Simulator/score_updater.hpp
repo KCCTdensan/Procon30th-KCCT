@@ -5,51 +5,54 @@
 
 namespace solver::simulator
 {
-	class Score
+	class ScoreUpdater
 	{
 		const Field &field;
 		const TeamID team;
-		int16_t tileScore;
-		int16_t regionScore;
+		TeamScore score;
 
 		void updatePanel(const Panel &panel)noexcept
 		{
 			if(toTeam(panel.getTileStatus()) == team)
 			{
-				tileScore += panel.getPoint();
+				score.tileScore += panel.getPoint();
 			}
 			else if(panel.getRegionStatus(team))
 			{
-				regionScore += panel.getPoint();
+				score.regionScore += panel.getPoint();
 			}
 		}
 
 	public:
-		Score(const Field &field, TeamID team)noexcept
-			:field(field), team(team), tileScore(0), regionScore(0)
+		ScoreUpdater(const Field &field, TeamID team)noexcept
+			:field(field), team(team)
 		{
 
 		}
 		void update()
 		{
-			tileScore = 0;
-			regionScore = 0;
+			score.tileScore = 0;
+			score.regionScore = 0;
 			for(const Panel &panel : field)
 			{
 				updatePanel(panel);
 			}
 		}
+		TeamScore getScore()const noexcept
+		{
+			return score;
+		}
 		int16_t getTileScore()const noexcept
 		{
-			return tileScore;
+			return score.tileScore;
 		}
 		int16_t getRegionScore()const noexcept
 		{
-			return regionScore;
+			return score.regionScore;
 		}
 		int16_t getTotalScore()const noexcept
 		{
-			return tileScore + regionScore;
+			return score.getTotalScore();
 		}
 	};
 }

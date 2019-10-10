@@ -22,7 +22,7 @@ namespace solver::simulator
 				}
 			}
 		}
-		bool &operator()(TeamID team, uint8_t agentNo)
+		std::vector<bool>::reference operator()(TeamID team, uint8_t agentNo)
 		{
 			return flags[static_cast<size_t>(team)][agentNo];
 		}

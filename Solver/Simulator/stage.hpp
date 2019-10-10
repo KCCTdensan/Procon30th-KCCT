@@ -18,7 +18,10 @@ namespace solver::simulator
 		ScoreManager scoreManager;
 
 		bool willAgentStay(const Agent &agent, ActionID command)const;
-		FieldFlag decideAgentFirstStayingPanels(const StageCommand &command)const;
+		bool willAgentRemoveTile(const Agent &agent, ActionID command)const;
+		StageFlag decideFirstAgentStayingPanels(StageCommand &command)const;
+		StageFlag decideAgentOverlappingPanels(const StageFlag &isDecided, StageCommand &command)const;
+		StageFlag decideNextStayingAgents(const StageFlag &isDecided, StageCommand &command)const;
 
 	public:
 		Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgentInfo &agentManagerInfo);
@@ -33,5 +36,8 @@ namespace solver::simulator
 		TileID getPanelTileStatus(Position position)const noexcept override;
 		bool getPanelRegionStatus(Position position, TeamID team)const noexcept override;
 		bool isAgentOnPanel(Position position)const noexcept override;
+		Score getScore()const noexcept override;
+		StageInterface *copy()const override;
+		void destroy()override;
 	};
 }

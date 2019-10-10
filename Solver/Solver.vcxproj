@@ -87,6 +87,7 @@
     <ClInclude Include="host.hpp" />
     <ClInclude Include="position.hpp" />
     <ClInclude Include="random.hpp" />
+    <ClInclude Include="score.hpp" />
     <ClInclude Include="settings\data.hpp" />
     <ClInclude Include="settings\data_info.hpp" />
     <ClInclude Include="settings\rw.hpp" />
@@ -95,7 +96,7 @@
     <ClInclude Include="Simulator\field.hpp" />
     <ClInclude Include="simulator\field_flag.hpp" />
     <ClInclude Include="Simulator\panel.hpp" />
-    <ClInclude Include="Simulator\score.hpp" />
+    <ClInclude Include="Simulator\score_updater.hpp" />
     <ClInclude Include="Simulator\score_manager.hpp" />
     <ClInclude Include="Simulator\stage.hpp" />
     <ClInclude Include="simulator\stage_flag.hpp" />

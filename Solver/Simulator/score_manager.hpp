@@ -1,33 +1,36 @@
 #pragma once
 
-#include "score.hpp"
+#include "score_updater.hpp"
+#include <array>
 
 
 namespace solver::simulator
 {
 	class ScoreManager
 	{
-		Score redScore;
-		Score blueScore;
+		std::array<ScoreUpdater, numTeams> scores;
 
 	public:
 		ScoreManager(const Field &field)
-			: redScore(field, TeamID::red), blueScore(field, TeamID::blue)
+			: scores{ScoreUpdater(field,TeamID::red), ScoreUpdater(field,TeamID::blue)}
 		{
 
 		}
 		void update()
 		{
-			redScore.update();
-			blueScore.update();
+			for(TeamID team : TeamID())
+			{
+				scores[static_cast<size_t>(team)].update();
+			}
 		}
-		const Score &getRedScore()const noexcept
+		const Score &getScore()const
 		{
-			return redScore;
-		}
-		const Score &getBlueScore()const noexcept
-		{
-			return blueScore;
+			Score ret;
+			for(TeamID team : TeamID())
+			{
+				ret.teamScores[static_cast<size_t>(team)] = scores[static_cast<size_t>(team)].getScore();
+			}
+			return ret;
 		}
 	};
 }
