@@ -78,6 +78,7 @@
     <ClInclude Include="action_id.hpp" />
     <ClInclude Include="command.hpp" />
     <ClInclude Include="Com\com_interface.hpp" />
+    <ClInclude Include="Com\json11.hpp" />
     <ClInclude Include="Com\received_match_data.hpp" />
     <ClInclude Include="Com\received_match_info.hpp" />
     <ClInclude Include="Com\send_action_data.hpp" />
@@ -101,6 +102,8 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Com\com_interface.cpp" />
+    <ClCompile Include="Com\json11.cpp" />
+    <ClCompile Include="com_main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

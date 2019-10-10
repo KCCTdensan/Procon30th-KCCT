@@ -78,9 +78,18 @@
     <ClInclude Include="Com\send_action_data.hpp">
       <Filter>Com</Filter>
     </ClInclude>
+    <ClInclude Include="Com\json11.hpp">
+      <Filter>Com</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="Com\com_interface.cpp">
+      <Filter>Com</Filter>
+    </ClCompile>
+    <ClCompile Include="Com\json11.cpp">
+      <Filter>Com</Filter>
+    </ClCompile>
+    <ClCompile Include="com_main.cpp">
       <Filter>Com</Filter>
     </ClCompile>
   </ItemGroup>

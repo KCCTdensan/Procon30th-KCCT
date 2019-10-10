@@ -3,8 +3,8 @@
 #include "send_action_data.hpp"
 #include<string>
 
-namespace solver::com{
-
+namespace solver::com
+{
 class ComInterface
 	{
 	private:
@@ -15,6 +15,7 @@ class ComInterface
 		std::string matchIDString;
 		std::string tokenString;
 
+	public:
 		ComInterface(std::string portNumString,std::string matchIDString,std::string tokenString);
 		int getMatchInfo(ReceivedMatchInfo* matchInfo);
 		int getMatchData(ReceivedMatchData* matchData);
