@@ -20,8 +20,8 @@ namespace solver::simulator
 		bool willAgentStay(const Agent &agent, ActionID command)const;
 		bool willAgentRemoveTile(const Agent &agent, ActionID command)const;
 		StageFlag decideFirstAgentStayingPanels(StageCommand &command)const;
-		StageFlag decideAgentOverlappingPanels(const StageFlag &isDecided, StageCommand &command)const;
-		StageFlag decideNextStayingAgents(const StageFlag &isDecided, StageCommand &command)const;
+		void decideAgentOverlappingPanels(StageFlag &isDecided, StageCommand &command)const;
+		void decideNextStayingAgents(StageFlag &isDecided, StageCommand &command)const;
 
 	public:
 		Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgentInfo &agentManagerInfo);

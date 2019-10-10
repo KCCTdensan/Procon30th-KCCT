@@ -23,7 +23,7 @@ namespace solver::simulator
 				scores[static_cast<size_t>(team)].update();
 			}
 		}
-		const Score &getScore()const
+		Score getScore()const noexcept
 		{
 			Score ret;
 			for(TeamID team : TeamID())

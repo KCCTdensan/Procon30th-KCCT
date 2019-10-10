@@ -35,5 +35,15 @@ namespace solver::simulator
 		{
 			return agents[static_cast<size_t>(team)][agentNo];
 		}
+		void move(StageCommand normalizedCommand)
+		{
+			for(TeamID team : TeamID())
+			{
+				for(uint8_t i = 0; i < numAgents; ++i)
+				{
+					agents[static_cast<size_t>(team)][i].move(normalizedCommand.teamCommands[static_cast<size_t>(team)].commands[i]);
+				}
+			}
+		}
 	};
 }

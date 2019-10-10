@@ -20,7 +20,6 @@ namespace solver::engine::ka31neo
 	float Simulator::calculateReward(const Score &score)const
 	{
 		std::array<int16_t, numTeams> totalScores;
-		TeamID victoriousTeam;
 		for(TeamID team : TeamID())
 		{
 			totalScores[static_cast<size_t>(team)] = score.teamScores[static_cast<size_t>(team)].getTotalScore();

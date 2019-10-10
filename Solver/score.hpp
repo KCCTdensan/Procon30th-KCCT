@@ -11,6 +11,11 @@ namespace solver
 		int16_t tileScore;
 		int16_t regionScore;
 
+		TeamScore()
+			: tileScore(0), regionScore(0)
+		{
+
+		}
 		int16_t getTotalScore()const noexcept
 		{
 			return tileScore + regionScore;

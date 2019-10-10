@@ -12,6 +12,11 @@ namespace solver
 		std::vector<std::vector<int8_t>> panelPoints;
 
 	public:
+		FieldInfo()
+			: size {0, 0}
+		{
+
+		}
 		void setSize(Size size)
 		{
 			this->size = size;

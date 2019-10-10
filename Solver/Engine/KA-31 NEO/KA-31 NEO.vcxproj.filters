@@ -15,5 +15,6 @@
     <ClCompile Include="node.cpp" />
     <ClCompile Include="child_nodes_manager.cpp" />
     <ClCompile Include="simulator.cpp" />
+    <ClCompile Include="..\..\random.cpp" />
   </ItemGroup>
 </Project>

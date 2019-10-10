@@ -84,6 +84,7 @@
     <ClInclude Include="simulator.hpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="..\..\random.cpp" />
     <ClCompile Include="agent.cpp" />
     <ClCompile Include="child_nodes_manager.cpp" />
     <ClCompile Include="engine.cpp" />

@@ -8,18 +8,13 @@ namespace solver::simulator
 {
 	struct StageFlag
 	{
-		FieldFlag fieldFlag;
+		FieldFlag<bool> fieldFlag;
 		AgentFlag agentFlag;
 
 		StageFlag(Size fieldSize, uint8_t numAgents)
 			: fieldFlag(fieldSize), agentFlag(numAgents)
 		{
 
-		}
-		StageFlag &operator|=(const StageFlag &flag)
-		{
-
-			return *this;
 		}
 	};
 }

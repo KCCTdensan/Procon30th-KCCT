@@ -13,6 +13,11 @@ namespace solver
 		std::array<std::vector<Position>, numTeams> agentInitialPositions;
 
 	public:
+		AgentInfo()
+			: numAgents(0)
+		{
+
+		}
 		void setNumAgents(uint8_t numAgents)
 		{
 			this->numAgents = numAgents;

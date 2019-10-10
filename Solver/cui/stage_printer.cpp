@@ -57,10 +57,16 @@ namespace solver::cui
 		{
 			for(uint8_t x = 0; x < stage.getFieldSize().width; ++x)
 			{
-				printPanel(Position {static_cast<int8_t>(x),static_cast<int8_t>(y)});
+				printPanel(Position(static_cast<int8_t>(x), static_cast<int8_t>(y)));
 			}
+			changeColor(ColorID::white, ColorID::black);
 			std::wcout << std::endl;
 		}
-		changeColor(ColorID::white, ColorID::black);
+		std::wcout << L"ターン : " << stage.getCurrentTurnNo() + 1 << std::endl;
+		std::wcout << L"赤チーム(タイル) : " << stage.getScore().teamScores[static_cast<size_t>(TeamID::red)].tileScore << std::endl;
+		std::wcout << L"赤チーム(領域) : " << stage.getScore().teamScores[static_cast<size_t>(TeamID::red)].regionScore << std::endl;
+		std::wcout << L"青チーム(タイル) : " << stage.getScore().teamScores[static_cast<size_t>(TeamID::blue)].tileScore << std::endl;
+		std::wcout << L"青チーム(領域) : " << stage.getScore().teamScores[static_cast<size_t>(TeamID::blue)].regionScore << std::endl;
+		std::wcout << std::endl;
 	}
 }

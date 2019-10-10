@@ -12,9 +12,24 @@ namespace solver
 		blue
 	};
 
-	inline TeamID toTeam(TileID tile)
+	inline TileID toTile(TeamID team_id)
 	{
-		switch(tile)
+		switch(team_id)
+		{
+		case TeamID::red:
+			return TileID::red;
+
+		case TeamID::blue:
+			return TileID::blue;
+
+		default:
+			return TileID::none;
+		}
+	}
+
+	inline TeamID toTeam(TileID tile_id)
+	{
+		switch(tile_id)
 		{
 		case TileID::red:
 			return TeamID::red;

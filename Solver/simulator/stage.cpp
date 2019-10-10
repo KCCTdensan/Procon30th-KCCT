@@ -36,14 +36,41 @@ namespace solver::simulator
 		return ret;
 	}
 
-	StageFlag Stage::decideAgentOverlappingPanels(const StageFlag &isDecided, StageCommand &command)const
+	void Stage::decideAgentOverlappingPanels(StageFlag &isDecided, StageCommand &command)const
 	{
-
+		FieldFlag<uint8_t> overlappedAgent(field.getSize());
+		for(TeamID team : TeamID())
+		{
+			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
+			{
+				if(isDecided.agentFlag(team, i))
+				{
+					continue;
+				}
+				ActionID agentCommand = command.teamCommands[static_cast<size_t>(team)].commands[i];
+				Position nextPosition = movedPosition(agentManager.agent(team, i).getPosition(), agentCommand);
+				if(overlappedAgent[nextPosition] != 0)
+				{
+					//パネルの上のエージェントを確定させる
+					TeamID teamOfAgentOnPanel = static_cast<TeamID>((0x0f & overlappedAgent[nextPosition]) >> 3);
+					uint8_t noOfAgentOnPanel = static_cast<uint8_t>(0x07 & overlappedAgent[nextPosition]);
+					Position positionOfAgentOnPanel = agentManager.agent(teamOfAgentOnPanel, noOfAgentOnPanel).getPosition();
+					isDecided.fieldFlag[positionOfAgentOnPanel] = true;
+					isDecided.agentFlag(teamOfAgentOnPanel, noOfAgentOnPanel) = true;
+					command.teamCommands[static_cast<size_t>(teamOfAgentOnPanel)].commands[noOfAgentOnPanel] = ActionID::stay;
+					Position agentPosition = agentManager.agent(team, i).getPosition();
+					isDecided.fieldFlag[agentPosition] = true;
+					isDecided.agentFlag(team, i) = true;
+					command.teamCommands[static_cast<size_t>(team)].commands[i] = ActionID::stay;
+					continue;
+				}
+				overlappedAgent[nextPosition] = 0xF0 | static_cast<uint8_t>(team) << 3 | i;
+			}
+		}
 	}
 	
-	StageFlag Stage::decideNextStayingAgents(const StageFlag &isDecided, StageCommand &command)const
+	void Stage::decideNextStayingAgents(StageFlag &isDecided, StageCommand &command)const
 	{
-		StageFlag ret(isDecided);
 		bool isUpdated;
 		do
 		{
@@ -63,8 +90,8 @@ namespace solver::simulator
 					{
 						//パネルの上のエージェントを確定させる
 						Position agentPosition = agentManager.agent(team, i).getPosition();
-						ret.fieldFlag[agentPosition] = true;
-						ret.agentFlag(team, i) = true;
+						isDecided.fieldFlag[agentPosition] = true;
+						isDecided.agentFlag(team, i) = true;
 						//意思表示が無効なので留まらせる
 						command.teamCommands[static_cast<size_t>(team)].commands[i] = ActionID::stay;
 						isUpdated = true;
@@ -75,8 +102,8 @@ namespace solver::simulator
 					{
 						//パネルの上のエージェントを確定させる
 						Position agentPosition = agentManager.agent(team, i).getPosition();
-						ret.fieldFlag[agentPosition] = true;
-						ret.agentFlag(team, i) = true;
+						isDecided.fieldFlag[agentPosition] = true;
+						isDecided.agentFlag(team, i) = true;
 						isUpdated = true;
 						continue;
 					}
@@ -84,7 +111,6 @@ namespace solver::simulator
 			}
 		}
 		while(isUpdated);
-		return ret;
 	}
 
 	Stage::Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgentInfo &agentManagerInfo)
@@ -103,10 +129,21 @@ namespace solver::simulator
 	{
 		StageCommand finalCommand = command;
 		StageFlag stayingFlag = decideFirstAgentStayingPanels(finalCommand);
-		stayingFlag = decideAgentOverlappingPanels(stayingFlag, finalCommand);
-		stayingFlag = decideNextStayingAgents(stayingFlag, finalCommand);
+		decideAgentOverlappingPanels(stayingFlag, finalCommand);
+		decideNextStayingAgents(stayingFlag, finalCommand);
+
+		agentManager.move(finalCommand);
+		for(TeamID team : TeamID())
+		{
+			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
+			{
+				Position nextPosition = movedPosition(agentManager.agent(team, i).getPosition(), command.teamCommands[static_cast<size_t>(team)].commands[i]);
+				field.actPanel(nextPosition, team);
+			}
+		}
 
 		scoreManager.update();
+		currentTurnNo++;
 	}
 
 	Size Stage::getFieldSize()const noexcept

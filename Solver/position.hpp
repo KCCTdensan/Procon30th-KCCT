@@ -10,6 +10,17 @@ namespace solver
 	{
 		int8_t x;
 		int8_t y;
+
+		Position()
+			: x(0), y(0)
+		{
+
+		}
+		Position(int8_t x, int8_t y)
+			: x(x), y(y)
+		{
+
+		}
 		Position &move(const Direction &direction)noexcept
 		{
 			x += direction.getX();

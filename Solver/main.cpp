@@ -9,13 +9,13 @@
 solver::FieldInfo createRandomField()
 {
 	solver::FieldInfo ret;
-	const solver::Size size = {solver::getRandomValue(10, 20), solver::getRandomValue(10, 20)};
+	const solver::Size size(static_cast<uint8_t>(solver::getRandomValue(10, 20)), static_cast<uint8_t>(solver::getRandomValue(10, 20)));
 	ret.setSize(size);
 	for(uint8_t y = 0; y < size.height; ++y)
 	{
 		for(uint8_t x = 0; x < size.width; ++x)
 		{
-			const solver::Position position = {x,y};
+			const solver::Position position(static_cast<int8_t>(x), static_cast<int8_t>(y));
 			ret[position] = solver::getRandomValue(-16, 16);
 		}
 	}
@@ -35,24 +35,22 @@ solver::AgentInfo createRandomAgent(solver::Size fieldSize)
 		redAgentPosition.y = solver::getRandomValue(0, fieldSize.height - 1);
 		for(uint8_t j = 0; j < i; ++j)
 		{
-			if(ret.redAgentInitialPosition(j) == redAgentPosition)
+			if(ret.agentInitialPosition(solver::TeamID::red, j) == redAgentPosition)
 			{
 				goto createPosition;
 			}
 		}
-		ret.redAgentInitialPosition(i) = redAgentPosition;
+		ret.agentInitialPosition(solver::TeamID::red, i) = redAgentPosition;
 		solver::Position blueAgentPosition;
 		blueAgentPosition.x = fieldSize.width - redAgentPosition.x - 1;
 		blueAgentPosition.y = redAgentPosition.y;
-		ret.blueAgentInitialPosition(i) = blueAgentPosition;
+		ret.agentInitialPosition(solver::TeamID::blue, i) = blueAgentPosition;
 	}
 	return ret;
 }
 
 int main(int argc, char *argv[])
 {
-	//return 0;
-
 	constexpr unsigned numTurns = 30;
 
 	switch(argc)
