@@ -9,7 +9,6 @@ class ComInterface
 	{
 	private:
 		std::string cmdString;
-		std::string jsonString;
 		std::string sendDataString;
 		std::string portNumString;
 		std::string matchIDString;
@@ -21,6 +20,7 @@ class ComInterface
 		int getMatchData(ReceivedMatchData* matchData);
 		int sendActionData(SendActionData actionData);
 		int getPimg();
+		std::string getCmdString();
 
 	};
 }
