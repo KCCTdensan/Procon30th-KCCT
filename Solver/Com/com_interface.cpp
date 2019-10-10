@@ -46,8 +46,8 @@ namespace solver::com
 
 	int ComInterface::getMatchData(ReceivedMatchData* receivedMatchData)
 	{
-		cmdString = "curl -H \"Authorrization: " + tokenString + "\" \"http://localhost:" + portNumString + "/matches/" + matchIDString + "\" > ./match_data.json";
-		system(cmdString.c_str());
+		//cmdString = "curl -H \"Authorization: " + tokenString + "\" \"http://localhost:" + portNumString + "/matches/" + matchIDString + "\" > ./match_data.json";
+		//system(cmdString.c_str());
 
 		std::ifstream ifstrm("./match_data.json");
 		std::string jsonString((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
@@ -57,31 +57,54 @@ namespace solver::com
 		auto matchDataJson = json11::Json::parse(jsonString, errString);
 		auto actions = matchDataJson["actions"].array_items();
 
-		int i = 0;
-		for (auto& data : actions)
+		receivedMatchData->turn = matchDataJson["turn"].int_value();
+		receivedMatchData->startedAtUnixTime = matchDataJson["startedAtUnixTime"].int_value();
+		receivedMatchData->width = matchDataJson["width"].int_value();
+		receivedMatchData->height = matchDataJson["height"].int_value();
+		for (auto action : actions)
 		{
 			ReceivedAction receivedAction;
-			std::cout << i << " : " << data["agentID"].int_value() << std::endl;
-			receivedAction.agentID = actions["agentID"].int_value();
-			receivedAction.dx = actions["dx"].int_value();
-			receivedAction.dy = actions["dy"].int_value();
-			receivedAction.type = actions["type"].string_value();
-			receivedAction.apply = actions["apply"].int_value();
-			receivedAction.turn = actions["turn"].int_value();
+			receivedAction.agentID = action["agentID"].int_value();
+			receivedAction.dx = action["dx"].int_value();
+			receivedAction.dy = action["dy"].int_value();
+			receivedAction.type = action["type"].string_value();
+			receivedAction.apply = action["apply"].int_value();
+			receivedAction.turn = action["turn"].int_value();
 			receivedMatchData->receivedActions.emplace_back(receivedAction);
-			i++;
-
 		}
-		receivedMatchData->height = matchDataJson["height"].int_value();
-		auto manyPoint = matchDataJson["points"].array_items();
-		for (auto points : manyPoint)
+		for (auto team : matchDataJson["teams"].array_items())
+		{
+			ReceivedTeam receivedTeam;
+			for (auto agent : team["agents"].array_items())
+			{
+				ReceivedAgent receivedAgent;
+				receivedAgent.agentID = agent["agentID"].int_value();
+				receivedAgent.x = agent["x"].int_value();
+				receivedAgent.y = agent["y"].int_value();
+				receivedTeam.receivedAgents.emplace_back(receivedAgent);
+			}
+			receivedTeam.areaPoint = team["areaPoint"].int_value();
+			receivedTeam.teamID = team["teamID"].int_value();
+			receivedTeam.tilePoint = team["tilePoint"].int_value();
+			receivedMatchData->teams.emplace_back(receivedTeam);
+		}
+		for (auto points : matchDataJson["points"].array_items())
 		{
 			std::vector<int> integerPoints;
-			auto pointsArray = points.array_items();
-			for (auto point : pointsArray)
+			for (auto point : points.array_items())
 			{
-				integerPoints
+				integerPoints.emplace_back(point.int_value());
 			}
+			receivedMatchData->points.emplace_back(integerPoints);
+		}
+		for (auto tileds : matchDataJson["tiled"].array_items())
+		{
+			std::vector<int>integerTileds;
+			for (auto tiled : tileds.array_items())
+			{
+				integerTileds.emplace_back(tiled.int_value());
+			}
+			receivedMatchData->tiled.emplace_back(integerTileds);
 		}
 		return 200;
 	}

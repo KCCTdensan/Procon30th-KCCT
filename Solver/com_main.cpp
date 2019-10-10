@@ -7,9 +7,11 @@ int main()
 {
 	solver::com::ComInterface comInterFace("3000","6","procon30_example_token");
 	solver::com::ReceivedMatchInfo receivedMatchInfo;
+	solver::com::ReceivedMatchData receivedMatchData;
 
 	system("chcp 65001"); //コマンドプロンプトの文字コードページをUTF-8に設定
 
+	//試合情報取得
 	std::cout << comInterFace.getMatchInfo(&receivedMatchInfo) << std::endl;
 	for (solver::com::ReceivedMatchInfoOne receivedMatchInfoOne : receivedMatchInfo.MatchesInfo)
 	{
@@ -20,6 +22,11 @@ int main()
 		std::cout << "turnMillis : " << receivedMatchInfoOne.turnMillis << std::endl;
 		std::cout << "turns : " << receivedMatchInfoOne.turns << std::endl;
 	}
+	std::cout << comInterFace.getMatchData(&receivedMatchData) << std::endl;
+
+	//試合データ取得
+
+
 	//std::cout << receivedMatchInfo.MatchesInfo[0].id << std::endl;
 	
 	//std::cout << comInterFace.getCmdString() << std::endl;
