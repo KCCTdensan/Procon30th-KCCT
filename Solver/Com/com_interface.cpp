@@ -15,7 +15,6 @@ namespace solver::com
 	int ComInterface::getMatchInfo(ReceivedMatchInfo* receivedMatchInfo)
 	{
 		cmdString = "curl -H \"Authorization:" + tokenString + "\" \"http://localhost:" + portNumString + "/matches\" > ./match_info.json";
-		//std::cout << "cmdStr: " << cmdString << std::endl;
 		system(cmdString.c_str());
 
 		std::ifstream ifstrm("./match_info.json");
@@ -46,8 +45,8 @@ namespace solver::com
 
 	int ComInterface::getMatchData(ReceivedMatchData* receivedMatchData)
 	{
-		//cmdString = "curl -H \"Authorization: " + tokenString + "\" \"http://localhost:" + portNumString + "/matches/" + matchIDString + "\" > ./match_data.json";
-		//system(cmdString.c_str());
+		cmdString = "curl -H \"Authorization: " + tokenString + "\" \"http://localhost:" + portNumString + "/matches/" + matchIDString + "\" > ./match_data.json";
+		system(cmdString.c_str());
 
 		std::ifstream ifstrm("./match_data.json");
 		std::string jsonString((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
