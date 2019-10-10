@@ -110,8 +110,20 @@ namespace solver::com
 
 	int ComInterface::sendActionData(SendActionData actionData)
 	{
+		sendDataString = "\"{\\\"actions\\\":[";
+		for (SendActionDataOne actionDataOne : actionData.actions) 
+		{
+			sendDataString += "{";
+			sendDataString += (
+				"\\\"agentID\\\":\""+std::to_string(actionDataOne.aentID)+
+				"\",\\\"dx\\\":\""+std::to_string(actionDataOne.dx)+
+				"\",\\\"dy\\\":\""+std::to_string(actionDataOne.dy)+
+				"\",\\\"type\\\":\""+actionDataOne.type);
+			sendDataString += "\"},\"";
+		}
+		sendDataString += "]}";
 		cmdString = "curl -H \"Authorization: "+tokenString+"\" -H \"Content-Type: application/json\" -X POST \"http://localhost:" + tokenString + "/matches/1/action\" -d \""+sendDataString+" > ./match_info.json";
-		//std::string jsonString = system(cmdString.c_str());
+		system(cmdString.c_str());
 		return 401;
 	}
 
