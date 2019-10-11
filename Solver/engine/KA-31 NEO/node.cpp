@@ -57,7 +57,7 @@ namespace solver::engine::ka31neo
 			{
 				return childNode;
 			}
-			if(selectedNode == nullptr || maxAverageRewardOfChildren < averageRewardOfChild)
+			if(selectedNode == nullptr || averageRewardOfChild > maxAverageRewardOfChildren)
 			{
 				maxAverageRewardOfChildren = averageRewardOfChild;
 				selectedNode = childNode;
@@ -110,9 +110,9 @@ namespace solver::engine::ka31neo
 		return selectedActionID;
 	}
 
-	Node *Node::prune(ActionID action_id)
+	Node *Node::prune(ActionID actionID)
 	{
-		Node *child = childNodesManager.prune(action_id);
+		Node *child = childNodesManager.prune(actionID);
 		delete this;
 		return child;
 	}

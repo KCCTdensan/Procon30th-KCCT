@@ -24,6 +24,7 @@ namespace solver::simulator
 		void decideNextStayingAgents(StageFlag &isDecided, StageCommand &command)const;
 
 	public:
+		Stage(const Stage &stage);
 		Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgentInfo &agentManagerInfo);
 		void act(const StageCommand &command)override;
 		Size getFieldSize()const noexcept override;
@@ -31,6 +32,7 @@ namespace solver::simulator
 		uint8_t getNumTurns()const noexcept override;
 		uint8_t getCurrentTurnNo()const noexcept override;
 		uint8_t getNumRemainingTurns()const noexcept override;
+		Position getAgentPosition(TeamID team, uint8_t agentNo)const;
 		bool canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const noexcept override;
 		int8_t getPanelPoint(Position position)const noexcept override;
 		TileID getPanelTileStatus(Position position)const noexcept override;

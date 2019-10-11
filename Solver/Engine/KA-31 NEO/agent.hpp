@@ -21,7 +21,7 @@ namespace solver::engine::ka31neo
 		Agent(const Agent &) = delete;
 		Agent &operator=(const Agent &) = delete;
 		Agent(Agent &&agent)noexcept;
-		Agent(TeamID team_id, uint8_t agentNo, const StageInterface &stage);
+		Agent(TeamID teamID, uint8_t agentNo, const StageInterface &stage);
 		~Agent();
 		void startThinking();
 		void stopThinking();

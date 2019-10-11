@@ -1,9 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="settings">
-      <UniqueIdentifier>{c8b52b9b-abc2-413a-9e19-2ce2b967cbc0}</UniqueIdentifier>
-    </Filter>
     <Filter Include="engine">
       <UniqueIdentifier>{f31f4c12-9a9f-4241-8566-610eaae72767}</UniqueIdentifier>
     </Filter>
@@ -40,15 +37,6 @@
     <ClInclude Include="tile_id.hpp" />
     <ClInclude Include="team_id.hpp" />
     <ClInclude Include="command.hpp" />
-    <ClInclude Include="settings\data.hpp">
-      <Filter>settings</Filter>
-    </ClInclude>
-    <ClInclude Include="settings\data_info.hpp">
-      <Filter>settings</Filter>
-    </ClInclude>
-    <ClInclude Include="settings\rw.hpp">
-      <Filter>settings</Filter>
-    </ClInclude>
     <ClInclude Include="engine\instance.hpp">
       <Filter>engine</Filter>
     </ClInclude>
@@ -81,9 +69,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp" />
-    <ClCompile Include="settings\rw.cpp">
-      <Filter>settings</Filter>
-    </ClCompile>
     <ClCompile Include="engine_loader.cpp" />
     <ClCompile Include="host.cpp" />
     <ClCompile Include="simulator\stage.cpp">

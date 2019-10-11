@@ -28,13 +28,13 @@ namespace solver::engine::ka31neo
 		}
 	}
 
-	const Node *ChildNodesManager::operator[](ActionID action_id)const noexcept
+	const Node *ChildNodesManager::operator[](ActionID actionID)const noexcept
 	{
-		if(action_id == ActionID::null)
+		if(actionID == ActionID::null)
 		{
 			return nullptr;
 		}
-		return children[static_cast<size_t>(action_id)];
+		return children[static_cast<size_t>(actionID)];
 	}
 
 	std::array<Node *, numActionID>::iterator ChildNodesManager::begin()noexcept
@@ -58,10 +58,10 @@ namespace solver::engine::ka31neo
 		return numChildren;
 	}
 
-	Node *ChildNodesManager::prune(ActionID action_id)
+	Node *ChildNodesManager::prune(ActionID actionID)
 	{
-		Node *selectedChild = children[static_cast<size_t>(action_id)];
-		children[static_cast<size_t>(action_id)] = nullptr;
+		Node *selectedChild = children[static_cast<size_t>(actionID)];
+		children[static_cast<size_t>(actionID)] = nullptr;
 		return selectedChild;
 	}
 }

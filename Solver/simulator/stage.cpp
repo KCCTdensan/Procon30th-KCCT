@@ -113,6 +113,12 @@ namespace solver::simulator
 		while(isUpdated);
 	}
 
+	Stage::Stage(const Stage &stage)
+		:numTurns(stage.getNumTurns()), currentTurnNo(stage.getCurrentTurnNo()), field(stage.field), agentManager(stage.agentManager), scoreManager(field)
+	{
+
+	}
+
 	Stage::Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgentInfo &agentManagerInfo)
 		:numTurns(numTurns), currentTurnNo(0), field(fieldInfo), agentManager(agentManagerInfo, field.getSize()), scoreManager(field)
 	{
@@ -173,6 +179,11 @@ namespace solver::simulator
 	uint8_t Stage::getNumRemainingTurns()const noexcept
 	{
 		return numTurns - currentTurnNo;
+	}
+
+	Position Stage::getAgentPosition(TeamID team, uint8_t agentNo) const
+	{
+		return agentManager.agent(team, agentNo).getPosition();
 	}
 
 	bool Stage::canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const noexcept

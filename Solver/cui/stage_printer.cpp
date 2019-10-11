@@ -36,6 +36,10 @@ namespace solver::cui
 		{
 			colorMask |= MASK_BLUE;
 		}
+		if(colorMask == MASK_INTENSITY)
+		{
+			return ColorID::white;
+		}
 		return static_cast<ColorID>(colorMask);
 	}
 

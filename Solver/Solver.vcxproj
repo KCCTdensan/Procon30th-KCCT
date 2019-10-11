@@ -88,9 +88,6 @@
     <ClInclude Include="position.hpp" />
     <ClInclude Include="random.hpp" />
     <ClInclude Include="score.hpp" />
-    <ClInclude Include="settings\data.hpp" />
-    <ClInclude Include="settings\data_info.hpp" />
-    <ClInclude Include="settings\rw.hpp" />
     <ClInclude Include="Simulator\agent.hpp" />
     <ClInclude Include="Simulator\agent_manager.hpp" />
     <ClInclude Include="Simulator\field.hpp" />
@@ -113,7 +110,6 @@
     <ClCompile Include="host.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="random.cpp" />
-    <ClCompile Include="settings\rw.cpp" />
     <ClCompile Include="simulator\stage.cpp" />
   </ItemGroup>
   <ItemGroup>

@@ -16,7 +16,7 @@ solver::FieldInfo createRandomField()
 		for(uint8_t x = 0; x < size.width; ++x)
 		{
 			const solver::Position position(static_cast<int8_t>(x), static_cast<int8_t>(y));
-			ret[position] = solver::getRandomValue(0, 16);
+			ret[position] = solver::getRandomValue(-3, 16);
 		}
 	}
 	return ret;
@@ -68,7 +68,7 @@ int main(int argc, char *argv[])
 	solver::EngineLoader ka31neoCreator(L"KA-31 NEO");
 	solver::EngineLoader controllerCreator(L"Controller");
 	solver::engine::Interface *controller1 = ka31neoCreator.createEngine();
-	solver::engine::Interface *controller2 = controllerCreator.createEngine();
+	solver::engine::Interface *controller2 = ka31neoCreator.createEngine();
 
 	solver::FieldInfo fieldInfo = createRandomField();
 	solver::AgentInfo agentInfo = createRandomAgent(fieldInfo.getSize());
@@ -81,14 +81,14 @@ int main(int argc, char *argv[])
 	for(int i = 0; i < numTurns; ++i)
 	{
 		host.startThinking();
-		Sleep(3000);
+		Sleep(5000);
 		host.stopThinking();
 		host.act();
 		printer.print();
 	}
 
 	ka31neoCreator.destroyEngine(controller1);
-	controllerCreator.destroyEngine(controller2);
+	ka31neoCreator.destroyEngine(controller2);
 
 	return 0;
 }

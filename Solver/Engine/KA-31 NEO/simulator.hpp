@@ -8,18 +8,19 @@ namespace solver::engine::ka31neo
 {
 	class Simulator
 	{
-		const TeamID team_id;
+		const TeamID teamID;
 		const int8_t agentNo;
 		const StageInterface &currentStage;
 		std::queue<ActionID> commandList;
 
-		StageCommand getRandomCommand(const StageInterface &stage)const;
+		ActionID decideAgentCommand(const StageInterface &stage, TeamID team, uint8_t agentNo)const;
+		StageCommand decideCommand(const StageInterface &stage)const;
 		float calculateReward(const Score &score)const;
 
 	public:
-		Simulator(TeamID team_id, int8_t agentNo, const StageInterface &currentStage);
+		Simulator(TeamID teamID, int8_t agentNo, const StageInterface &currentStage);
 		float rollout()const;
-		bool canAct(ActionID action_id)const noexcept;
-		Simulator next(ActionID action_id)const;
+		bool canAct(ActionID actionID)const noexcept;
+		Simulator next(ActionID actionID)const;
 	};
 }

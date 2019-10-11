@@ -3,18 +3,19 @@
 
 namespace solver::engine::ka31neo
 {
-	void Engine::initialize(TeamID team_id, const StageInterface &stage)
+	void Engine::initialize(TeamID teamID, const StageInterface &stage)
 	{
-		this->team_id = team_id;
+		this->teamID = teamID;
 		for(uint8_t i = 0; i < stage.getNumAgents(); ++i)
 		{
-			agents.emplace_back(Agent(team_id, i, stage));
+			agents.emplace_back(Agent(teamID, i, stage));
 		}
 		agentIntentions.commands.resize(stage.getNumAgents());
 	}
 
 	void Engine::startThinking()
 	{
+		std::fill(agentIntentions.commands.begin(), agentIntentions.commands.end(), ActionID::null);
 		for(Agent &agent : agents)
 		{
 			agent.startThinking();

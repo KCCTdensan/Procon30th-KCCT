@@ -25,10 +25,10 @@ namespace solver::engine::ka31neo
 		agent.isThinking = false;
 	}
 
-	Agent::Agent(TeamID team_id, uint8_t agentNo, const StageInterface &stage)
-		: team(team_id), agentNo(agentNo), isThinking(false), threadHandle(NULL), threadID(0)
+	Agent::Agent(TeamID teamID, uint8_t agentNo, const StageInterface &stage)
+		: team(teamID), agentNo(agentNo), isThinking(false), threadHandle(NULL), threadID(0)
 	{
-		currentNode = new Node(Simulator(team_id, agentNo, stage));
+		currentNode = new Node(Simulator(teamID, agentNo, stage));
 	}
 
 	Agent::~Agent()

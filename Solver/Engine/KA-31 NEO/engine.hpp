@@ -9,13 +9,13 @@ namespace solver::engine::ka31neo
 {
 	class Engine : public Interface
 	{
-		TeamID team_id;
+		TeamID teamID;
 		unsigned numRemainingTurns;
 		std::vector<Agent> agents;
 		TeamCommand agentIntentions;
 
 	public:
-		void initialize(TeamID team_id, const StageInterface &stage);
+		void initialize(TeamID teamID, const StageInterface &stage);
 		void startThinking()override;
 		void stopThinking()override;
 		const TeamCommand &getBestActions()const override;

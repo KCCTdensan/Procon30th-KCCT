@@ -1,17 +1,41 @@
 #include "simulator.hpp"
 #include "../../random.hpp"
+#include <numeric>
 
 
 namespace solver::engine::ka31neo
 {
-	StageCommand Simulator::getRandomCommand(const StageInterface &stage)const
+	ActionID Simulator::decideAgentCommand(const StageInterface &stage, TeamID team, uint8_t agentNo) const
+	{
+		/*
+		std::array<float, numActionID> actionEvaluationValues;
+		Position agentPosition = stage.getAgentPosition(team, agentNo);
+		for(ActionID action : ActionID())
+		{
+			Position nextPosition = movedPosition(agentPosition, action);
+			int8_t panelPoint = stage.getPanelPoint(nextPosition);
+			TileID panelTileStatus = stage.getPanelTileStatus(nextPosition);
+			actionEvaluationValues[static_cast<size_t>(action)] = panelTileStatus == TileID::none ? 0.0f : panelPoint;
+		}
+		float denominator = std::reduce(actionEvaluationValues.begin(), actionEvaluationValues.end());
+		*/
+		ActionID action;
+		do
+		{
+			action = static_cast<ActionID>(getRandomValue(1, numActionID));
+		}
+		while(!stage.canAgentAct(team, agentNo, action));
+		return action;
+	}
+
+	StageCommand Simulator::decideCommand(const StageInterface &stage)const
 	{
 		StageCommand command(stage.getNumAgents());
 		for(TeamID team : TeamID())
 		{
 			for(uint8_t i = 0; i < stage.getNumAgents(); ++i)
 			{
-				command.teamCommands[static_cast<size_t>(team)].commands[i] = static_cast<ActionID>(getRandomValue(1, numActionID - 1));
+				command.teamCommands[static_cast<size_t>(team)].commands[i] = decideAgentCommand(stage, team, i);
 			}
 		}
 		return command;
@@ -27,8 +51,8 @@ namespace solver::engine::ka31neo
 		if(totalScores[static_cast<size_t>(TeamID::red)] != totalScores[static_cast<size_t>(TeamID::blue)])//全体スコアが違っていた場合
 		{
 			//全体スコアを比較
-			float redEvaluationValue = std::tanh(static_cast<float>(totalScores[static_cast<size_t>(TeamID::red)] - totalScores[static_cast<size_t>(TeamID::blue)]) * 0.2f);
-			switch(team_id)
+			float redEvaluationValue = std::tanh(static_cast<float>(totalScores[static_cast<size_t>(TeamID::red)] - totalScores[static_cast<size_t>(TeamID::blue)]) * 0.1f);
+			switch(teamID)
 			{
 			case TeamID::red:
 				return redEvaluationValue;
@@ -40,8 +64,8 @@ namespace solver::engine::ka31neo
 		else//全体スコアが等しい場合
 		{
 			//タイルスコアを比較
-			float redEvaluationValue = std::tanh(static_cast<float>(score.teamScores[static_cast<size_t>(TeamID::red)].tileScore - score.teamScores[static_cast<size_t>(TeamID::blue)].tileScore) * 0.2f);
-			switch(team_id)
+			float redEvaluationValue = std::tanh(static_cast<float>(score.teamScores[static_cast<size_t>(TeamID::red)].tileScore - score.teamScores[static_cast<size_t>(TeamID::blue)].tileScore) * 0.1f);
+			switch(teamID)
 			{
 			case TeamID::red:
 				return redEvaluationValue;
@@ -53,8 +77,8 @@ namespace solver::engine::ka31neo
 		return 0.0f;
 	}
 
-	Simulator::Simulator(TeamID team_id, int8_t agentNo, const StageInterface &currentStage)
-		: team_id(team_id), agentNo(agentNo), currentStage(currentStage)
+	Simulator::Simulator(TeamID teamID, int8_t agentNo, const StageInterface &currentStage)
+		: teamID(teamID), agentNo(agentNo), currentStage(currentStage)
 	{
 
 	}
@@ -63,16 +87,16 @@ namespace solver::engine::ka31neo
 	{
 		StageInterface &stage = *currentStage.copy();
 		std::queue<ActionID> commandList = this->commandList;
-		for(int i = 0; i < commandList.size(); ++i)
+		while(commandList.size() != 0)
 		{
-			StageCommand command = getRandomCommand(stage);
-			command.teamCommands[static_cast<size_t>(team_id)].commands[agentNo] = commandList.front();
+			StageCommand command = decideCommand(stage);
+			command.teamCommands[static_cast<size_t>(teamID)].commands[agentNo] = commandList.front();
 			commandList.pop();
 			stage.act(command);
 		}
-		for(uint8_t i = currentStage.getCurrentTurnNo() + static_cast<uint8_t>(commandList.size()); i < currentStage.getNumTurns() && i < currentStage.getCurrentTurnNo() + 10; ++i)
+		for(uint8_t i = 0; i < stage.getNumRemainingTurns() && i < 10; ++i)
 		{
-			StageCommand command = getRandomCommand(stage);
+			StageCommand command = decideCommand(stage);
 			stage.act(command);
 		}
 		Score finalScore = stage.getScore();
@@ -80,15 +104,15 @@ namespace solver::engine::ka31neo
 		return calculateReward(finalScore);
 	}
 
-	bool Simulator::canAct(ActionID action_id)const noexcept
+	bool Simulator::canAct(ActionID actionID)const noexcept
 	{
-		return currentStage.canAgentAct(team_id, agentNo, action_id);
+		return currentStage.canAgentAct(teamID, agentNo, actionID);
 	}
 
-	Simulator Simulator::next(ActionID action_id)const
+	Simulator Simulator::next(ActionID actionID)const
 	{
-		Simulator ret(team_id, agentNo, currentStage);
-		ret.commandList.push(action_id);
+		Simulator ret(teamID, agentNo, currentStage);
+		ret.commandList.push(actionID);
 		return ret;
 	}
 }

@@ -27,6 +27,8 @@ namespace solver
 	{
 		StageCommand command(redEngine.getBestActions(), blueEngine.getBestActions());
 		stage.act(command);
+		redEngine.update(command);
+		blueEngine.update(command);
 	}
 
 	uint8_t Host::getNumAgents()const noexcept

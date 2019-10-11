@@ -5,8 +5,8 @@
 
 namespace solver::engine::ka31neo
 {
-	constexpr float controlParameter = 0.71f;
-	constexpr unsigned threshold = 10;
+	constexpr float controlParameter = 10.0f;
+	constexpr unsigned threshold = 100;
 
 	class Node
 	{
@@ -28,6 +28,6 @@ namespace solver::engine::ka31neo
 		bool isLeafNode()const noexcept;
 		void search();
 		ActionID getBestAction()const noexcept;
-		_NODISCARD Node *prune(ActionID action_id);
+		_NODISCARD Node *prune(ActionID actionID);
 	};
 }
