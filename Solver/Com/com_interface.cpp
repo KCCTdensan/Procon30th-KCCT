@@ -6,15 +6,15 @@
 
 namespace solver::com
 {
-	ComInterface::ComInterface(std::string portNumString, std::string matchIDString, std::string tokenString)
-		: portNumString(portNumString),matchIDString(matchIDString),tokenString(tokenString)
+	ComInterface::ComInterface(std::string hostNameString,std::string portNumString, std::string matchIDString, std::string tokenString)
+		: hostNameString(hostNameString),portNumString(portNumString),matchIDString(matchIDString),tokenString(tokenString)
 	{
 
 	}
 
 	int ComInterface::getMatchInfo(ReceivedMatchInfo* receivedMatchInfo)
 	{
-		cmdString = "curl -H \"Authorization:" + tokenString + "\" \"http://localhost:" + portNumString + "/matches\" > ./match_info.json";
+		cmdString = "curl -H \"Authorization:" + tokenString + "\" \"http://" + hostNameString + ":" + portNumString + "/matches\" > ./match_info.json";
 		system(cmdString.c_str());
 
 		std::ifstream ifstrm("./match_info.json");
@@ -29,7 +29,6 @@ namespace solver::com
 		for(auto &info : matchInfos)
 		{
 			ReceivedMatchInfoOne receivedMatchInfoOne;
-			std::cout << i << " : " << info["id"].int_value() << std::endl;
 			receivedMatchInfoOne.id = info["id"].int_value();
 			receivedMatchInfoOne.intervalMillis = info["intervalMillis"].int_value();
 			receivedMatchInfoOne.matchTo = info["matchTo"].string_value();
@@ -45,7 +44,7 @@ namespace solver::com
 
 	int ComInterface::getMatchData(ReceivedMatchData* receivedMatchData)
 	{
-		cmdString = "curl -H \"Authorization: " + tokenString + "\" \"http://localhost:" + portNumString + "/matches/" + matchIDString + "\" > ./match_data.json";
+		cmdString = "curl -H \"Authorization: " + tokenString + "\" \"http://" + hostNameString + ":" + portNumString + "/matches/" + matchIDString + "\" > ./match_data.json";
 		system(cmdString.c_str());
 
 		std::ifstream ifstrm("./match_data.json");
@@ -111,25 +110,34 @@ namespace solver::com
 	int ComInterface::sendActionData(SendActionData actionData)
 	{
 		sendDataString = "\"{\\\"actions\\\":[";
+		int i = 0;
 		for (SendActionDataOne actionDataOne : actionData.actions) 
 		{
+			if (i != 0)sendDataString += ",";
 			sendDataString += "{";
 			sendDataString += (
-				"\\\"agentID\\\":\""+std::to_string(actionDataOne.aentID)+
-				"\",\\\"dx\\\":\""+std::to_string(actionDataOne.dx)+
-				"\",\\\"dy\\\":\""+std::to_string(actionDataOne.dy)+
-				"\",\\\"type\\\":\""+actionDataOne.type);
-			sendDataString += "\"},\"";
+				"\\\"agentID\\\":"+std::to_string(actionDataOne.aentID)+
+				",\\\"dx\\\":"+std::to_string(actionDataOne.dx)+
+				",\\\"dy\\\":"+std::to_string(actionDataOne.dy)+
+				",\\\"type\\\":\\\""+actionDataOne.type)+"\\\"";
+			sendDataString += "}";
+			i++;
 		}
-		sendDataString += "]}";
-		cmdString = "curl -H \"Authorization: "+tokenString+"\" -H \"Content-Type: application/json\" -X POST \"http://localhost:" + tokenString + "/matches/1/action\" -d \""+sendDataString+" > ./match_info.json";
+		sendDataString += "]}\"";
+		cmdString = "curl -H \"Authorization: "+tokenString+"\" -H \"Content-Type: application/json\" -X POST \"http://" + hostNameString + ":" + portNumString + "/matches/1/action\" -d "+sendDataString+" > ./action_data.json";
+		std::cout <<"cmd : "<< cmdString << std::endl;
 		system(cmdString.c_str());
-		return 401;
+
+		std::ifstream ifstrm("./action_data.json");
+		std::string jsonString((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
+		std::cout << "jsonstr : " << jsonString << std::endl;
+
+		return 200;
 	}
 
 	int ComInterface::getPimg()
 	{
-		cmdString = "curl - H \"Authorization: "+tokenString+"\" \"http://localhost:"+portNumString+"/matches > ./match_info.json";
+		cmdString = "curl - H \"Authorization: "+tokenString+"\" \"http://"+hostNameString+":"+portNumString+"/matches > ./ping_info.json";
 		//std::string jsonString = system(cmdString.c_str());
 		return 401;
 	}

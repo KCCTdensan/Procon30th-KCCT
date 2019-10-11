@@ -10,12 +10,13 @@ class ComInterface
 	private:
 		std::string cmdString;
 		std::string sendDataString;
+		std::string hostNameString;
 		std::string portNumString;
-		std::string matchIDString;
 		std::string tokenString;
+		std::string matchIDString;
 
 	public:
-		ComInterface(std::string portNumString,std::string matchIDString,std::string tokenString);
+		ComInterface(std::string hostNameString,std::string portNumString,std::string matchIDString,std::string tokenString);
 		int getMatchInfo(ReceivedMatchInfo* matchInfo);
 		int getMatchData(ReceivedMatchData* matchData);
 		int sendActionData(SendActionData actionData);

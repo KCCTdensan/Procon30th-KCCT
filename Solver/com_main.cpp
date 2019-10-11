@@ -5,9 +5,10 @@
 
 int main()
 {
-	solver::com::ComInterface comInterFace("3000","6","procon30_example_token");
+	solver::com::ComInterface comInterFace("kd-D-004","3000","6","procon30_example_token");
 	solver::com::ReceivedMatchInfo receivedMatchInfo;
 	solver::com::ReceivedMatchData receivedMatchData;
+	solver::com::SendActionData sendActionData;
 
 	system("chcp 65001"); //コマンドプロンプトの文字コードページをUTF-8に設定
 
@@ -22,11 +23,19 @@ int main()
 		std::cout << "turnMillis : " << receivedMatchInfoOne.turnMillis << std::endl;
 		std::cout << "turns : " << receivedMatchInfoOne.turns << std::endl;
 	}
+	
+	//試合データ取得
 	std::cout << comInterFace.getMatchData(&receivedMatchData) << std::endl;
 
-	//試合データ取得
+	//行動更新
+	solver::com::SendActionDataOne sendActionData1;
+	solver::com::SendActionDataOne sendActionData2;
+	sendActionData1 = { 9,1,1,"move" };
+	sendActionData2 = { 10,1,1,"move" };
+	sendActionData.actions.emplace_back(sendActionData1);
+	sendActionData.actions.emplace_back(sendActionData2);
 
-
+	std::cout << comInterFace.sendActionData(sendActionData) << std::endl;
 	//std::cout << receivedMatchInfo.MatchesInfo[0].id << std::endl;
 	
 	//std::cout << comInterFace.getCmdString() << std::endl;
