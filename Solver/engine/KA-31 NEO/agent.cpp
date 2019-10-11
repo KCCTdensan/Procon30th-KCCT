@@ -14,10 +14,29 @@ namespace solver::engine::ka31neo
 		return 0;
 	}
 
+	Agent::Agent(Agent &&agent)noexcept
+	{
+		this->currentNode = agent.currentNode;
+		this->isThinking = agent.isThinking;
+		this->threadHandle = agent.threadHandle;
+		this->threadID = agent.threadID;
+		agent.currentNode = nullptr;
+		agent.isThinking = false;
+	}
+
 	Agent::Agent(TeamID team_id, uint8_t agentNo, const StageInterface &stage)
 		: isThinking(false), threadHandle(NULL), threadID(0)
 	{
 		currentNode = new Node(Simulator(team_id, agentNo, stage));
+	}
+
+	Agent::~Agent()
+	{
+		if(isThinking)
+		{
+			stopThinking();
+		}
+		delete currentNode;
 	}
 
 	void Agent::startThinking()

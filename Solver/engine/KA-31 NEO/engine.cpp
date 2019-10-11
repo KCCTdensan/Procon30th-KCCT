@@ -8,8 +8,9 @@ namespace solver::engine::ka31neo
 		this->team_id = team_id;
 		for(uint8_t i = 0; i < stage.getNumAgents(); ++i)
 		{
-			agents.emplace_back(team_id, i, stage);
+			agents.emplace_back(Agent(team_id, i, stage));
 		}
+		agentIntentions.commands.resize(stage.getNumAgents());
 	}
 
 	void Engine::startThinking()

@@ -65,7 +65,7 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	solver::EngineLoader controllerCreator(L"Controller");
+	solver::EngineLoader controllerCreator(L"KA-31 NEO");
 	solver::engine::Interface *controller1 = controllerCreator.createEngine();
 	solver::engine::Interface *controller2 = controllerCreator.createEngine();
 
@@ -80,10 +80,10 @@ int main(int argc, char *argv[])
 	for(int i = 0; i < numTurns; ++i)
 	{
 		host.startThinking();
+		Sleep(3000);
 		host.stopThinking();
 		host.act();
 		printer.print();
-		Sleep(3000);
 	}
 
 	controllerCreator.destroyEngine(controller1);

@@ -6,7 +6,7 @@
 namespace solver::engine::ka31neo
 {
 	constexpr float controlParameter = 0.71f;
-	constexpr unsigned threshold = 100;
+	constexpr unsigned threshold = 10;
 
 	class Node
 	{
@@ -24,6 +24,7 @@ namespace solver::engine::ka31neo
 
 	public:
 		Node(const Simulator &simulator);
+		~Node();
 		bool isLeafNode()const noexcept;
 		void search();
 		ActionID getBestAction()const noexcept;

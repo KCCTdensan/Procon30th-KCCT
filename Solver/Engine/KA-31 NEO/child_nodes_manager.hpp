@@ -14,6 +14,9 @@ namespace solver::engine::ka31neo
 		unsigned numChildren;
 
 	public:
+		ChildNodesManager(const ChildNodesManager &) = delete;
+		ChildNodesManager &operator=(const ChildNodesManager &) = delete;
+		ChildNodesManager(ChildNodesManager &&childNodesManager)noexcept;
 		ChildNodesManager();
 		~ChildNodesManager();
 		const Node *operator[](ActionID action_id)const noexcept;

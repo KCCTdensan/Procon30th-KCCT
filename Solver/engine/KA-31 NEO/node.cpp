@@ -72,6 +72,11 @@ namespace solver::engine::ka31neo
 
 	}
 
+	Node::~Node()
+	{
+
+	}
+
 	bool Node::isLeafNode()const noexcept
 	{
 		return childNodesManager.getNumChildren() == 0;

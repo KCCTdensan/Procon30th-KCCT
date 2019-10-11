@@ -6,7 +6,7 @@ namespace solver::engine::ka31neo
 {
 	StageCommand Simulator::getRandomCommand(uint8_t numAgents)const
 	{
-		StageCommand command;
+		StageCommand command(numAgents);
 		for(TeamID team : TeamID())
 		{
 			for(uint8_t i = 0; i < numAgents; ++i)
@@ -70,7 +70,7 @@ namespace solver::engine::ka31neo
 			commandList.pop();
 			stage->act(command);
 		}
-		for(uint8_t i = currentStage.getCurrentTurnNo() + static_cast<uint8_t>(commandList.size()); i < currentStage.getNumTurns(); ++i)
+		for(uint8_t i = currentStage.getCurrentTurnNo() + static_cast<uint8_t>(commandList.size()); i < currentStage.getNumTurns() && i < currentStage.getCurrentTurnNo() + 10; ++i)
 		{
 			StageCommand command = getRandomCommand(stage->getNumAgents());
 			stage->act(command);

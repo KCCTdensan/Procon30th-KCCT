@@ -25,9 +25,7 @@ namespace solver
 
 	void Host::act()
 	{
-		StageCommand command;
-		command.teamCommands[static_cast<size_t>(TeamID::red)] = redEngine.getBestActions();
-		command.teamCommands[static_cast<size_t>(TeamID::blue)] = blueEngine.getBestActions();
+		StageCommand command(redEngine.getBestActions(), blueEngine.getBestActions());
 		stage.act(command);
 	}
 

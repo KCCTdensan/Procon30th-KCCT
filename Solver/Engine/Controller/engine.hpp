@@ -11,7 +11,7 @@ namespace solver::engine::controller
 		unsigned numAgents;
 		unsigned numRemainingTurns;
 		const StageInterface *stage;
-		TeamCommand agentIntentions;
+		TeamCommand agentCommands;
 
 	public:
 		Engine()

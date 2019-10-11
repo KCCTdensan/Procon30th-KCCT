@@ -4,10 +4,16 @@
 
 namespace solver::engine::ka31neo
 {
-	ChildNodesManager::ChildNodesManager()
-		: children{nullptr}, numChildren(0)
+	ChildNodesManager::ChildNodesManager(ChildNodesManager &&childNodesManager)noexcept
+		: children(childNodesManager.children), numChildren(childNodesManager.numChildren)
 	{
+		std::fill(childNodesManager.children.begin(), childNodesManager.children.end(), nullptr);
+	}
 
+	ChildNodesManager::ChildNodesManager()
+		: numChildren(0)
+	{
+		std::fill(children.begin(), children.end(), nullptr);
 	}
 
 	ChildNodesManager::~ChildNodesManager()
