@@ -120,7 +120,7 @@ namespace solver::simulator
 		{
 			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
 			{
-
+				field.actPanel(agentManager.agent(team, i).getPosition(), team);
 			}
 		}
 	}
@@ -132,15 +132,19 @@ namespace solver::simulator
 		decideAgentOverlappingPanels(stayingFlag, finalCommand);
 		decideNextStayingAgents(stayingFlag, finalCommand);
 
-		agentManager.move(finalCommand);
 		for(TeamID team : TeamID())
 		{
 			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
 			{
-				Position nextPosition = movedPosition(agentManager.agent(team, i).getPosition(), command.teamCommands[static_cast<size_t>(team)].commands[i]);
-				field.actPanel(nextPosition, team);
+				Position nextPosition = movedPosition(agentManager.agent(team, i).getPosition(), finalCommand.teamCommands[static_cast<size_t>(team)].commands[i]);
+				int ret = field.actPanel(nextPosition, team);
+				if(ret == 2)
+				{
+					finalCommand.teamCommands[static_cast<size_t>(team)].commands[i] = ActionID::stay;
+				}
 			}
 		}
+		agentManager.move(finalCommand);
 
 		scoreManager.update();
 		currentTurnNo++;

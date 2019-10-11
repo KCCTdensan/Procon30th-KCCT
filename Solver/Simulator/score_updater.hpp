@@ -19,7 +19,7 @@ namespace solver::simulator
 			}
 			else if(panel.getRegionStatus(team))
 			{
-				score.regionScore += panel.getPoint();
+				score.regionScore += std::abs(panel.getPoint());
 			}
 		}
 

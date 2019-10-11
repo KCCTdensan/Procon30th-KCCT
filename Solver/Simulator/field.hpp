@@ -45,7 +45,10 @@ namespace solver::simulator
 		{
 			//フィールドの範囲外の場合
 			if(!isPositionInField(position, size))return;
-			if(fieldFlag[position] != 1)return;
+			//自チームのタイルが存在する場合
+			if((*this)[position].getTileStatus() == tile)return;
+			//チェック済みの場合
+			if(fieldFlag[position] == 2)return;
 			fieldFlag[position] = 2;
 			(*this)[position].setRegionStatus(toTeam(tile), isRegionPanel);
 			setRegionPanel(movedPosition(position, ActionID::left), tile, isRegionPanel, fieldFlag);
@@ -112,20 +115,28 @@ namespace solver::simulator
 		{
 			return panels.end();
 		}
-		void actPanel(Position position, TeamID agentTeam)
+		int actPanel(Position position, TeamID agentTeam)
 		{
 			TileID panelTileStatus = (*this)[position].getTileStatus();
 			if(panelTileStatus == TileID::none)
 			{
 				(*this)[position].setTile(toTile(agentTeam));
-				//
-				return;
+				for(TeamID team : TeamID())
+				{
+					updateRegionPanel(position, toTile(team));
+				}
+				return 1;
 			}
 			if(panelTileStatus != toTile(agentTeam))
 			{
 				(*this)[position].removeTile();
-				//
+				for(TeamID team : TeamID())
+				{
+					updateRegionPanel(position, toTile(team));
+				}
+				return 2;
 			}
+			return 0;
 		}
 	};
 }

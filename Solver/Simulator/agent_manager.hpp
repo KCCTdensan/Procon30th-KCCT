@@ -23,7 +23,7 @@ namespace solver::simulator
 			{
 				for(uint8_t i = 0; i < numAgents; ++i)
 				{
-					agents[static_cast<size_t>(team)].emplace_back(fieldSize, team, agentInfo.agentInitialPosition(team, i));
+					agents[static_cast<size_t>(team)].emplace_back(Agent(this->fieldSize, team, agentInfo.agentInitialPosition(team, i)));
 				}
 			}
 		}

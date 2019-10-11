@@ -42,7 +42,7 @@ namespace solver::cui
 	void StagePrinter::printPanel(Position position)const noexcept
 	{
 		changeColor(characterColor(position), backgroundColor(position));
-		std::wprintf(L"%3d ", stage.getPanelPoint(position));
+		std::printf("%3d ", stage.getPanelPoint(position));
 	}
 
 	StagePrinter::StagePrinter(const StageInterface &stage)noexcept
@@ -62,11 +62,11 @@ namespace solver::cui
 			changeColor(ColorID::white, ColorID::black);
 			std::wcout << std::endl;
 		}
-		std::wcout << L"ターン : " << stage.getCurrentTurnNo() + 1 << std::endl;
-		std::wcout << L"赤チーム(タイル) : " << stage.getScore().teamScores[static_cast<size_t>(TeamID::red)].tileScore << std::endl;
-		std::wcout << L"赤チーム(領域) : " << stage.getScore().teamScores[static_cast<size_t>(TeamID::red)].regionScore << std::endl;
-		std::wcout << L"青チーム(タイル) : " << stage.getScore().teamScores[static_cast<size_t>(TeamID::blue)].tileScore << std::endl;
-		std::wcout << L"青チーム(領域) : " << stage.getScore().teamScores[static_cast<size_t>(TeamID::blue)].regionScore << std::endl;
-		std::wcout << std::endl;
+		std::cout << "ターン : " << static_cast<int>(stage.getCurrentTurnNo()) << std::endl;
+		std::cout << "赤チーム(タイル) : " << static_cast<int>(stage.getScore().teamScores[static_cast<size_t>(TeamID::red)].tileScore) << std::endl;
+		std::cout << "赤チーム(領域) : " << static_cast<int>(stage.getScore().teamScores[static_cast<size_t>(TeamID::red)].regionScore) << std::endl;
+		std::cout << "青チーム(タイル) : " << static_cast<int>(stage.getScore().teamScores[static_cast<size_t>(TeamID::blue)].tileScore) << std::endl;
+		std::cout << "青チーム(領域) : " << static_cast<int>(stage.getScore().teamScores[static_cast<size_t>(TeamID::blue)].regionScore) << std::endl;
+		std::cout << std::endl;
 	}
 }

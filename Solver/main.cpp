@@ -31,7 +31,7 @@ solver::AgentInfo createRandomAgent(solver::Size fieldSize)
 	{
 		createPosition:
 		solver::Position redAgentPosition;
-		redAgentPosition.x = solver::getRandomValue(0, fieldSize.width / 2 - 1);
+		redAgentPosition.x = solver::getRandomValue(0, fieldSize.width / 2 - 2);
 		redAgentPosition.y = solver::getRandomValue(0, fieldSize.height - 1);
 		for(uint8_t j = 0; j < i; ++j)
 		{
