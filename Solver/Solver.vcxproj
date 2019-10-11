@@ -79,6 +79,11 @@
     <ClInclude Include="command.hpp" />
     <ClInclude Include="cui\stage_printer.hpp" />
     <ClInclude Include="cui\string_color.hpp" />
+    <ClInclude Include="Com\com_interface.hpp" />
+    <ClInclude Include="Com\json11.hpp" />
+    <ClInclude Include="Com\received_match_data.hpp" />
+    <ClInclude Include="Com\received_match_info.hpp" />
+    <ClInclude Include="Com\send_action_data.hpp" />
     <ClInclude Include="direction.hpp" />
     <ClInclude Include="engine\instance.hpp" />
     <ClInclude Include="engine\interface.hpp" />
@@ -114,6 +119,11 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="simulator\agent_flag.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="Com\com_interface.cpp" />
+    <ClCompile Include="Com\json11.cpp" />
+    <ClCompile Include="com_main.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

@@ -1,34 +1,48 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <Filter Include="engine">
-      <UniqueIdentifier>{f31f4c12-9a9f-4241-8566-610eaae72767}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="simulator">
+    <Filter Include="Simulator">
       <UniqueIdentifier>{e1357c8a-3c39-4a3d-8055-4bb7c6ef1f7e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="cui">
-      <UniqueIdentifier>{3031ced7-4cdf-4dde-8260-873c82921817}</UniqueIdentifier>
+    <Filter Include="Engine">
+      <UniqueIdentifier>{f31f4c12-9a9f-4241-8566-610eaae72767}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\Controller">
+      <UniqueIdentifier>{3cf2446e-f225-42e9-89d1-cecb8891581d}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Engine\KA-31 NEO">
+      <UniqueIdentifier>{207fcb4d-21f6-42d1-b389-9b492387683c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Com">
+      <UniqueIdentifier>{6ac2beda-12cd-48ec-a8ec-0a81265a896b}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
+    <None Include="Engine\interface.hpp">
+      <Filter>Engine</Filter>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
     <ClInclude Include="Simulator\panel.hpp">
-      <Filter>simulator</Filter>
+      <Filter>Simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="Simulator\score.hpp">
+      <Filter>Simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\score_manager.hpp">
-      <Filter>simulator</Filter>
+      <Filter>Simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\agent.hpp">
-      <Filter>simulator</Filter>
+      <Filter>Simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\agent_manager.hpp">
-      <Filter>simulator</Filter>
+      <Filter>Simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\field.hpp">
-      <Filter>simulator</Filter>
+      <Filter>Simulator</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\stage.hpp">
-      <Filter>simulator</Filter>
+      <Filter>Simulator</Filter>
     </ClInclude>
     <ClInclude Include="action_id.hpp" />
     <ClInclude Include="direction.hpp" />
@@ -36,53 +50,47 @@
     <ClInclude Include="size.hpp" />
     <ClInclude Include="tile_id.hpp" />
     <ClInclude Include="team_id.hpp" />
+    <ClInclude Include="Engine\Controller\controller.hpp">
+      <Filter>Engine\Controller</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\KA-31 NEO\node.hpp">
+      <Filter>Engine\KA-31 NEO</Filter>
+    </ClInclude>
+    <ClInclude Include="Engine\KA-31 NEO\ka31neo.hpp">
+      <Filter>Engine\KA-31 NEO</Filter>
+    </ClInclude>
     <ClInclude Include="command.hpp" />
-    <ClInclude Include="engine\instance.hpp">
-      <Filter>engine</Filter>
+    <ClInclude Include="Engine\KA-31 NEO\simulator.hpp">
+      <Filter>Engine\KA-31 NEO</Filter>
     </ClInclude>
-    <ClInclude Include="engine\interface.hpp">
-      <Filter>engine</Filter>
+    <ClInclude Include="Engine\KA-31 NEO\child_nodes_manager.hpp">
+      <Filter>Engine\KA-31 NEO</Filter>
     </ClInclude>
-    <ClInclude Include="host.hpp" />
-    <ClInclude Include="engine_loader.hpp" />
-    <ClInclude Include="stage_info.hpp" />
-    <ClInclude Include="field_info.hpp" />
-    <ClInclude Include="agent_info.hpp" />
-    <ClInclude Include="stage_interface.hpp" />
-    <ClInclude Include="cui\stage_printer.hpp">
-      <Filter>cui</Filter>
+    <ClInclude Include="Com\com_interface.hpp">
+      <Filter>Com</Filter>
     </ClInclude>
-    <ClInclude Include="cui\string_color.hpp">
-      <Filter>cui</Filter>
+    <ClInclude Include="Com\received_match_data.hpp">
+      <Filter>Com</Filter>
     </ClInclude>
-    <ClInclude Include="random.hpp" />
-    <ClInclude Include="simulator\field_flag.hpp">
-      <Filter>simulator</Filter>
+    <ClInclude Include="Com\received_match_info.hpp">
+      <Filter>Com</Filter>
     </ClInclude>
-    <ClInclude Include="simulator\stage_flag.hpp">
-      <Filter>simulator</Filter>
+    <ClInclude Include="Com\send_action_data.hpp">
+      <Filter>Com</Filter>
     </ClInclude>
-    <ClInclude Include="score.hpp" />
-    <ClInclude Include="Simulator\score_updater.hpp">
-      <Filter>simulator</Filter>
+    <ClInclude Include="Com\json11.hpp">
+      <Filter>Com</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="engine_loader.cpp" />
-    <ClCompile Include="host.cpp" />
-    <ClCompile Include="simulator\stage.cpp">
-      <Filter>simulator</Filter>
+    <ClCompile Include="Com\com_interface.cpp">
+      <Filter>Com</Filter>
     </ClCompile>
-    <ClCompile Include="cui\stage_printer.cpp">
-      <Filter>cui</Filter>
+    <ClCompile Include="Com\json11.cpp">
+      <Filter>Com</Filter>
     </ClCompile>
-    <ClCompile Include="cui\string_color.cpp" />
-    <ClCompile Include="random.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="simulator\agent_flag.hpp">
-      <Filter>simulator</Filter>
-    </None>
+    <ClCompile Include="com_main.cpp">
+      <Filter>Com</Filter>
+    </ClCompile>
   </ItemGroup>
 </Project>
