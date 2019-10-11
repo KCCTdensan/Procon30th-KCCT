@@ -15,6 +15,7 @@ namespace solver::engine::ka31neo
 	}
 
 	Agent::Agent(Agent &&agent)noexcept
+		: team(agent.team), agentNo(agent.agentNo)
 	{
 		this->currentNode = agent.currentNode;
 		this->isThinking = agent.isThinking;
@@ -25,7 +26,7 @@ namespace solver::engine::ka31neo
 	}
 
 	Agent::Agent(TeamID team_id, uint8_t agentNo, const StageInterface &stage)
-		: isThinking(false), threadHandle(NULL), threadID(0)
+		: team(team_id), agentNo(agentNo), isThinking(false), threadHandle(NULL), threadID(0)
 	{
 		currentNode = new Node(Simulator(team_id, agentNo, stage));
 	}
@@ -59,5 +60,10 @@ namespace solver::engine::ka31neo
 	ActionID Agent::getBestAction()const noexcept
 	{
 		return currentNode->getBestAction();
+	}
+
+	void Agent::updateStage(const StageCommand &command)
+	{
+		currentNode = currentNode->prune(command.teamCommands[static_cast<size_t>(team)].commands[agentNo]);
 	}
 }

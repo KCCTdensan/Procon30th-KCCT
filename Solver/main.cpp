@@ -16,7 +16,7 @@ solver::FieldInfo createRandomField()
 		for(uint8_t x = 0; x < size.width; ++x)
 		{
 			const solver::Position position(static_cast<int8_t>(x), static_cast<int8_t>(y));
-			ret[position] = solver::getRandomValue(-16, 16);
+			ret[position] = solver::getRandomValue(0, 16);
 		}
 	}
 	return ret;
@@ -25,13 +25,13 @@ solver::FieldInfo createRandomField()
 solver::AgentInfo createRandomAgent(solver::Size fieldSize)
 {
 	solver::AgentInfo ret;
-	const uint8_t numAgents = static_cast<uint8_t>(solver::getRandomValue(2, 8));
+	const uint8_t numAgents = 1;//static_cast<uint8_t>(solver::getRandomValue(2, 8));
 	ret.setNumAgents(numAgents);
 	for(uint8_t i = 0; i < numAgents; ++i)
 	{
 		createPosition:
 		solver::Position redAgentPosition;
-		redAgentPosition.x = solver::getRandomValue(0, fieldSize.width / 2 - 2);
+		redAgentPosition.x = solver::getRandomValue(0, fieldSize.width / 2 - 1);
 		redAgentPosition.y = solver::getRandomValue(0, fieldSize.height - 1);
 		for(uint8_t j = 0; j < i; ++j)
 		{
@@ -65,8 +65,9 @@ int main(int argc, char *argv[])
 		return -1;
 	}
 
-	solver::EngineLoader controllerCreator(L"KA-31 NEO");
-	solver::engine::Interface *controller1 = controllerCreator.createEngine();
+	solver::EngineLoader ka31neoCreator(L"KA-31 NEO");
+	solver::EngineLoader controllerCreator(L"Controller");
+	solver::engine::Interface *controller1 = ka31neoCreator.createEngine();
 	solver::engine::Interface *controller2 = controllerCreator.createEngine();
 
 	solver::FieldInfo fieldInfo = createRandomField();
@@ -86,7 +87,7 @@ int main(int argc, char *argv[])
 		printer.print();
 	}
 
-	controllerCreator.destroyEngine(controller1);
+	ka31neoCreator.destroyEngine(controller1);
 	controllerCreator.destroyEngine(controller2);
 
 	return 0;

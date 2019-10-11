@@ -10,7 +10,6 @@ namespace solver::engine::controller
 		this->team = team;
 		numAgents = stage.getNumAgents();
 		numRemainingTurns = stage.getNumRemainingTurns();
-		this->stage = &stage;
 		agentCommands.commands.resize(numAgents);
 	}
 
@@ -30,5 +29,10 @@ namespace solver::engine::controller
 	const TeamCommand &Engine::getBestActions()const
 	{
 		return agentCommands;
+	}
+
+	void Engine::update(const StageCommand &command)
+	{
+
 	}
 }

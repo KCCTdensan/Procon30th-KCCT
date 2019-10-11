@@ -24,5 +24,6 @@ namespace solver::engine::ka31neo
 		std::array<Node *, numActionID>::iterator end()noexcept;
 		void createChild(ActionID actionID, const Simulator &simulator);
 		unsigned getNumChildren()const noexcept;
+		Node *prune(ActionID action_id);
 	};
 }

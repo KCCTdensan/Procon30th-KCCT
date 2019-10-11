@@ -8,6 +8,8 @@ namespace solver::engine::ka31neo
 {
 	class Agent
 	{
+		const TeamID team;
+		const int8_t agentNo;
 		Node *currentNode;
 		bool isThinking;
 		HANDLE threadHandle;
@@ -24,5 +26,6 @@ namespace solver::engine::ka31neo
 		void startThinking();
 		void stopThinking();
 		ActionID getBestAction()const noexcept;
+		void updateStage(const StageCommand &command);
 	};
 }

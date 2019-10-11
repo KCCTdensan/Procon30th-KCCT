@@ -57,4 +57,11 @@ namespace solver::engine::ka31neo
 	{
 		return numChildren;
 	}
+
+	Node *ChildNodesManager::prune(ActionID action_id)
+	{
+		Node *selectedChild = children[static_cast<size_t>(action_id)];
+		children[static_cast<size_t>(action_id)] = nullptr;
+		return selectedChild;
+	}
 }

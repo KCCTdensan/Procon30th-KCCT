@@ -37,4 +37,12 @@ namespace solver::engine::ka31neo
 	{
 		return agentIntentions;
 	}
+
+	void Engine::update(const StageCommand &command)
+	{
+		for(Agent &agent : agents)
+		{
+			agent.updateStage(command);
+		}
+	}
 }

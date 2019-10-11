@@ -9,7 +9,7 @@ namespace solver::engine::ka31neo
 		{
 			return INFINITY;
 		}
-		return averageReward + controlParameter * std::sqrt(2.0f * std::logf(static_cast<float>(numVisited))) / numVisitedOfChild;
+		return averageRewardOfChild + controlParameter * std::sqrt(2.0f * std::logf(static_cast<float>(numVisited))) / numVisitedOfChild;
 	}
 
 	float Node::evaluate()
@@ -44,7 +44,7 @@ namespace solver::engine::ka31neo
 		{
 			expand();
 		}
-		float maxAverageRewardOfChildren = 0.0f;
+		float maxAverageRewardOfChildren = -INFINITY;
 		Node *selectedNode = nullptr;
 		for(Node *childNode : childNodesManager)
 		{
@@ -108,5 +108,12 @@ namespace solver::engine::ka31neo
 			}
 		}
 		return selectedActionID;
+	}
+
+	Node *Node::prune(ActionID action_id)
+	{
+		Node *child = childNodesManager.prune(action_id);
+		delete this;
+		return child;
 	}
 }

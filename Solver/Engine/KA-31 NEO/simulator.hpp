@@ -13,7 +13,7 @@ namespace solver::engine::ka31neo
 		const StageInterface &currentStage;
 		std::queue<ActionID> commandList;
 
-		StageCommand getRandomCommand(uint8_t numAgents)const;
+		StageCommand getRandomCommand(const StageInterface &stage)const;
 		float calculateReward(const Score &score)const;
 
 	public:

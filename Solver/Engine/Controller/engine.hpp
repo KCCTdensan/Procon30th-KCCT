@@ -10,7 +10,6 @@ namespace solver::engine::controller
 		TeamID team;
 		unsigned numAgents;
 		unsigned numRemainingTurns;
-		const StageInterface *stage;
 		TeamCommand agentCommands;
 
 	public:
@@ -19,11 +18,11 @@ namespace solver::engine::controller
 			team = TeamID::null;
 			numAgents = 0;
 			numRemainingTurns = 0;
-			stage = nullptr;
 		}
 		void initialize(TeamID team, const StageInterface &stage);
 		void startThinking()override;
 		void stopThinking()override;
 		const TeamCommand &getBestActions()const override;
+		void update(const StageCommand &command);
 	};
 }

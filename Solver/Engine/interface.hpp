@@ -13,5 +13,6 @@ namespace solver::engine
 		virtual void startThinking() = 0;
 		virtual void stopThinking() = 0;
 		virtual const TeamCommand &getBestActions()const = 0;
+		virtual void update(const StageCommand &command) = 0;
 	};
 }

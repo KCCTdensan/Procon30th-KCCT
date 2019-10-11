@@ -28,5 +28,6 @@ namespace solver::engine::ka31neo
 		bool isLeafNode()const noexcept;
 		void search();
 		ActionID getBestAction()const noexcept;
+		_NODISCARD Node *prune(ActionID action_id);
 	};
 }
