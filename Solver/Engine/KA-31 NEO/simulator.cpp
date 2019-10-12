@@ -1,24 +1,26 @@
 #include "simulator.hpp"
 #include "../../random.hpp"
-#include <numeric>
 
 
 namespace solver::engine::ka31neo
 {
-	ActionID Simulator::decideAgentCommand(const StageInterface &stage, TeamID team, uint8_t agentNo) const
-	{
-		/*
+	ActionID Simulator::decideAgentCommand(const StageInterface &stage, TeamID team, uint8_t agentNo)const
+	{		
 		std::array<float, numActionID> actionEvaluationValues;
 		Position agentPosition = stage.getAgentPosition(team, agentNo);
 		for(ActionID action : ActionID())
 		{
 			Position nextPosition = movedPosition(agentPosition, action);
+			if(!isPositionInField(nextPosition, stage.getFieldSize()))
+			{
+				continue;
+			}
 			int8_t panelPoint = stage.getPanelPoint(nextPosition);
 			TileID panelTileStatus = stage.getPanelTileStatus(nextPosition);
-			actionEvaluationValues[static_cast<size_t>(action)] = panelTileStatus == TileID::none ? 0.0f : panelPoint;
+			actionEvaluationValues[static_cast<size_t>(action)] = panelTileStatus == toTile(team) ? 0.0f : exp(panelPoint);
 		}
-		float denominator = std::reduce(actionEvaluationValues.begin(), actionEvaluationValues.end());
-		*/
+		return static_cast<ActionID>(probability(actionEvaluationValues));
+		/*
 		ActionID action;
 		do
 		{
@@ -26,6 +28,7 @@ namespace solver::engine::ka31neo
 		}
 		while(!stage.canAgentAct(team, agentNo, action));
 		return action;
+		*/
 	}
 
 	StageCommand Simulator::decideCommand(const StageInterface &stage)const

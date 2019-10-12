@@ -12,7 +12,7 @@ namespace solver::engine::ka31neo
 		const int8_t agentNo;
 		const StageInterface &currentStage;
 		std::queue<ActionID> commandList;
-
+ 
 		ActionID decideAgentCommand(const StageInterface &stage, TeamID team, uint8_t agentNo)const;
 		StageCommand decideCommand(const StageInterface &stage)const;
 		float calculateReward(const Score &score)const;
