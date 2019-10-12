@@ -5,8 +5,8 @@
 
 namespace solver::engine::ka31neo
 {
-	constexpr float controlParameter = 10.0f;
-	constexpr unsigned threshold = 100;
+	constexpr float controlParameter = 20.0f;
+	constexpr unsigned threshold = 30;
 
 	class Node
 	{

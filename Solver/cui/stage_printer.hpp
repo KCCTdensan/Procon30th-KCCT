@@ -13,6 +13,8 @@ namespace solver::cui
 		ColorID backgroundColor(Position position)const noexcept;
 		ColorID characterColor(Position position)const noexcept;
 		void printPanel(Position position)const noexcept;
+		void printField()const noexcept;
+		void printScore()const noexcept;
 
 	public:
 		StagePrinter(const StageInterface &stage)noexcept;

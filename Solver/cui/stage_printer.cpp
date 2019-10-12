@@ -49,13 +49,7 @@ namespace solver::cui
 		std::printf("%3d ", stage.getPanelPoint(position));
 	}
 
-	StagePrinter::StagePrinter(const StageInterface &stage)noexcept
-		: stage(stage)
-	{
-
-	}
-
-	void StagePrinter::print()const noexcept
+	void StagePrinter::printField() const noexcept
 	{
 		for(uint8_t y = 0; y < stage.getFieldSize().height; ++y)
 		{
@@ -66,11 +60,40 @@ namespace solver::cui
 			changeColor(ColorID::white, ColorID::black);
 			std::wcout << std::endl;
 		}
+	}
+
+	void StagePrinter::printScore() const noexcept
+	{
 		std::cout << "ターン : " << static_cast<int>(stage.getCurrentTurnNo()) << std::endl;
-		std::cout << "赤チーム(タイル) : " << static_cast<int>(stage.getScore().teamScores[static_cast<size_t>(TeamID::red)].tileScore) << std::endl;
-		std::cout << "赤チーム(領域) : " << static_cast<int>(stage.getScore().teamScores[static_cast<size_t>(TeamID::red)].regionScore) << std::endl;
-		std::cout << "青チーム(タイル) : " << static_cast<int>(stage.getScore().teamScores[static_cast<size_t>(TeamID::blue)].tileScore) << std::endl;
-		std::cout << "青チーム(領域) : " << static_cast<int>(stage.getScore().teamScores[static_cast<size_t>(TeamID::blue)].regionScore) << std::endl;
-		std::cout << std::endl;
+		TeamScore redScore = stage.getScore().teamScores[static_cast<size_t>(TeamID::red)];
+		TeamScore blueScore = stage.getScore().teamScores[static_cast<size_t>(TeamID::blue)];
+
+		std::cout << "赤チーム : ";
+		printf("%4d", redScore.getTotalScore());
+		std::cout << " (タイル : ";
+		printf("%4d", redScore.tileScore);
+		std::cout << ", 領域 : ";
+		printf("%4d", redScore.regionScore);
+		std::cout << ")" << std::endl;
+
+		std::cout << "青チーム : ";
+		printf("%4d", blueScore.getTotalScore());
+		std::cout << " (タイル : ";
+		printf("%4d", blueScore.tileScore);
+		std::cout << ", 領域 : ";
+		printf("%4d", blueScore.regionScore);
+		std::cout << ")" << std::endl;
+	}
+
+	StagePrinter::StagePrinter(const StageInterface &stage)noexcept
+		: stage(stage)
+	{
+
+	}
+
+	void StagePrinter::print()const noexcept
+	{
+		printField();
+		printScore();
 	}
 }
