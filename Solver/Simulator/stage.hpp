@@ -19,11 +19,8 @@ namespace solver::simulator
 		ScoreManager scoreManager;
 		CommandNormalizer commandNormalizer;
 
-		bool willAgentStay(const Agent &agent, CommandID command)const;
-		bool willAgentRemoveTile(const Agent &agent, CommandID command)const;
-		StageFlag decideFirstAgentStayingPanels(StageCommand &command)const;
-		void decideAgentOverlappingPanels(StageFlag &isDecided, StageCommand &command)const;
-		void decideNextStayingAgents(StageFlag &isDecided, StageCommand &command)const;
+		void updatePanels(const StageCommand &command);
+		void moveAgents(const StageCommand &command);
 
 	public:
 		Stage(const Stage &stage);

@@ -4,42 +4,43 @@
 
 namespace solver::engine::ka31neo
 {
+	unsigned Simulator::pow2(unsigned x)
+	{
+		unsigned ret = 1;
+		for(unsigned i = 0; i < x; ++i)
+		{
+			ret *= 2;
+		}
+		return ret;
+	}
+
 	CommandID Simulator::decideAgentCommand(const StageInterface &stage, TeamID team, uint8_t agentNo)const
 	{		
-		std::array<float, numCommandID> actionEvaluationValues;
-		Position agentPosition = stage.getAgentPosition(team, agentNo);
+		std::array<unsigned, numCommandID> actionEvaluationValues;
+		const Position agentPosition = stage.getAgentPosition(team, agentNo);
 		for(int i = 0; i < numCommandID; ++i)
 		{
-			Command command = static_cast<CommandID>(i);
-			Direction commandDirection = command.direction;
-			ActionID commandAction = command.action;
-			Position nextPosition = movedPosition(agentPosition, commandDirection);
-			if(!isPositionInField(nextPosition, stage.getFieldSize()))
-			{
-				continue;
-			}
-			int8_t panelPoint = stage.getPanelPoint(nextPosition);
-			TileID panelTileStatus = stage.getPanelTileStatus(nextPosition);
+			const Command command = static_cast<CommandID>(i);
 			if(!stage.canAgentAct(team, agentNo, command))
 			{
-				actionEvaluationValues[i] = 0.0f;
+				actionEvaluationValues[i] = 0;
+				continue;
 			}
+			const Direction commandDirection = command.direction;
+			const ActionID commandAction = command.action;
+			const Position nextPosition = movedPosition(agentPosition, commandDirection);
+			const int8_t panelPoint = stage.getPanelPoint(nextPosition);
+			const TileID panelTileStatus = stage.getPanelTileStatus(nextPosition);
 			if(panelTileStatus == toTile(team))
 			{
-				actionEvaluationValues[i] = commandAction == ActionID::removePanel ? -expf(panelPoint) : 0.0f;
+				actionEvaluationValues[i] = commandAction == ActionID::removePanel ? pow2(-panelPoint / 4 + 4) : 0;
 			}
-			actionEvaluationValues[i] = expf(panelPoint);
+			else
+			{
+				actionEvaluationValues[i] = pow2(panelPoint / 4 + 4);
+			}
 		}
 		return static_cast<CommandID>(probability(actionEvaluationValues));
-		/*
-		CommandID action;
-		do
-		{
-			action = static_cast<CommandID>(getRandomValue(1, numCommandID));
-		}
-		while(!stage.canAgentMovePositionally(team, agentNo, action));
-		return action;
-		*/
 	}
 
 	StageCommand Simulator::decideCommand(const StageInterface &stage)const

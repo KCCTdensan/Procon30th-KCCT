@@ -20,14 +20,14 @@ namespace solver::simulator
 			{
 				for(uint8_t i = 0; i < numAgents; ++i)
 				{
-					TeamID team = static_cast<TeamID>(t);
+					const TeamID team = static_cast<TeamID>(t);
 					const Agent &agent = agentManager(team, i);
-					CommandID agentCommand = command.teamCommands[t].commands[i];
-					Direction commandDirection = Command(agentCommand).direction;
+					const CommandID agentCommand = command.teamCommands[t].commands[i];
+					const Direction commandDirection = Command(agentCommand).direction;
 					if(agentCommand == CommandID::stay || !agent.canMovePositionally(commandDirection))
 					{
 						//パネルの上のエージェントを確定させる
-						Position agentPosition = agent.getCurrentPosition();
+						const Position agentPosition = agent.getCurrentPosition();
 						flag.fieldFlag[agentPosition] = true;
 						flag.agentFlag(team, i) = true;
 						ret.teamCommands[t].commands[i] = CommandID::stay;
@@ -45,23 +45,23 @@ namespace solver::simulator
 			{
 				for(uint8_t i = 0; i < numAgents; ++i)
 				{
-					TeamID team = static_cast<TeamID>(t);
+					const TeamID team = static_cast<TeamID>(t);
 					if(flag.agentFlag(team, i))
 					{
 						continue;
 					}
 					const Agent &agent = agentManager(team, i);
-					CommandID agentCommand = command.teamCommands[t].commands[i];
-					Position agentPosition = agentManager(team, i).getCurrentPosition();
-					Direction commandDirection = Command(agentCommand).direction;
-					Position nextPosition = movedPosition(agentPosition, commandDirection);
+					const CommandID agentCommand = command.teamCommands[t].commands[i];
+					const Position agentPosition = agentManager(team, i).getCurrentPosition();
+					const Direction commandDirection = Command(agentCommand).direction;
+					const Position nextPosition = movedPosition(agentPosition, commandDirection);
 					//コマンドの指定先位置がかぶっていた場合
 					if(overlappedAgent[nextPosition] != 0)
 					{
 						//パネルの上のエージェントを確定させる
-						TeamID teamOfAgentOnPanel = static_cast<TeamID>((0x0f & overlappedAgent[nextPosition]) >> 3);
-						uint8_t noOfAgentOnPanel = static_cast<uint8_t>(0x07 & overlappedAgent[nextPosition]);
-						Position positionOfAgentOnPanel = agentManager(teamOfAgentOnPanel, noOfAgentOnPanel).getCurrentPosition();
+						const TeamID teamOfAgentOnPanel = static_cast<TeamID>((0x0f & overlappedAgent[nextPosition]) >> 3);
+						const uint8_t noOfAgentOnPanel = static_cast<uint8_t>(0x07 & overlappedAgent[nextPosition]);
+						const Position positionOfAgentOnPanel = agentManager(teamOfAgentOnPanel, noOfAgentOnPanel).getCurrentPosition();
 						flag.fieldFlag[positionOfAgentOnPanel] = true;
 						flag.agentFlag(teamOfAgentOnPanel, noOfAgentOnPanel) = true;
 						ret.teamCommands[static_cast<size_t>(teamOfAgentOnPanel)].commands[noOfAgentOnPanel] = CommandID::stay;
@@ -86,16 +86,16 @@ namespace solver::simulator
 				{
 					for(uint8_t i = 0; i < numAgents; ++i)
 					{
-						TeamID team = static_cast<TeamID>(t);
+						const TeamID team = static_cast<TeamID>(t);
 						if(flag.agentFlag(team, i))
 						{
 							continue;
 						}
 						const Agent &agent = agentManager(team, i);
-						CommandID agentCommand = command.teamCommands[t].commands[i];
-						Position agentPosition = agentManager(team, i).getCurrentPosition();
-						Direction commandDirection = Command(agentCommand).direction;
-						Position nextPosition = movedPosition(agentPosition, commandDirection);
+						const CommandID agentCommand = command.teamCommands[t].commands[i];
+						const Position agentPosition = agentManager(team, i).getCurrentPosition();
+						const Direction commandDirection = Command(agentCommand).direction;
+						const Position nextPosition = movedPosition(agentPosition, commandDirection);
 						//移動先のパネルのエージェントが確定していた場合
 						if(flag.fieldFlag[nextPosition])
 						{

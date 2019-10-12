@@ -17,7 +17,7 @@ namespace solver::simulator
 
 		Panel &operator[](Position position)
 		{
-			size_t index = static_cast<size_t>(size.width) *position.y + position.x;
+			const size_t index = static_cast<size_t>(size.width) *position.y + position.x;
 			return panels[index];
 		}
 		int checkRegionPanel(Position position, TileID tile, FieldFlag<int8_t> &fieldFlag)
@@ -58,12 +58,12 @@ namespace solver::simulator
 		}
 		void updateRegionPanelStart(Position position, TileID tile, FieldFlag<int8_t> &fieldFlag)
 		{
-			int ret = checkRegionPanel(position, tile, fieldFlag);
+			const int ret = checkRegionPanel(position, tile, fieldFlag);
 			if(ret == 0)
 			{
 				return;
 			}
-			bool isRegionPanel = ret == 1;
+			const bool isRegionPanel = ret == 1;
 			setRegionPanel(position, tile, isRegionPanel, fieldFlag);
 		}
 		void updateRegionPanel(Position startPosition, TileID tile)
@@ -83,14 +83,14 @@ namespace solver::simulator
 			{
 				for(uint8_t x = 0; x < size.width; ++x)
 				{
-					Position position(x, y);
+					const Position position(x, y);
 					panels.emplace_back(fieldInfo[position]);
 				}
 			}
 		}
 		const Panel &operator[](Position position)const
 		{
-			size_t index = static_cast<size_t>(size.width) *position.y + position.x;
+			const size_t index = static_cast<size_t>(size.width) *position.y + position.x;
 			return panels[index];
 		}
 		const Size getSize()const noexcept

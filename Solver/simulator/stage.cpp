@@ -3,6 +3,50 @@
 
 namespace solver::simulator
 {
+	void Stage::updatePanels(const StageCommand &command)
+	{
+		for(int t = 0; t < numTeams; ++t)
+		{
+			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
+			{
+				const TeamID team = static_cast<TeamID>(t);
+				const Agent &agent = agentManager(team, i);
+				const Command agentCommand = command.teamCommands[t].commands[i];
+				const Direction direction = agentCommand.direction;
+				const ActionID action = agentCommand.action;
+				const Position nextPosition = movedPosition(agent.getCurrentPosition(), direction);
+				switch(action)
+				{
+				case ActionID::setTileOnPanel:
+					field.setTileOnPanel(nextPosition, toTile(team));
+					break;
+
+				case ActionID::removePanel:
+					field.removeTileOnPanel(nextPosition);
+					break;
+				}
+			}
+		}
+		scoreManager.update();
+	}
+
+	void Stage::moveAgents(const StageCommand &command)
+	{
+		std::array<std::vector<Direction>, numTeams> directions;
+		for(int t = 0; t < numTeams; ++t)
+		{
+			size_t numAgents = agentManager.getNumAgents();
+			directions[t].resize(numAgents);
+			for(uint8_t i = 0; i < numAgents; ++i)
+			{
+				const Command agentCommand = command.teamCommands[t].commands[i];
+				const ActionID action = agentCommand.action;
+				directions[t][i] = action == ActionID::setTileOnPanel ? agentCommand.direction : DirectionID::center;
+			}
+		}
+		agentManager.move(directions);
+	}
+
 	Stage::Stage(const Stage &stage)
 		:numTurns(stage.getNumTurns()), currentTurnNo(stage.getCurrentTurnNo()), field(stage.field), agentManager(stage.agentManager), scoreManager(field), commandNormalizer(stage.commandNormalizer)
 	{
@@ -24,19 +68,8 @@ namespace solver::simulator
 	void Stage::act(const StageCommand &command)
 	{
 		const StageCommand &normalizedCommand = commandNormalizer(command);
-		std::array<std::vector<Direction>, numTeams> directions;
-		for(int t = 0; t < numTeams; ++t)
-		{
-			size_t numAgents = agentManager.getNumAgents();
-			directions[t].resize(numAgents);
-			for(uint8_t i = 0; i < numAgents; ++i)
-			{
-				Command agentCommand = command.teamCommands[t].commands[i];
-				directions[t][i] = agentCommand.direction;
-			}
-		}
-		agentManager.move(directions);
-		scoreManager.update();
+		updatePanels(normalizedCommand);
+		moveAgents(normalizedCommand);
 		currentTurnNo++;
 	}
 
@@ -81,19 +114,20 @@ namespace solver::simulator
 		{
 			return true;
 		}
-		Direction direction = command.direction;
-		if(!canAgentMovePositionally(team, agentNo, direction))
-		{
-			return false;
-		}
 		ActionID action = command.action;
 		if(action == ActionID::doNothing)
 		{
 			return true;
 		}
+		Direction direction = command.direction;
+		if(!canAgentMovePositionally(team, agentNo, direction))
+		{
+			return false;
+		}
 		Position nextPosition = movedPosition(agentManager(team, agentNo).getCurrentPosition(), direction);
-		TileID tile = toTile(team);
-		return (action == ActionID::removePanel && tile != TileID::none) || (action == ActionID::setTileOnPanel && tile == field[nextPosition].getTileStatus());
+		TileID agentTile = toTile(team);
+		TileID panelTile = field[nextPosition].getTileStatus();
+		return (action == ActionID::removePanel && panelTile != TileID::none) || (action == ActionID::setTileOnPanel && (panelTile == agentTile || panelTile == TileID::none));
 	}
 
 	int8_t Stage::getPanelPoint(Position position)const noexcept
