@@ -1,7 +1,10 @@
+#if 0
+
 #include<iostream>
 #include<string>
 #include "Com/com_interface.hpp"
 #include<windows.h>
+
 
 int main()
 {
@@ -45,3 +48,6 @@ int main()
 	Sleep(3*1000);
 	return 0;
 }
+
+
+#endif
