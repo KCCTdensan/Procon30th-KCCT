@@ -5,16 +5,27 @@
 
 int main()
 {
-	solver::com::ComInterface comInterFace("kd-D-004","3000","6","procon30_example_token");
+	std::string hostName;
+	std::string portNum;
+	std::string matchID;
+	std::string token;
+
+	//testcase localhost 3000 6 procon30_example_token
+	std::cin >> hostName >> portNum >> matchID >> token;
+
+	solver::com::ComInterface comInterFace(hostName,portNum,matchID,token);
 	solver::com::ReceivedMatchInfo receivedMatchInfo;
 	solver::com::ReceivedMatchData receivedMatchData;
 	solver::com::SendActionData sendActionData;
 
 	system("chcp 65001"); //コマンドプロンプトの文字コードページをUTF-8に設定
 
+	//getPing
+	std::cout << comInterFace.getPimg() << std::endl;
+
 	//試合情報取得
 	std::cout << comInterFace.getMatchInfo(&receivedMatchInfo) << std::endl;
-	for (solver::com::ReceivedMatchInfoOne receivedMatchInfoOne : receivedMatchInfo.MatchesInfo)
+	/*for (solver::com::ReceivedMatchInfoOne receivedMatchInfoOne : receivedMatchInfo.MatchesInfo)
 	{
 		std::cout << "id : " << receivedMatchInfoOne.id << std::endl;
 		std::cout << "intervalMillis : " << receivedMatchInfoOne.intervalMillis << std::endl;
@@ -22,7 +33,7 @@ int main()
 		std::cout << "teamID : " << receivedMatchInfoOne.teamID << std::endl;
 		std::cout << "turnMillis : " << receivedMatchInfoOne.turnMillis << std::endl;
 		std::cout << "turns : " << receivedMatchInfoOne.turns << std::endl;
-	}
+	}*/
 	
 	//試合データ取得
 	std::cout << comInterFace.getMatchData(&receivedMatchData) << std::endl;

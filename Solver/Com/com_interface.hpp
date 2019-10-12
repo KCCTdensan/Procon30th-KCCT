@@ -20,7 +20,7 @@ class ComInterface
 		int getMatchInfo(ReceivedMatchInfo* matchInfo);
 		int getMatchData(ReceivedMatchData* matchData);
 		int sendActionData(SendActionData actionData);
-		int getPimg();
+		std::string getPimg();
 		std::string getCmdString();
 
 	};

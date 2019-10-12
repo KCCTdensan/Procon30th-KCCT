@@ -1,3 +1,5 @@
+#if 0
+
 #include "engine_loader.hpp"
 #include "simulator/stage.hpp"
 #include "host.hpp"
@@ -92,3 +94,5 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
+#endif
