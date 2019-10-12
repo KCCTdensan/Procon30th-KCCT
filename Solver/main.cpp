@@ -9,14 +9,14 @@
 solver::FieldInfo createRandomField()
 {
 	solver::FieldInfo ret;
-	const solver::Size size(static_cast<uint8_t>(solver::getRandomValue(10, 20)), static_cast<uint8_t>(solver::getRandomValue(10, 20)));
+	const solver::Size size(static_cast<uint8_t>(solver::getRandomValue(20, 20)), static_cast<uint8_t>(solver::getRandomValue(10, 20)));
 	ret.setSize(size);
 	for(uint8_t y = 0; y < size.height; ++y)
 	{
 		for(uint8_t x = 0; x < size.width; ++x)
 		{
 			const solver::Position position(static_cast<int8_t>(x), static_cast<int8_t>(y));
-			ret[position] = solver::getRandomValue(-3, 16);
+			ret[position] = solver::getRandomValue(-16, 16);
 		}
 	}
 	return ret;
