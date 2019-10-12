@@ -1,62 +1,83 @@
-﻿#pragma once
-
-#include "action_id.hpp"
+#pragma once
 
 
 namespace solver
 {
+	enum class DirectionID
+	{
+		topLeft,
+		top,
+		topRight,
+		left,
+		center,
+		right,
+		bottomLeft,
+		bottom,
+		bottomRight
+	};
+
+	constexpr size_t numDirectionID = 9;
+	
 	class Direction
 	{
-		int8_t x;
-		int8_t y;
+		int dx : 2;
+		int dy : 2;
 
 	public:
-		Direction(ActionID id)noexcept
+		Direction()noexcept
 		{
-			switch(id)
+			dx = 0;
+			dy = 0;
+		}
+		Direction(DirectionID directionID)noexcept
+		{
+			switch(directionID)
 			{
-			case ActionID::topLeft:
-			case ActionID::top:
-			case ActionID::topRight:
-				y = -1;
-				break;
-
-			case ActionID::bottomLeft:
-			case ActionID::bottom:
-			case ActionID::bottomRight:
-				y = 1;
-				break;
-
+			case DirectionID::topLeft:
+				dx = -1;
+				dy = -1;
+				return;
+			case DirectionID::top:
+				dx = 0;
+				dy = -1;
+				return;
+			case DirectionID::topRight:
+				dx = 1;
+				dy = -1;
+				return;
+			case DirectionID::left:
+				dx = -1;
+				dy = 0;
+				return;
+			case DirectionID::right:
+				dx = 1;
+				dy = 0;
+				return;
+			case DirectionID::bottomLeft:
+				dx = -1;
+				dy = 1;
+				return;
+			case DirectionID::bottom:
+				dx = 0;
+				dy = 1;
+				return;
+			case DirectionID::bottomRight:
+				dx = 1;
+				dy = 1;
+				return;
 			default:
-				y = 0;
-				break;
-			}
-			switch(id)
-			{
-			case ActionID::topLeft:
-			case ActionID::left:
-			case ActionID::bottomLeft:
-				x = -1;
-				break;
-
-			case ActionID::topRight:
-			case ActionID::right:
-			case ActionID::bottomRight:
-				x = 1;
-				break;
-
-			default:
-				x = 0;
-				break;
+				dx = 0;
+				dy = 0;
+				return;
 			}
 		}
-		char getX()const noexcept
+		char getDx()const noexcept
 		{
-			return x;
+			return dx;
 		}
-		char getY()const noexcept
+		char getDy()const noexcept
 		{
-			return y;
+			return dy;
 		}
 	};
 }

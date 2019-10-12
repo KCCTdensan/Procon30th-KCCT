@@ -22,7 +22,7 @@ namespace solver::engine::controller
 		void initialize(TeamID team, const StageInterface &stage);
 		void startThinking()override;
 		void stopThinking()override;
-		const TeamCommand &getBestActions()const override;
+		const TeamCommand &getBestCommands()const override;
 		void update(const StageCommand &command);
 	};
 }

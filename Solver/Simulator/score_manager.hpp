@@ -18,17 +18,17 @@ namespace solver::simulator
 		}
 		void update()
 		{
-			for(TeamID team : TeamID())
+			for(int t = 0; t < numTeams; ++t)
 			{
-				scores[static_cast<size_t>(team)].update();
+				scores[t].update();
 			}
 		}
 		Score getScore()const noexcept
 		{
 			Score ret;
-			for(TeamID team : TeamID())
+			for(int t = 0; t < numTeams; ++t)
 			{
-				ret.teamScores[static_cast<size_t>(team)] = scores[static_cast<size_t>(team)].getScore();
+				ret.teamScores[t] = scores[t].getScore();
 			}
 			return ret;
 		}

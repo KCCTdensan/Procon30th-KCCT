@@ -28,28 +28,28 @@ namespace solver::engine::ka31neo
 		}
 	}
 
-	const Node *ChildNodesManager::operator[](ActionID actionID)const noexcept
+	const Node *ChildNodesManager::operator[](CommandID commandID)const noexcept
 	{
-		if(actionID == ActionID::null)
+		if(commandID == CommandID::null)
 		{
 			return nullptr;
 		}
-		return children[static_cast<size_t>(actionID)];
+		return children[static_cast<size_t>(commandID)];
 	}
 
-	std::array<Node *, numActionID>::iterator ChildNodesManager::begin()noexcept
+	std::array<Node *, numCommandID>::iterator ChildNodesManager::begin()noexcept
 	{
 		return children.begin();
 	}
 
-	std::array<Node *, numActionID>::iterator ChildNodesManager::end()noexcept
+	std::array<Node *, numCommandID>::iterator ChildNodesManager::end()noexcept
 	{
 		return children.end();
 	}
 
-	void ChildNodesManager::createChild(ActionID actionID, const Simulator &simulator)
+	void ChildNodesManager::createChild(CommandID commandID, const Simulator &simulator)
 	{
-		children[static_cast<size_t>(actionID)] = new Node(simulator.next(actionID));
+		children[static_cast<size_t>(commandID)] = new Node(simulator.next(commandID));
 		++numChildren;
 	}
 
@@ -58,10 +58,10 @@ namespace solver::engine::ka31neo
 		return numChildren;
 	}
 
-	Node *ChildNodesManager::prune(ActionID actionID)
+	Node *ChildNodesManager::prune(CommandID commandID)
 	{
-		Node *selectedChild = children[static_cast<size_t>(actionID)];
-		children[static_cast<size_t>(actionID)] = nullptr;
+		Node *selectedChild = children[static_cast<size_t>(commandID)];
+		children[static_cast<size_t>(commandID)] = nullptr;
 		return selectedChild;
 	}
 }

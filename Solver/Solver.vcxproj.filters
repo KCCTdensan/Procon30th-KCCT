@@ -30,9 +30,6 @@
     <ClInclude Include="engine_loader.hpp" />
     <ClInclude Include="host.hpp" />
     <ClInclude Include="stage_interface.hpp" />
-    <ClInclude Include="action_id.hpp">
-      <Filter>basic</Filter>
-    </ClInclude>
     <ClInclude Include="Simulator\agent.hpp">
       <Filter>simulator</Filter>
     </ClInclude>
@@ -44,12 +41,6 @@
     </ClInclude>
     <ClInclude Include="Com\com_interface.hpp">
       <Filter>com</Filter>
-    </ClInclude>
-    <ClInclude Include="command.hpp">
-      <Filter>basic</Filter>
-    </ClInclude>
-    <ClInclude Include="direction.hpp">
-      <Filter>basic</Filter>
     </ClInclude>
     <ClInclude Include="Simulator\field.hpp">
       <Filter>simulator</Filter>
@@ -118,6 +109,18 @@
       <Filter>basic</Filter>
     </ClInclude>
     <ClInclude Include="stage_info.hpp">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="direction.hpp">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="simulator\command_normalizer.hpp">
+      <Filter>simulator</Filter>
+    </ClInclude>
+    <ClInclude Include="stage_command.hpp">
+      <Filter>basic</Filter>
+    </ClInclude>
+    <ClInclude Include="command.hpp">
       <Filter>basic</Filter>
     </ClInclude>
   </ItemGroup>

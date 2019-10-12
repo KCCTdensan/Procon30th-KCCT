@@ -15,7 +15,7 @@ namespace solver::engine::ka31neo
 
 	void Engine::startThinking()
 	{
-		std::fill(agentIntentions.commands.begin(), agentIntentions.commands.end(), ActionID::null);
+		std::fill(agentIntentions.commands.begin(), agentIntentions.commands.end(), CommandID::null);
 		for(Agent &agent : agents)
 		{
 			agent.startThinking();
@@ -30,11 +30,11 @@ namespace solver::engine::ka31neo
 		}
 		for(uint8_t i = 0; i < agents.size(); ++i)
 		{
-			agentIntentions.commands[i] = agents[i].getBestAction();
+			agentIntentions.commands[i] = agents[i].getBestCommand();
 		}
 	}
 
-	const TeamCommand &Engine::getBestActions()const
+	const TeamCommand &Engine::getBestCommands()const
 	{
 		return agentIntentions;
 	}

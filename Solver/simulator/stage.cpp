@@ -3,155 +3,39 @@
 
 namespace solver::simulator
 {
-	bool Stage::willAgentStay(const Agent &agent, ActionID command)const
-	{
-		//エージェントが"留まる"を選択したか、意思表示が無効な場合
-		return command == ActionID::stay || !agent.canMove(command);
-	}
-
-	bool Stage::willAgentRemoveTile(const Agent &agent, ActionID command) const
-	{
-		Position nextPosition = movedPosition(agent.getPosition(), command);
-		TileID tile = field[nextPosition].getTileStatus();
-		return tile != TileID::none && agent.getTeam() != toTeam(tile);
-	}
-
-	StageFlag Stage::decideFirstAgentStayingPanels(StageCommand &command)const
-	{
-		StageFlag ret(field.getSize(), agentManager.getNumAgents());
-		for(TeamID team : TeamID())
-		{
-			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
-			{
-				if(willAgentStay(agentManager.agent(team, i), command.teamCommands[static_cast<size_t>(team)].commands[i]))
-				{
-					//パネルの上のエージェントを確定させる
-					Position agentPosition = agentManager.agent(team, i).getPosition();
-					ret.fieldFlag[agentPosition] = true;
-					ret.agentFlag(team, i) = true;
-					command.teamCommands[static_cast<size_t>(team)].commands[i] = ActionID::stay;
-				}
-			}
-		}
-		return ret;
-	}
-
-	void Stage::decideAgentOverlappingPanels(StageFlag &isDecided, StageCommand &command)const
-	{
-		FieldFlag<uint8_t> overlappedAgent(field.getSize());
-		for(TeamID team : TeamID())
-		{
-			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
-			{
-				if(isDecided.agentFlag(team, i))
-				{
-					continue;
-				}
-				ActionID agentCommand = command.teamCommands[static_cast<size_t>(team)].commands[i];
-				Position nextPosition = movedPosition(agentManager.agent(team, i).getPosition(), agentCommand);
-				if(overlappedAgent[nextPosition] != 0)
-				{
-					//パネルの上のエージェントを確定させる
-					TeamID teamOfAgentOnPanel = static_cast<TeamID>((0x0f & overlappedAgent[nextPosition]) >> 3);
-					uint8_t noOfAgentOnPanel = static_cast<uint8_t>(0x07 & overlappedAgent[nextPosition]);
-					Position positionOfAgentOnPanel = agentManager.agent(teamOfAgentOnPanel, noOfAgentOnPanel).getPosition();
-					isDecided.fieldFlag[positionOfAgentOnPanel] = true;
-					isDecided.agentFlag(teamOfAgentOnPanel, noOfAgentOnPanel) = true;
-					command.teamCommands[static_cast<size_t>(teamOfAgentOnPanel)].commands[noOfAgentOnPanel] = ActionID::stay;
-					Position agentPosition = agentManager.agent(team, i).getPosition();
-					isDecided.fieldFlag[agentPosition] = true;
-					isDecided.agentFlag(team, i) = true;
-					command.teamCommands[static_cast<size_t>(team)].commands[i] = ActionID::stay;
-					continue;
-				}
-				overlappedAgent[nextPosition] = 0xF0 | static_cast<uint8_t>(team) << 3 | i;
-			}
-		}
-	}
-	
-	void Stage::decideNextStayingAgents(StageFlag &isDecided, StageCommand &command)const
-	{
-		bool isUpdated;
-		do
-		{
-			isUpdated = false;
-			for(TeamID team : TeamID())
-			{
-				for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
-				{
-					if(isDecided.agentFlag(team, i))
-					{
-						continue;
-					}
-					ActionID agentCommand = command.teamCommands[static_cast<size_t>(team)].commands[i];
-					Position nextPosition = movedPosition(agentManager.agent(team, i).getPosition(), agentCommand);
-					//移動先のパネルのエージェントが確定していた場合
-					if(isDecided.fieldFlag[nextPosition])
-					{
-						//パネルの上のエージェントを確定させる
-						Position agentPosition = agentManager.agent(team, i).getPosition();
-						isDecided.fieldFlag[agentPosition] = true;
-						isDecided.agentFlag(team, i) = true;
-						//意思表示が無効なので留まらせる
-						command.teamCommands[static_cast<size_t>(team)].commands[i] = ActionID::stay;
-						isUpdated = true;
-						continue;
-					}
-					//敵パネルをはがす場合
-					if(willAgentRemoveTile(agentManager.agent(team, i), agentCommand))
-					{
-						//パネルの上のエージェントを確定させる
-						Position agentPosition = agentManager.agent(team, i).getPosition();
-						isDecided.fieldFlag[agentPosition] = true;
-						isDecided.agentFlag(team, i) = true;
-						isUpdated = true;
-						continue;
-					}
-				}
-			}
-		}
-		while(isUpdated);
-	}
-
 	Stage::Stage(const Stage &stage)
-		:numTurns(stage.getNumTurns()), currentTurnNo(stage.getCurrentTurnNo()), field(stage.field), agentManager(stage.agentManager), scoreManager(field)
+		:numTurns(stage.getNumTurns()), currentTurnNo(stage.getCurrentTurnNo()), field(stage.field), agentManager(stage.agentManager), scoreManager(field), commandNormalizer(stage.commandNormalizer)
 	{
 
 	}
 
 	Stage::Stage(uint8_t numTurns, const FieldInfo &fieldInfo, const AgentInfo &agentManagerInfo)
-		:numTurns(numTurns), currentTurnNo(0), field(fieldInfo), agentManager(agentManagerInfo, field.getSize()), scoreManager(field)
+		: numTurns(numTurns), currentTurnNo(0), field(fieldInfo), agentManager(agentManagerInfo, field.getSize()), scoreManager(field), commandNormalizer(field, agentManager)
 	{
-		for(TeamID team : TeamID())
+		for(int t = 0; t < numTeams; ++t)
 		{
 			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
 			{
-				field.actPanel(agentManager.agent(team, i).getPosition(), team);
+				field.setTileOnPanel(agentManager(static_cast<TeamID>(t), i).getCurrentPosition(), toTile(static_cast<TeamID>(t)));
 			}
 		}
 	}
 
 	void Stage::act(const StageCommand &command)
 	{
-		StageCommand finalCommand = command;
-		StageFlag stayingFlag = decideFirstAgentStayingPanels(finalCommand);
-		decideAgentOverlappingPanels(stayingFlag, finalCommand);
-		decideNextStayingAgents(stayingFlag, finalCommand);
-
-		for(TeamID team : TeamID())
+		const StageCommand &normalizedCommand = commandNormalizer(command);
+		std::array<std::vector<Direction>, numTeams> directions;
+		for(int t = 0; t < numTeams; ++t)
 		{
-			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
+			size_t numAgents = agentManager.getNumAgents();
+			directions[t].resize(numAgents);
+			for(uint8_t i = 0; i < numAgents; ++i)
 			{
-				Position nextPosition = movedPosition(agentManager.agent(team, i).getPosition(), finalCommand.teamCommands[static_cast<size_t>(team)].commands[i]);
-				int ret = field.actPanel(nextPosition, team);
-				if(ret == 2)
-				{
-					finalCommand.teamCommands[static_cast<size_t>(team)].commands[i] = ActionID::stay;
-				}
+				Command agentCommand = command.teamCommands[t].commands[i];
+				directions[t][i] = agentCommand.direction;
 			}
 		}
-		agentManager.move(finalCommand);
-
+		agentManager.move(directions);
 		scoreManager.update();
 		currentTurnNo++;
 	}
@@ -183,12 +67,33 @@ namespace solver::simulator
 
 	Position Stage::getAgentPosition(TeamID team, uint8_t agentNo) const
 	{
-		return agentManager.agent(team, agentNo).getPosition();
+		return agentManager(team, agentNo).getCurrentPosition();
 	}
 
-	bool Stage::canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const noexcept
+	bool Stage::canAgentMovePositionally(TeamID team, uint8_t agentNo, Direction direction)const
 	{
-		return agentManager.agent(team_id, agentNo).canMove(action_id);
+		return agentManager(team, agentNo).canMovePositionally(direction);
+	}
+
+	bool Stage::canAgentAct(TeamID team, uint8_t agentNo, Command command)const
+	{
+		if(command == CommandID::stay)
+		{
+			return true;
+		}
+		Direction direction = command.direction;
+		if(!canAgentMovePositionally(team, agentNo, direction))
+		{
+			return false;
+		}
+		ActionID action = command.action;
+		if(action == ActionID::doNothing)
+		{
+			return true;
+		}
+		Position nextPosition = movedPosition(agentManager(team, agentNo).getCurrentPosition(), direction);
+		TileID tile = toTile(team);
+		return (action == ActionID::removePanel && tile != TileID::none) || (action == ActionID::setTileOnPanel && tile == field[nextPosition].getTileStatus());
 	}
 
 	int8_t Stage::getPanelPoint(Position position)const noexcept
@@ -201,18 +106,18 @@ namespace solver::simulator
 		return field[position].getTileStatus();
 	}
 
-	bool Stage::getPanelRegionStatus(Position position, TeamID team)const noexcept
+	bool Stage::getPanelRegionStatus(Position position, TeamID team)const
 	{
 		return field[position].getRegionStatus(team);
 	}
 
 	bool Stage::isAgentOnPanel(Position position)const noexcept
 	{
-		for(TeamID team : TeamID())
+		for(int t = 0; t < numTeams; ++t)
 		{
 			for(uint8_t i = 0; i < agentManager.getNumAgents(); ++i)
 			{
-				if(position == agentManager.agent(team, i).getPosition())
+				if(position == agentManager(static_cast<TeamID>(t), i).getCurrentPosition())
 				{
 					return true;
 				}

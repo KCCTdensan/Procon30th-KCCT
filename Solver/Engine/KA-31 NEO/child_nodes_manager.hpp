@@ -10,7 +10,7 @@ namespace solver::engine::ka31neo
 
 	class ChildNodesManager
 	{
-		std::array<Node *, numActionID> children;
+		std::array<Node *, numCommandID> children;
 		unsigned numChildren;
 
 	public:
@@ -19,11 +19,11 @@ namespace solver::engine::ka31neo
 		ChildNodesManager(ChildNodesManager &&childNodesManager)noexcept;
 		ChildNodesManager();
 		~ChildNodesManager();
-		const Node *operator[](ActionID actionID)const noexcept;
-		std::array<Node *, numActionID>::iterator begin()noexcept;
-		std::array<Node *, numActionID>::iterator end()noexcept;
-		void createChild(ActionID actionID, const Simulator &simulator);
+		const Node *operator[](CommandID commandID)const noexcept;
+		std::array<Node *, numCommandID>::iterator begin()noexcept;
+		std::array<Node *, numCommandID>::iterator end()noexcept;
+		void createChild(CommandID commandID, const Simulator &simulator);
 		unsigned getNumChildren()const noexcept;
-		Node *prune(ActionID actionID);
+		Node *prune(CommandID commandID);
 	};
 }

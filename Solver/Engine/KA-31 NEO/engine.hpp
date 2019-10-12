@@ -18,7 +18,7 @@ namespace solver::engine::ka31neo
 		void initialize(TeamID teamID, const StageInterface &stage);
 		void startThinking()override;
 		void stopThinking()override;
-		const TeamCommand &getBestActions()const override;
+		const TeamCommand &getBestCommands()const override;
 		void update(const StageCommand &command);
 	};
 }

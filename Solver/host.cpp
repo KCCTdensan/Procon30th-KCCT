@@ -25,7 +25,7 @@ namespace solver
 
 	void Host::act()
 	{
-		StageCommand command(redEngine.getBestActions(), blueEngine.getBestActions());
+		StageCommand command(redEngine.getBestCommands(), blueEngine.getBestCommands());
 		stage.act(command);
 		redEngine.update(command);
 		blueEngine.update(command);

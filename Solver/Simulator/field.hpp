@@ -30,13 +30,13 @@ namespace solver::simulator
 			if(fieldFlag[position] != 0)return 0;
 			fieldFlag[position] = 1;
 
-			int retL = checkRegionPanel(movedPosition(position, ActionID::left), tile, fieldFlag);
+			int retL = checkRegionPanel(movedPosition(position, DirectionID::left), tile, fieldFlag);
 			if(retL == -1)return -1;
-			int retT = checkRegionPanel(movedPosition(position, ActionID::top), tile, fieldFlag);
+			int retT = checkRegionPanel(movedPosition(position, DirectionID::top), tile, fieldFlag);
 			if(retT == -1)return -1;
-			int retR = checkRegionPanel(movedPosition(position, ActionID::right), tile, fieldFlag);
+			int retR = checkRegionPanel(movedPosition(position, DirectionID::right), tile, fieldFlag);
 			if(retR == -1)return -1;
-			int retB = checkRegionPanel(movedPosition(position, ActionID::bottom), tile, fieldFlag);
+			int retB = checkRegionPanel(movedPosition(position, DirectionID::bottom), tile, fieldFlag);
 			if(retB == -1)return -1;
 
 			return 1;
@@ -51,10 +51,10 @@ namespace solver::simulator
 			if(fieldFlag[position] == 2)return;
 			fieldFlag[position] = 2;
 			(*this)[position].setRegionStatus(toTeam(tile), isRegionPanel);
-			setRegionPanel(movedPosition(position, ActionID::left), tile, isRegionPanel, fieldFlag);
-			setRegionPanel(movedPosition(position, ActionID::top), tile, isRegionPanel, fieldFlag);
-			setRegionPanel(movedPosition(position, ActionID::right), tile, isRegionPanel, fieldFlag);
-			setRegionPanel(movedPosition(position, ActionID::bottom), tile, isRegionPanel, fieldFlag);
+			setRegionPanel(movedPosition(position, DirectionID::left), tile, isRegionPanel, fieldFlag);
+			setRegionPanel(movedPosition(position, DirectionID::top), tile, isRegionPanel, fieldFlag);
+			setRegionPanel(movedPosition(position, DirectionID::right), tile, isRegionPanel, fieldFlag);
+			setRegionPanel(movedPosition(position, DirectionID::bottom), tile, isRegionPanel, fieldFlag);
 		}
 		void updateRegionPanelStart(Position position, TileID tile, FieldFlag<int8_t> &fieldFlag)
 		{
@@ -69,10 +69,10 @@ namespace solver::simulator
 		void updateRegionPanel(Position startPosition, TileID tile)
 		{
 			FieldFlag<int8_t> fieldFlag(size);
-			updateRegionPanelStart(movedPosition(startPosition, ActionID::left), tile, fieldFlag);
-			updateRegionPanelStart(movedPosition(startPosition, ActionID::top), tile, fieldFlag);
-			updateRegionPanelStart(movedPosition(startPosition, ActionID::right), tile, fieldFlag);
-			updateRegionPanelStart(movedPosition(startPosition, ActionID::bottom), tile, fieldFlag);
+			updateRegionPanelStart(movedPosition(startPosition, DirectionID::left), tile, fieldFlag);
+			updateRegionPanelStart(movedPosition(startPosition, DirectionID::top), tile, fieldFlag);
+			updateRegionPanelStart(movedPosition(startPosition, DirectionID::right), tile, fieldFlag);
+			updateRegionPanelStart(movedPosition(startPosition, DirectionID::bottom), tile, fieldFlag);
 		}
 
 	public:
@@ -83,9 +83,7 @@ namespace solver::simulator
 			{
 				for(uint8_t x = 0; x < size.width; ++x)
 				{
-					Position position;
-					position.x = x;
-					position.y = y;
+					Position position(x, y);
 					panels.emplace_back(fieldInfo[position]);
 				}
 			}
@@ -115,28 +113,21 @@ namespace solver::simulator
 		{
 			return panels.end();
 		}
-		int actPanel(Position position, TeamID agentTeam)
+		void setTileOnPanel(Position panelPosition, TileID tile)
 		{
-			TileID panelTileStatus = (*this)[position].getTileStatus();
-			if(panelTileStatus == TileID::none)
+			(*this)[panelPosition].setTile(tile);
+			for(int t = 0; t < numTeams; ++t)
 			{
-				(*this)[position].setTile(toTile(agentTeam));
-				for(TeamID team : TeamID())
-				{
-					updateRegionPanel(position, toTile(team));
-				}
-				return 1;
+				updateRegionPanel(panelPosition, toTile(static_cast<TeamID>(t)));
 			}
-			if(panelTileStatus != toTile(agentTeam))
+		}
+		void removeTileOnPanel(Position panelPosition)
+		{
+			(*this)[panelPosition].removeTile();
+			for(int t = 0; t < numTeams; ++t)
 			{
-				(*this)[position].removeTile();
-				for(TeamID team : TeamID())
-				{
-					updateRegionPanel(position, toTile(team));
-				}
-				return 2;
+				updateRegionPanel(panelPosition, toTile(static_cast<TeamID>(t)));
 			}
-			return 0;
 		}
 	};
 }

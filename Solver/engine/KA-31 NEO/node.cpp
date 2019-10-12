@@ -19,13 +19,14 @@ namespace solver::engine::ka31neo
 
 	void Node::expand()
 	{
-		for(ActionID i : ActionID())
+		for(int i = 0; i < numCommandID; ++i)
 		{
-			if(!simulator.canAct(i))
+			CommandID command = static_cast<CommandID>(i);
+			if(!simulator.canAct(command))
 			{
 				continue;
 			}
-			childNodesManager.createChild(i, simulator);
+			childNodesManager.createChild(command, simulator);
 		}
 	}
 
@@ -90,13 +91,14 @@ namespace solver::engine::ka31neo
 		averageReward = static_cast<float>(record) / numVisited;
 	}
 
-	ActionID Node::getBestAction()const noexcept
+	CommandID Node::getBestCommand()const noexcept
 	{
 		unsigned maxNumVisited = 0;
-		ActionID selectedActionID = ActionID::null;
-		for(ActionID i : ActionID())
+		CommandID selectedcommandID = CommandID::null;
+		for(int i = 0; i < numCommandID; ++i)
 		{
-			const Node *childNode = childNodesManager[i];
+			CommandID command = static_cast<CommandID>(i);
+			const Node *childNode = childNodesManager[command];
 			if(childNode == nullptr)
 			{
 				continue;
@@ -104,15 +106,15 @@ namespace solver::engine::ka31neo
 			if(childNode->numVisited > maxNumVisited)
 			{
 				maxNumVisited = childNode->numVisited;
-				selectedActionID = i;
+				selectedcommandID = command;
 			}
 		}
-		return selectedActionID;
+		return selectedcommandID;
 	}
 
-	Node *Node::prune(ActionID actionID)
+	Node *Node::prune(CommandID commandID)
 	{
-		Node *child = childNodesManager.prune(actionID);
+		Node *child = childNodesManager.prune(commandID);
 		delete this;
 		return child;
 	}

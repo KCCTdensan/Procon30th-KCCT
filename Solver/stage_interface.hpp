@@ -1,6 +1,6 @@
 #pragma once
 
-#include "command.hpp"
+#include "stage_command.hpp"
 #include "team_id.hpp"
 #include "position.hpp"
 #include "tile_id.hpp"
@@ -19,7 +19,8 @@ namespace solver
 		virtual uint8_t getCurrentTurnNo()const = 0;
 		virtual uint8_t getNumRemainingTurns()const = 0;
 		virtual Position getAgentPosition(TeamID team, uint8_t agentNo)const = 0;
-		virtual bool canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const = 0;
+		virtual bool canAgentMovePositionally(TeamID team, uint8_t agentNo, Direction direction)const = 0;
+		virtual bool canAgentAct(TeamID team, uint8_t agentNo, Command command)const = 0;
 		virtual int8_t getPanelPoint(Position position)const = 0;
 		virtual TileID getPanelTileStatus(Position position)const = 0;
 		virtual bool getPanelRegionStatus(Position position, TeamID team)const = 0;

@@ -4,7 +4,8 @@
 #include "field.hpp"
 #include "agent_manager.hpp"
 #include "score_manager.hpp"
-#include "../command.hpp"
+#include "command_normalizer.hpp"
+#include "../stage_command.hpp"
 
 
 namespace solver::simulator
@@ -16,9 +17,10 @@ namespace solver::simulator
 		Field field;
 		AgentManager agentManager;
 		ScoreManager scoreManager;
+		CommandNormalizer commandNormalizer;
 
-		bool willAgentStay(const Agent &agent, ActionID command)const;
-		bool willAgentRemoveTile(const Agent &agent, ActionID command)const;
+		bool willAgentStay(const Agent &agent, CommandID command)const;
+		bool willAgentRemoveTile(const Agent &agent, CommandID command)const;
 		StageFlag decideFirstAgentStayingPanels(StageCommand &command)const;
 		void decideAgentOverlappingPanels(StageFlag &isDecided, StageCommand &command)const;
 		void decideNextStayingAgents(StageFlag &isDecided, StageCommand &command)const;
@@ -33,10 +35,11 @@ namespace solver::simulator
 		uint8_t getCurrentTurnNo()const noexcept override;
 		uint8_t getNumRemainingTurns()const noexcept override;
 		Position getAgentPosition(TeamID team, uint8_t agentNo)const;
-		bool canAgentAct(TeamID team_id, uint8_t agentNo, ActionID action_id)const noexcept override;
+		bool canAgentMovePositionally(TeamID team, uint8_t agentNo, Direction direction)const override;
+		bool canAgentAct(TeamID team, uint8_t agentNo, Command command)const override;
 		int8_t getPanelPoint(Position position)const noexcept override;
 		TileID getPanelTileStatus(Position position)const noexcept override;
-		bool getPanelRegionStatus(Position position, TeamID team)const noexcept override;
+		bool getPanelRegionStatus(Position position, TeamID team)const override;
 		bool isAgentOnPanel(Position position)const noexcept override;
 		Score getScore()const noexcept override;
 		StageInterface *copy()const override;

@@ -22,11 +22,11 @@ namespace solver::engine::controller
 	{
 		for(unsigned i = 0; i < numAgents; ++i)
 		{
-			agentCommands.commands[i] = static_cast<ActionID>(getRandomValue(0, numActionID));//仮プログラム
+			agentCommands.commands[i] = static_cast<CommandID>(getRandomValue(0, numCommandID));//仮プログラム
 		}
 	}
 
-	const TeamCommand &Engine::getBestActions()const
+	const TeamCommand &Engine::getBestCommands()const
 	{
 		return agentCommands;
 	}

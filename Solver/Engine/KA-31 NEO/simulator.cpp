@@ -4,29 +4,40 @@
 
 namespace solver::engine::ka31neo
 {
-	ActionID Simulator::decideAgentCommand(const StageInterface &stage, TeamID team, uint8_t agentNo)const
+	CommandID Simulator::decideAgentCommand(const StageInterface &stage, TeamID team, uint8_t agentNo)const
 	{		
-		std::array<float, numActionID> actionEvaluationValues;
+		std::array<float, numCommandID> actionEvaluationValues;
 		Position agentPosition = stage.getAgentPosition(team, agentNo);
-		for(ActionID action : ActionID())
+		for(int i = 0; i < numCommandID; ++i)
 		{
-			Position nextPosition = movedPosition(agentPosition, action);
+			Command command = static_cast<CommandID>(i);
+			Direction commandDirection = command.direction;
+			ActionID commandAction = command.action;
+			Position nextPosition = movedPosition(agentPosition, commandDirection);
 			if(!isPositionInField(nextPosition, stage.getFieldSize()))
 			{
 				continue;
 			}
 			int8_t panelPoint = stage.getPanelPoint(nextPosition);
 			TileID panelTileStatus = stage.getPanelTileStatus(nextPosition);
-			actionEvaluationValues[static_cast<size_t>(action)] = panelTileStatus == toTile(team) ? 0.0f : exp(panelPoint);
+			if(!stage.canAgentAct(team, agentNo, command))
+			{
+				actionEvaluationValues[i] = 0.0f;
+			}
+			if(panelTileStatus == toTile(team))
+			{
+				actionEvaluationValues[i] = commandAction == ActionID::removePanel ? -expf(panelPoint) : 0.0f;
+			}
+			actionEvaluationValues[i] = expf(panelPoint);
 		}
-		return static_cast<ActionID>(probability(actionEvaluationValues));
+		return static_cast<CommandID>(probability(actionEvaluationValues));
 		/*
-		ActionID action;
+		CommandID action;
 		do
 		{
-			action = static_cast<ActionID>(getRandomValue(1, numActionID));
+			action = static_cast<CommandID>(getRandomValue(1, numCommandID));
 		}
-		while(!stage.canAgentAct(team, agentNo, action));
+		while(!stage.canAgentMovePositionally(team, agentNo, action));
 		return action;
 		*/
 	}
@@ -34,11 +45,11 @@ namespace solver::engine::ka31neo
 	StageCommand Simulator::decideCommand(const StageInterface &stage)const
 	{
 		StageCommand command(stage.getNumAgents());
-		for(TeamID team : TeamID())
+		for(int t = 0; t < numTeams; ++t)
 		{
 			for(uint8_t i = 0; i < stage.getNumAgents(); ++i)
 			{
-				command.teamCommands[static_cast<size_t>(team)].commands[i] = decideAgentCommand(stage, team, i);
+				command.teamCommands[t].commands[i] = decideAgentCommand(stage, static_cast<TeamID>(t), i);
 			}
 		}
 		return command;
@@ -47,9 +58,9 @@ namespace solver::engine::ka31neo
 	float Simulator::calculateReward(const Score &score)const
 	{
 		std::array<int16_t, numTeams> totalScores;
-		for(TeamID team : TeamID())
+		for(int t = 0; t < numTeams; ++t)
 		{
-			totalScores[static_cast<size_t>(team)] = score.teamScores[static_cast<size_t>(team)].getTotalScore();
+			totalScores[t] = score.teamScores[t].getTotalScore();
 		}
 		if(totalScores[static_cast<size_t>(TeamID::red)] != totalScores[static_cast<size_t>(TeamID::blue)])//全体スコアが違っていた場合
 		{
@@ -89,7 +100,7 @@ namespace solver::engine::ka31neo
 	float Simulator::rollout()const
 	{
 		StageInterface &stage = *currentStage.copy();
-		std::queue<ActionID> commandList = this->commandList;
+		std::queue<CommandID> commandList = this->commandList;
 		while(commandList.size() != 0)
 		{
 			StageCommand command = decideCommand(stage);
@@ -107,15 +118,15 @@ namespace solver::engine::ka31neo
 		return calculateReward(finalScore);
 	}
 
-	bool Simulator::canAct(ActionID actionID)const noexcept
+	bool Simulator::canAct(CommandID commandID)const noexcept
 	{
-		return currentStage.canAgentAct(teamID, agentNo, actionID);
+		return currentStage.canAgentAct(teamID, agentNo, commandID);
 	}
 
-	Simulator Simulator::next(ActionID actionID)const
+	Simulator Simulator::next(CommandID commandID)const
 	{
 		Simulator ret(teamID, agentNo, currentStage);
-		ret.commandList.push(actionID);
+		ret.commandList.push(commandID);
 		return ret;
 	}
 }

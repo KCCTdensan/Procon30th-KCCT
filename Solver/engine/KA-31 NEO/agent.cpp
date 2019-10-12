@@ -57,9 +57,9 @@ namespace solver::engine::ka31neo
 		CloseHandle(threadHandle);
 	}
 
-	ActionID Agent::getBestAction()const noexcept
+	CommandID Agent::getBestCommand()const noexcept
 	{
-		return currentNode->getBestAction();
+		return currentNode->getBestCommand();
 	}
 
 	void Agent::updateStage(const StageCommand &command)

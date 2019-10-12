@@ -74,9 +74,9 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="action_id.hpp" />
-    <ClInclude Include="agent_info.hpp" />
     <ClInclude Include="command.hpp" />
+    <ClInclude Include="agent_info.hpp" />
+    <ClInclude Include="stage_command.hpp" />
     <ClInclude Include="cui\stage_printer.hpp" />
     <ClInclude Include="cui\string_color.hpp" />
     <ClInclude Include="Com\com_interface.hpp" />
@@ -95,6 +95,7 @@
     <ClInclude Include="score.hpp" />
     <ClInclude Include="Simulator\agent.hpp" />
     <ClInclude Include="Simulator\agent_manager.hpp" />
+    <ClInclude Include="simulator\command_normalizer.hpp" />
     <ClInclude Include="Simulator\field.hpp" />
     <ClInclude Include="simulator\field_flag.hpp" />
     <ClInclude Include="Simulator\panel.hpp" />

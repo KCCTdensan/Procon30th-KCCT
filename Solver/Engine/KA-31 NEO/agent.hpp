@@ -25,7 +25,7 @@ namespace solver::engine::ka31neo
 		~Agent();
 		void startThinking();
 		void stopThinking();
-		ActionID getBestAction()const noexcept;
+		CommandID getBestCommand()const noexcept;
 		void updateStage(const StageCommand &command);
 	};
 }

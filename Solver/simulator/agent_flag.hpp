@@ -13,12 +13,12 @@ namespace solver::simulator
 	public:
 		AgentFlag(uint8_t numAgents)
 		{
-			for(TeamID team : TeamID())
+			for(int t = 0; t < numTeams; ++t)
 			{
-				flags[static_cast<size_t>(team)].resize(numAgents);
+				flags[t].resize(numAgents);
 				for(uint8_t i = 0; i < numAgents; ++i)
 				{
-					flags[static_cast<size_t>(team)][i] = false;
+					flags[t][i] = false;
 				}
 			}
 		}

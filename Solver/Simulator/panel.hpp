@@ -10,13 +10,13 @@ namespace solver::simulator
 	{
 		const int8_t point;
 		TileID tileStatus;
-		bool regionStatus[numTeams];
+		std::array<bool, numTeams> regionStatus;
 
 	public:
 		Panel(int8_t point)noexcept
-			: point(point), tileStatus(TileID::none), regionStatus {false}
+			: point(point), tileStatus(TileID::none)
 		{
-
+			std::fill(regionStatus.begin(), regionStatus.end(), false);
 		}
 		int8_t getPoint()const noexcept
 		{
@@ -40,14 +40,14 @@ namespace solver::simulator
 		}
 		void setRegionStatus(TeamID team, bool isRegion)noexcept
 		{
-			if(toTeam(tileStatus) != team || !isRegion)
+			if(tileStatus != toTile(team) || !isRegion)
 			{
-				regionStatus[static_cast<int>(team)] = isRegion;
+				regionStatus[static_cast<size_t>(team)] = isRegion;
 			}
 		}
 		bool getRegionStatus(TeamID team)const noexcept
 		{
-			return regionStatus[static_cast<int>(team)];
+			return regionStatus[static_cast<size_t>(team)];
 		}
 	};
 }
