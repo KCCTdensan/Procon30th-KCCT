@@ -25,7 +25,7 @@ solver::FieldInfo createRandomField()
 solver::AgentInfo createRandomAgent(solver::Size fieldSize)
 {
 	solver::AgentInfo ret;
-	const uint8_t numAgents = static_cast<uint8_t>(solver::getRandomValue(2, 8));
+	const uint8_t numAgents = static_cast<uint8_t>(solver::getRandomValue(8, 8));
 	ret.setNumAgents(numAgents);
 	for(uint8_t i = 0; i < numAgents; ++i)
 	{

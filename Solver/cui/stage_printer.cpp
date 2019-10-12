@@ -95,5 +95,6 @@ namespace solver::cui
 	{
 		printField();
 		printScore();
+		std::cout << std::endl << std::endl;
 	}
 }

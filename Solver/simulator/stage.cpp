@@ -110,24 +110,7 @@ namespace solver::simulator
 
 	bool Stage::canAgentAct(TeamID team, uint8_t agentNo, Command command)const
 	{
-		if(command == CommandID::stay)
-		{
-			return true;
-		}
-		ActionID action = command.action;
-		if(action == ActionID::doNothing)
-		{
-			return true;
-		}
-		Direction direction = command.direction;
-		if(!canAgentMovePositionally(team, agentNo, direction))
-		{
-			return false;
-		}
-		Position nextPosition = movedPosition(agentManager(team, agentNo).getCurrentPosition(), direction);
-		TileID agentTile = toTile(team);
-		TileID panelTile = field[nextPosition].getTileStatus();
-		return (action == ActionID::removePanel && panelTile != TileID::none) || (action == ActionID::setTileOnPanel && (panelTile == agentTile || panelTile == TileID::none));
+		return commandNormalizer.canAgentAct(team, agentNo, command);
 	}
 
 	int8_t Stage::getPanelPoint(Position position)const noexcept

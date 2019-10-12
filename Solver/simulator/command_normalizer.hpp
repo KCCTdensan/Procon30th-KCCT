@@ -23,8 +23,7 @@ namespace solver::simulator
 					const TeamID team = static_cast<TeamID>(t);
 					const Agent &agent = agentManager(team, i);
 					const CommandID agentCommand = command.teamCommands[t].commands[i];
-					const Direction commandDirection = Command(agentCommand).direction;
-					if(agentCommand == CommandID::stay || !agent.canMovePositionally(commandDirection))
+					if(agentCommand == CommandID::stay || !canAgentAct(team, i, agentCommand))
 					{
 						//パネルの上のエージェントを確定させる
 						const Position agentPosition = agent.getCurrentPosition();
@@ -52,7 +51,7 @@ namespace solver::simulator
 					}
 					const Agent &agent = agentManager(team, i);
 					const CommandID agentCommand = command.teamCommands[t].commands[i];
-					const Position agentPosition = agentManager(team, i).getCurrentPosition();
+					const Position agentPosition = agent.getCurrentPosition();
 					const Direction commandDirection = Command(agentCommand).direction;
 					const Position nextPosition = movedPosition(agentPosition, commandDirection);
 					//コマンドの指定先位置がかぶっていた場合
@@ -70,6 +69,7 @@ namespace solver::simulator
 						ret.teamCommands[t].commands[i] = CommandID::stay;
 						continue;
 					}
+					overlappedAgent[nextPosition] = 0xf0 | (t << 3) | i;
 				}
 			}
 			return ret;
@@ -128,6 +128,27 @@ namespace solver::simulator
 			: field(field), agentManager(agentManager)
 		{
 
+		}
+		bool canAgentAct(TeamID team, uint8_t agentNo, Command command)const
+		{
+			if(command == CommandID::stay)
+			{
+				return true;
+			}
+			ActionID action = command.action;
+			if(action == ActionID::doNothing)
+			{
+				return true;
+			}
+			Direction direction = command.direction;
+			if(!agentManager(team, agentNo).canMovePositionally(direction))
+			{
+				return false;
+			}
+			Position nextPosition = movedPosition(agentManager(team, agentNo).getCurrentPosition(), direction);
+			TileID agentTile = toTile(team);
+			TileID panelTile = field[nextPosition].getTileStatus();
+			return (action == ActionID::removePanel && panelTile != TileID::none) || (action == ActionID::setTileOnPanel && (panelTile == agentTile || panelTile == TileID::none));
 		}
 		StageCommand operator()(const StageCommand &command)const
 		{
