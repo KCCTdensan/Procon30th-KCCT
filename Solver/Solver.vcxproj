@@ -119,6 +119,7 @@
     <ClCompile Include="2engines_host.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="random.cpp" />
+    <ClCompile Include="server_interface.cpp" />
     <ClCompile Include="simulator\stage.cpp" />
   </ItemGroup>
   <ItemGroup>

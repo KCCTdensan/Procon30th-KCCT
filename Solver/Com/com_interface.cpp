@@ -109,7 +109,7 @@ namespace solver::com
 		return 200;
 	}
 
-	int ComInterface::sendActionData(SendActionData actionData)
+	int ComInterface::sendActionData(const SendActionData &actionData)
 	{
 		sendDataString = "\"{\\\"actions\\\":[";
 		int i = 0;

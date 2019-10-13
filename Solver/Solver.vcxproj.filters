@@ -26,6 +26,7 @@
     </ClCompile>
     <ClCompile Include="2engines_host.cpp" />
     <ClCompile Include="1engine_host.cpp" />
+    <ClCompile Include="server_interface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine_loader.hpp" />

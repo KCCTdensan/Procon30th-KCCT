@@ -20,7 +20,7 @@ namespace solver::com
 		ComInterface(std::string hostNameString, std::string portNumString, std::string matchIDString, std::string tokenString);
 		int getMatchInfo(ReceivedMatchInfo *matchInfo);
 		int getMatchData(ReceivedMatchData *matchData);
-		int sendActionData(SendActionData actionData);
+		int sendActionData(const SendActionData &actionData);
 		std::string getPing();
 		std::string getCmdString();
 	};
