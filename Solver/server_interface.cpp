@@ -15,14 +15,14 @@ namespace solver
 	}
 
 	ServerInterface::ServerInterface()
-		: comInterface("", "", "", "d55101d94c146f52bb03345bba0c58c01435cd0314a95518eeb4518f182c774a")
+		: numAgents(0), comInterface("", "", "", "d55101d94c146f52bb03345bba0c58c01435cd0314a95518eeb4518f182c774a")
 	{
-
+		agentIDs.resize(numAgents);
 	}
 
 	simulator::Stage ServerInterface::getStage()
 	{
-		uint8_t numTurns;
+		uint8_t numTurns = 0;
 		FieldInfo fieldInfo;
 		AgentInfo agentInfo;
 		simulator::Stage ret(numTurns, fieldInfo, agentInfo);
@@ -43,6 +43,7 @@ namespace solver
 
 	StageCommand ServerInterface::recieveCommand()
 	{
-
+		StageCommand ret(numAgents);
+		return ret;
 	}
 }

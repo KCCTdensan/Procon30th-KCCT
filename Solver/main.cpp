@@ -1,10 +1,10 @@
-#define MODE 1
+#define MODE 0
 
 #if MODE == 0
 
 #include "engine_loader.hpp"
 #include "simulator/stage.hpp"
-#include "host.hpp"
+#include "2engines_host.hpp"
 #include "cui/stage_printer.hpp"
 #include "random.hpp"
 #include <iostream>

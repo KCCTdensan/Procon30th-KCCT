@@ -31,6 +31,12 @@ namespace solver::simulator
 						flag.agentFlag(team, i) = true;
 						ret.teamCommands[t].commands[i] = CommandID::stay;
 					}
+					ActionID action = Command(agentCommand).action;
+					if(action == ActionID::removePanel)
+					{
+						const Position agentPosition = agent.getCurrentPosition();
+						flag.fieldFlag[agentPosition] = true;
+					}
 				}
 			}
 			return ret;

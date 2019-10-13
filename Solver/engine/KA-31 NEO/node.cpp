@@ -3,7 +3,7 @@
 
 namespace solver::engine::ka31neo
 {
-	constexpr float controlParameter = 10.0f;
+	constexpr float controlParameter = 3.0f;
 	constexpr unsigned threshold = 100;
 
 	float Node::UCB1(float averageRewardOfChild, unsigned numVisitedOfChild)const noexcept

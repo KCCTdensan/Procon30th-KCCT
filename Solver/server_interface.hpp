@@ -9,6 +9,7 @@ namespace solver
 {
 	class ServerInterface
 	{
+		const int numAgents;
 		com::ComInterface comInterface;
 		std::vector<int> agentIDs;
 
