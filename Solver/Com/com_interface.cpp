@@ -15,6 +15,7 @@ namespace solver::com
 	int ComInterface::getMatchInfo(ReceivedMatchInfo* receivedMatchInfo)
 	{
 		cmdString = "curl -H \"Authorization:" + tokenString + "\" \"http://" + hostNameString + ":" + portNumString + "/matches\" > ./match_info.json";
+		std::cout << "cmdstr : " << cmdString << std::endl;
 		system(cmdString.c_str());
 
 		std::ifstream ifstrm("./match_info.json");
@@ -45,6 +46,7 @@ namespace solver::com
 	int ComInterface::getMatchData(ReceivedMatchData* receivedMatchData)
 	{
 		cmdString = "curl -H \"Authorization: " + tokenString + "\" \"http://" + hostNameString + ":" + portNumString + "/matches/" + matchIDString + "\" > ./match_data.json";
+		std::cout << "cmdstr : " << cmdString << std::endl;
 		system(cmdString.c_str());
 
 		std::ifstream ifstrm("./match_data.json");
@@ -135,11 +137,17 @@ namespace solver::com
 		return 200;
 	}
 
-	int ComInterface::getPimg()
+	std::string ComInterface::getPimg()
 	{
-		cmdString = "curl - H \"Authorization: "+tokenString+"\" \"http://"+hostNameString+":"+portNumString+"/matches > ./ping_info.json";
-		//std::string jsonString = system(cmdString.c_str());
-		return 401;
+		cmdString = "curl -H \"Authorization: "+tokenString+"\" \"http://"+hostNameString+":"+portNumString+"/ping\" > ./ping_info.json";
+		std::cout << cmdString << std::endl;
+		system(cmdString.c_str());
+
+		std::ifstream ifstrm("./ping_info.json");
+		std::string jsonString((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
+		std::cout << "jsonstr : " << jsonString << std::endl;
+
+		return jsonString;
 	}
 
 	std::string ComInterface::getCmdString() 
