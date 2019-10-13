@@ -24,7 +24,7 @@ int main()
 	system("chcp 65001"); //コマンドプロンプトの文字コードページをUTF-8に設定
 
 	//getPing
-	std::cout << comInterFace.getPimg() << std::endl;
+	std::cout << comInterFace.getPing() << std::endl;
 
 	//試合情報取得
 	std::cout << comInterFace.getMatchInfo(&receivedMatchInfo) << std::endl;

@@ -1,5 +1,6 @@
-#include "host.hpp"
+#include "2engines_host.hpp"
 #include "agent_info.hpp"
+#include "1engine_host.hpp"
 
 
 namespace solver
@@ -29,10 +30,5 @@ namespace solver
 		stage.act(command);
 		redEngine.update(command);
 		blueEngine.update(command);
-	}
-
-	uint8_t Host::getNumAgents()const noexcept
-	{
-		return stage.getNumAgents();
 	}
 }

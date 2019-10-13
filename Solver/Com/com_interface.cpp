@@ -137,7 +137,7 @@ namespace solver::com
 		return 200;
 	}
 
-	std::string ComInterface::getPimg()
+	std::string ComInterface::getPing()
 	{
 		cmdString = "curl -H \"Authorization: "+tokenString+"\" \"http://"+hostNameString+":"+portNumString+"/ping\" > ./ping_info.json";
 		std::cout << cmdString << std::endl;

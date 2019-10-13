@@ -2,7 +2,6 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <ClCompile Include="engine_loader.cpp" />
-    <ClCompile Include="host.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="Com\com_interface.cpp">
       <Filter>com</Filter>
@@ -25,10 +24,11 @@
     <ClCompile Include="cui\string_color.cpp">
       <Filter>cui</Filter>
     </ClCompile>
+    <ClCompile Include="2engines_host.cpp" />
+    <ClCompile Include="1engine_host.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="engine_loader.hpp" />
-    <ClInclude Include="host.hpp" />
     <ClInclude Include="stage_interface.hpp" />
     <ClInclude Include="Simulator\agent.hpp">
       <Filter>simulator</Filter>
@@ -123,6 +123,9 @@
     <ClInclude Include="command.hpp">
       <Filter>basic</Filter>
     </ClInclude>
+    <ClInclude Include="2engines_host.hpp" />
+    <ClInclude Include="1engine_host.hpp" />
+    <ClInclude Include="server_interface.hpp" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="simulator">

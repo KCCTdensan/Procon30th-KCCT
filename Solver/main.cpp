@@ -1,4 +1,6 @@
-#if 0
+#define MODE 1
+
+#if MODE == 0
 
 #include "engine_loader.hpp"
 #include "simulator/stage.hpp"
@@ -51,21 +53,9 @@ solver::AgentInfo createRandomAgent(solver::Size fieldSize)
 	return ret;
 }
 
-int main(int argc, char *argv[])
+int main()
 {
 	constexpr unsigned numTurns = 30;
-
-	switch(argc)
-	{
-	case 1:
-		break;
-
-	case 2:
-		break;
-
-	default:
-		return -1;
-	}
 
 	solver::EngineLoader ka31neoCreator(L"KA-31 NEO");
 	solver::EngineLoader controllerCreator(L"Controller");
@@ -94,5 +84,26 @@ int main(int argc, char *argv[])
 
 	return 0;
 }
+
+
+#else
+
+#include "engine_loader.hpp"
+#include "1engine_host.hpp"
+#include "cui/stage_printer.hpp"
+
+
+int main()
+{
+	solver::EngineLoader engineLoader(L"KA-31 NEO");
+	solver::engine::Interface *engine = engineLoader.createEngine();
+	solver::Client client(*engine);
+	solver::cui::StagePrinter printer(client.getStage());
+	printer.print();
+	//loop
+	engineLoader.destroyEngine(engine);
+	return 0;
+}
+
 
 #endif

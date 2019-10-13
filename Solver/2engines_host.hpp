@@ -17,6 +17,5 @@ namespace solver
 		void startThinking();
 		void stopThinking();
 		void act();
-		uint8_t getNumAgents()const noexcept;
 	};
 }
