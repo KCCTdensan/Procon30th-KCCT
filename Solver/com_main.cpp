@@ -15,13 +15,12 @@ int main()
 	int turnMillis;
 	int teamNum = 0;
 
-	/*hostName = "10.10.52.252";
+	hostName = "10.10.52.252";
 	portNum = "80";
 	token = "d55101d94c146f52bb03345bba0c58c01435cd0314a95518eeb4518f182c774a"
-	*/
 
 	std::cout << "matchID enemyID turnMillis";
-	std::cin >> hostName >> portNum >> token >> matchID >> enemyTeamID >> turnMillis;
+	std::cin >> matchID >> enemyTeamID >> turnMillis;
 
 	solver::com::ComInterface comInterFace(hostName,portNum,matchID,token);
 	solver::com::ReceivedMatchInfo receivedMatchInfo;

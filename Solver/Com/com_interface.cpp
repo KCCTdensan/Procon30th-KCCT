@@ -47,7 +47,7 @@ namespace solver::com
 	{
 		cmdString = "curl -H \"Authorization: " + tokenString + "\" \"http://" + hostNameString + ":" + portNumString + "/matches/" + matchIDString + "\" > ./match_data.json";
 		std::cout << "cmdstr : " << cmdString << std::endl;
-		//system(cmdString.c_str());
+		system(cmdString.c_str());
 
 		std::ifstream ifstrm("./match_data.json");
 		std::string jsonString((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
