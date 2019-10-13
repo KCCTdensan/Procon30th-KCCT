@@ -47,7 +47,7 @@ namespace solver::com
 	{
 		cmdString = "curl -H \"Authorization: " + tokenString + "\" \"http://" + hostNameString + ":" + portNumString + "/matches/" + matchIDString + "\" > ./match_data.json";
 		std::cout << "cmdstr : " << cmdString << std::endl;
-		system(cmdString.c_str());
+		//system(cmdString.c_str());
 
 		std::ifstream ifstrm("./match_data.json");
 		std::string jsonString((std::istreambuf_iterator<char>(ifstrm)), std::istreambuf_iterator<char>());
@@ -118,7 +118,7 @@ namespace solver::com
 			if (i != 0)sendDataString += ",";
 			sendDataString += "{";
 			sendDataString += (
-				"\\\"agentID\\\":"+std::to_string(actionDataOne.aentID)+
+				"\\\"agentID\\\":"+std::to_string(actionDataOne.agentID)+
 				",\\\"dx\\\":"+std::to_string(actionDataOne.dx)+
 				",\\\"dy\\\":"+std::to_string(actionDataOne.dy)+
 				",\\\"type\\\":\\\""+actionDataOne.type)+"\\\"";
@@ -126,7 +126,7 @@ namespace solver::com
 			i++;
 		}
 		sendDataString += "]}\"";
-		cmdString = "curl -H \"Authorization: "+tokenString+"\" -H \"Content-Type: application/json\" -X POST \"http://" + hostNameString + ":" + portNumString + "/matches/1/action\" -d "+sendDataString+" > ./action_data.json";
+		cmdString = "curl -H \"Authorization: "+tokenString+"\" -H \"Content-Type: application/json\" -X POST \"http://" + hostNameString + ":" + portNumString + "/matches/"+matchIDString+"/action\" -d "+sendDataString+" > ./action_data.json";
 		std::cout <<"cmd : "<< cmdString << std::endl;
 		system(cmdString.c_str());
 

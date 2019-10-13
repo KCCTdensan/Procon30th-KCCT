@@ -6,7 +6,7 @@ namespace solver::com
 	struct SendActionDataOne
 	{
 
-		int aentID;
+		int agentID;
 		int dx;
 		int dy;
 		std::string type;

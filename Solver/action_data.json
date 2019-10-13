@@ -1,1 +1,1 @@
-{"actions":[{"agentID":9,"dx":1,"dy":1,"type":"move","turn":1},{"agentID":10,"dx":1,"dy":1,"type":"move","turn":1}]}
+{"actions":[{"agentID":15,"dx":1,"dy":1,"type":"move","turn":1},{"agentID":16,"dx":-1,"dy":1,"type":"move","turn":1},{"agentID":17,"dx":1,"dy":0,"type":"move","turn":1},{"agentID":18,"dx":-1,"dy":1,"type":"move","turn":1},{"agentID":19,"dx":1,"dy":1,"type":"move","turn":1},{"agentID":20,"dx":0,"dy":1,"type":"move","turn":1},{"agentID":21,"dx":-1,"dy":1,"type":"move","turn":1},{"agentID":22,"dx":0,"dy":0,"type":"move","turn":1}]}
