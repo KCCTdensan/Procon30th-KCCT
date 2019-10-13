@@ -97,7 +97,6 @@ int main()
 							sendActionData.actions[agentNum].type = "remove";
 						}
 						*/
-
 					}
 				}
 				std::cout << "dx:" << sendActionData.actions[agentNum].dx << " dy:" << sendActionData.actions[agentNum].dy <<std::endl;
