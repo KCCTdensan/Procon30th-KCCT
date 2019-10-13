@@ -15,14 +15,17 @@ namespace solver
 	}
 
 	ServerInterface::ServerInterface()
-		: comInterface()
+		: comInterface("", "", "", "d55101d94c146f52bb03345bba0c58c01435cd0314a95518eeb4518f182c774a")
 	{
 
 	}
 
 	simulator::Stage ServerInterface::getStage()
 	{
-		simulator::Stage ret;
+		uint8_t numTurns;
+		FieldInfo fieldInfo;
+		AgentInfo agentInfo;
+		simulator::Stage ret(numTurns, fieldInfo, agentInfo);
 		agentIDs.resize(ret.getNumAgents());
 		return ret;
 	}

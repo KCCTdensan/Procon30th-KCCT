@@ -3,7 +3,6 @@
 #include "com/com_interface.hpp"
 #include "command.hpp"
 #include "simulator/stage.hpp"
-#include "com/send_action_data.hpp"
 
 
 namespace solver
