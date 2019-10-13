@@ -48,7 +48,7 @@ namespace solver::simulator
 	}
 
 	Stage::Stage(const Stage &stage)
-		:numTurns(stage.getNumTurns()), currentTurnNo(stage.getCurrentTurnNo()), field(stage.field), agentManager(stage.agentManager), scoreManager(field), commandNormalizer(stage.commandNormalizer)
+		:numTurns(stage.getNumTurns()), currentTurnNo(stage.getCurrentTurnNo()), field(stage.field), agentManager(stage.agentManager), scoreManager(field), commandNormalizer(field, agentManager)
 	{
 
 	}

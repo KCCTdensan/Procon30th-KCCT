@@ -40,6 +40,7 @@ namespace solver::engine::ka31neo
 				actionEvaluationValues[i] = pow2(panelPoint / 4 + 4);
 			}
 		}
+		actionEvaluationValues[static_cast<size_t>(CommandID::stay)] /= 2;
 		return static_cast<CommandID>(probability(actionEvaluationValues));
 	}
 
