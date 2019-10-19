@@ -17,10 +17,12 @@ solver::FieldInfo createRandomField()
 	ret.setSize(size);
 	for(uint8_t y = 0; y < size.height; ++y)
 	{
-		for(uint8_t x = 0; x < size.width; ++x)
+		for(uint8_t x = 0; x < size.width / 2 + 1; ++x)
 		{
 			const solver::Position position(static_cast<int8_t>(x), static_cast<int8_t>(y));
-			ret[position] = solver::getRandomValue(-16, 16);
+			ret[position] = solver::getRandomValue(-4, 16);
+			const solver::Position mirror(size.width - position.x - 1, position.y);
+			ret[mirror] = ret[position];
 		}
 	}
 	return ret;
